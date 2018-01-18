@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <title>UCSF FS Service Portal</title>
+  <!-- bootstrap css -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+    crossorigin="anonymous">
+  <!-- Bootstrap Date-Picker Plugin Stylesheet -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="css/custom.css">
+</head>
+<body>
+
+  <!-- navbar -->
+  <nav class="navbar navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-nav-demo" aria-expanded="false">
+					<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+        <a href="http://www.ucsf.edu/" class="navbar-brand">
+					<span id="ucsf-banner-nav">UC San Francisco</span>
+				</a>
+      </div>
+      <div class="collapse navbar-collapse" id="bs-nav-demo">
+        <ul class="nav navbar-nav navbar-right">
+          <li>
+            <a href="#"><span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span> Hidden Item</a>
+          </li>
+          <li>
+            <a href="new-sr.html"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> New Service</a>
+          </li>
+          <li>
+            <a href="https://www.ucsfhealth.org/"><span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span> FAQ</a>
+          </li>
+          <li>
+            <a href="https://www.cpfm.ucsf.edu/maximo/custcharges.cfm" target="_blank"><span class="glyphicon glyphicon-usd" aria-hidden="true"></span> Bills</a>
+          </li>
+          <li>
+            <a href="edit-profile.html"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span> Edit Profile</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <!-- /navbar -->
+
+  <!-- Jumbotron -->
+  <div class="jumbotron">
+    <div class="container">
+        <h2>Xayaseth Boudsady</h2>
+        <p>xayaseth.boudsady@ucsf.edu</p>
+        <p class="text-center"><a href="index.html" class="btn btn-primary btn-md" role="button">Sign Out</a></p>
+    </div>
+  </div>
+  <!-- /Jumbotron-->
+
+
+  <!-- Login Form -->
+  <div class="container">
+    <p class="text-center">
+      <a href="new-sr.html" class="btn btn-success btn-md" role="button"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> New Service Request</a>
+    </p>
+    <h3>Limit Listing...</h3>
+    <br>
+    <form class="form-inline">
+      <div class="form-group">
+        <label class="control-label" for="date">From</label>
+        <input class="form-control" id="date" name="date" placeholder="MM/DD/YYYY" type="text">
+      </div>
+      <div class="form-group">
+        <label class="control-label" for="date">To</label>
+        <input class="form-control" id="date" name="date" placeholder="MM/DD/YYYY" type="text">
+      </div>
+      <div class="form-group">
+        <label class="control-label" for="date">&nbsp;</label>
+        <button type="button" class="btn btn-default" id="dateSubmit">Submit&nbsp;&nbsp;<i class="fa fa-sign-in" aria-hidden="true"></i></button>
+      </div>
+      </form>
+  </div>
+  <!-- /Login Form-->
+
+
+  <!-- Table Data -->
+  <div class="container">
+    <table class="table">
+      <thead>
+        <tr>
+          <th class="wo-date">Date</th>
+          <th class="wo-type">Type</th>
+          <th class="wo-sr">SR #</th>
+          <th class="wo-num">WO #</th>
+          <th class="wo-dept">Dept Ref</th>
+          <th class="wo-title">Title</th>
+          <th class="wo-status">Status</th>
+          <th class="wo-contact">Contact</th>
+          <th class="wo-location">Location</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td scope="row">05/31/17 10:14AM</td>
+          <td class="wo-type">FP</td>
+          <td></td>
+          <td><a href="wo-sr\wo-C392472.html">C392472</a></td>
+          <td class="wo-dept"></td>
+          <td>Buchanan Dental Clinic, Asset Data Capture &amp; Lock Out / Tag Out</td>
+          <td class="wo-status">INPRG</td>
+          <td class="wo-contact">XBOUDSADY</td>
+          <td class="wo-location">3043 654 Minnesota St</td>
+        </tr>
+        <tr>
+          <td scope="row">05/31/17 10:12AM</td>
+          <td class="wo-type">FP</td>
+          <td></td>
+          <td><a href="wo-sr\wo-C392470.html">C392470</a></td>
+          <td class="wo-dept"></td>
+          <td>Oyster Point, Asset Data Capture &amp; Lock Out / Tag Out</td>
+          <td class="wo-status">APPR</td>
+          <td class="wo-contact">XBOUDSADY</td>
+          <td class="wo-location">3000 Parnassus Services B</td>
+        </tr>
+        <tr>
+          <td scope="row">05/31/17 10:08AM</td>
+          <td class="wo-type">FP</td>
+          <td></td>
+          <td><a href="wo-sr\wo-C392468.html">C392468</a></td>
+          <td class="wo-dept"></td>
+          <td>Mission Center Building, Asset Data Capture &amp; Lock Out / Tag Ou</td>
+          <td class="wo-status">APPR</td>
+          <td class="wo-contact">XBOUDSADY</td>
+          <td class="wo-location">2264 Proctor Foundation</td>
+        </tr>
+        <tr>
+          <td scope="row">05/15/17 03:15PM</td>
+          <td class="wo-type">CUST</td>
+          <td><a href="wo-sr\sr-54219.html">54219</a></td>
+          <td class="wo-dept"></td>
+          <td></td>
+          <td>EZMax, Asset Application - WO History is showing Tasks WO</td>
+          <td class="wo-status">QUEUED</td>
+          <td class="wo-contact">XBOUDSADY</td>
+          <td class="wo-location"></td>
+        </tr>
+        <tr>
+          <td scope="row">01/31/17 11:52AM</td>
+          <td class="wo-type">FP</td>
+          <td></td>
+          <td><a href="wo-sr\wo-c317365.html">C317365</a></td>
+          <td class="wo-dept"></td>
+          <td>Millberry Union, Asset Data Capture &amp; Lock Out / Tag Out</td>
+          <td class="wo-status">APPR</td>
+          <td class="wo-contact">XBOUDSADY</td>
+          <td class="wo-location">3047 Stem Cell Research (</td>
+        </tr>
+        <tr>
+          <td scope="row">01/26/17 08:53AM</td>
+          <td class="wo-type">CUST</td>
+          <td><a href="wo-sr\sr-43785.html">43785</a></td>
+          <td class="wo-dept"></td>
+          <td></td>
+          <td>Modify Asset Application Default Table Query View</td>
+          <td class="wo-status">RESOLVED</td>
+          <td class="wo-contact">XBOUDSADY</td>
+          <td class="wo-location"></td>
+        </tr>
+        <tr>
+          <td scope="row">01/25/17 08:00AM</td>
+          <td class="wo-type">FP</td>
+          <td></td>
+          <td><a href="wo-sr\wo-c314525.html">C314525</a></td>
+          <td class="wo-dept"></td>
+          <td>MZRC 2420 Garage, Asset Data Capture &amp; Lock Out / Tag Out</td>
+          <td class="wo-status">APPR</td>
+          <td class="wo-contact">XBOUDSADY</td>
+          <td class="wo-location">3062 2420 Sutter Parking</td>
+        </tr>
+        <tr>
+          <td scope="row">01/25/17 07:58AM</td>
+          <td class="wo-type">FP</td>
+          <td></td>
+          <td><a href="wo-sr\wo-c314524.html">C314524</a></td>
+          <td class="wo-dept"></td>
+          <td>Mt Zion Cancer Research, Asset Data Capture &amp; Lock Out / Tag Out</td>
+          <td class="wo-status">APPR</td>
+          <td class="wo-contact">XBOUDSADY</td>
+          <td class="wo-location">2037 MT Zion Cancer Resea</td>
+        </tr>
+        <tr>
+          <td scope="row">01/23/17 10:38AM</td>
+          <td class="wo-type">FP</td>
+          <td></td>
+          <td><a href="wo-sr\wo-c313989.html">C313989</a></td>
+          <td class="wo-dept"></td>
+          <td>Laurel Heights Annex, Asset Data Capture &amp; Lock Out / Tag Out</td>
+          <td class="wo-status">APPR</td>
+          <td class="wo-contact">XBOUDSADY</td>
+          <td class="wo-location">2012 Campus Library (Kalm</td>
+        </tr>
+        <tr>
+          <td scope="row">01/23/17 10:24AM</td>
+          <td class="wo-type">FP</td>
+          <td></td>
+          <td><a href="wo-sr\wo-C313985.html">C313985</a></td>
+          <td class="wo-dept"></td>
+          <td>Laurel Heights, Asset Data Capture &amp; Lock Out / Tag Out</td>
+          <td class="wo-status">APPR</td>
+          <td class="wo-contact">XBOUDSADY</td>
+          <td class="wo-location">2012 Campus Library (Kalm</td>
+        </tr>
+        <tr>
+          <td scope="row">01/19/17 01:03PM</td>
+          <td class="wo-type">CUST</td>
+          <td><a href="wo-sr\sr-43096.html">43096</a></td>
+          <td class="wo-dept"></td>
+          <td></td>
+          <td>EZMAX Change Request feature.</td>
+          <td class="wo-status">QUEUED</td>
+          <td class="wo-contact">XBOUDSADY</td>
+          <td class="wo-location"></td>
+        </tr>
+      </tbody>
+    </table>
+    <hr id="footer">
+  </div>
+  <!-- /Table Data -->
+
+  <hr>
+
+
+  
+
+  <!-- jQuery 2.1.4 -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+  <!-- Bootsrap 3.3.7 -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+    crossorigin="anonymous"></script>
+  <!-- Bootstrap Date-Picker Plugin 1.4.1 -->
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
+
+  <script>
+    $(document).ready(function () {
+      var date_input = $('input[name="date"]'); //our date input has the name "date"
+      var container = $('.bootstrap-iso form').length > 0 ? $('.bootstrap-iso form').parent() : "body";
+      var options = {
+        format: 'mm/dd/yyyy',
+        container: container,
+        todayHighlight: true,
+        autoclose: true,
+      };
+      date_input.datepicker(options);
+    })
+  </script>
+
+</body>
+</html>

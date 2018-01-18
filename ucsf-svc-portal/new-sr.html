@@ -1,0 +1,1020 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <title>UCSF FS Service Portal</title>
+  <!-- bootstrap css -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+    crossorigin="anonymous">
+  <!-- Bootstrap Date-Picker Plugin Stylesheet -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="css/custom.css">
+</head>
+<body>
+
+  <!-- navbar -->
+  <nav class="navbar navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-nav-demo" aria-expanded="false">
+					<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+        <a href="http://www.ucsf.edu/" class="navbar-brand">
+					<span id="ucsf-banner-nav">UC San Francisco</span>
+				</a>
+      </div>
+      <div class="collapse navbar-collapse" id="bs-nav-demo">
+        <ul class="nav navbar-nav navbar-right">
+          <li>
+            <a href=""><span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span> Hidden Item</a>
+          </li>
+          <li>
+            <a href="new-sr.html"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> New Service</a>
+          </li>
+          <li>
+            <a href="https://www.ucsfhealth.org/"><span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span> FAQ</a>
+          </li>
+          <li>
+            <a href="https://www.ucsfhealth.org/"><span class="glyphicon glyphicon-usd" aria-hidden="true"></span> Bills</a>
+          </li>
+          <li>
+            <a href="edit-profile.html"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span> Edit Profile</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <!-- /navbar -->
+
+  <!-- Jumbotron -->
+  <div class="jumbotron">
+    <div class="container">
+        <h2>Xayaseth Boudsady</h2>
+        <p>xayaseth.boudsady@ucsf.edu</p>
+        <p class="text-center"><a href="index.html" class="btn btn-primary btn-md" role="button">Sign Out</a></p>
+    </div>
+  </div>
+  <!-- /Jumbotron-->
+
+
+  <!-- Heading -->
+  <div class="container">
+    <h4><a href="main.html">Return to My Work Orders</a></h4>
+
+    <p>Please be aware that work orders submitted via the web are only handled during normal business hours.</p>
+    <p>For emergencies always call the Customer Service Center directly at <a href="tel:+1-476-2021">476-2021</a>.</p>
+  </div>
+  <!-- /Heading-->
+
+  <hr>
+
+  <!-- Content -->
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-6 col-md-2">
+        <div class="thumbnail">
+          <div class="caption">
+            <center>
+              <h1><i class="fa fa-home" aria-hidden="true"></i></h1>
+              <p>Housing</p>
+              <p><a href="#" class="btn btn-default" role="button" data-toggle="modal" data-target="#housingModal">Info</a></p>
+            </center>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-6 col-md-2">
+        <div class="thumbnail">
+          <div class="caption">
+            <center>
+              <h1><i class="fa fa-ticket" aria-hidden="true"></i></h1>
+              <p>Event Set-Ups</p>
+              <p><a href="#" class="btn btn-default" role="button" data-toggle="modal" data-target="#eventSetupModal">Info</a></p>
+            </center>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-6 col-md-2">
+        <div class="thumbnail">
+          <div class="caption">
+            <center>
+              <h1><i class="fa fa-key" aria-hidden="true"></i></h1>
+              <p>Key Requests</p>
+              <p><a href="#" class="btn btn-default" role="button" data-toggle="modal" data-target="#keyRequestModal">Info</a></p>
+            </center>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-6 col-md-2">
+        <div class="thumbnail">
+          <div class="caption">
+            <center>
+              <h1><i class="fa fa-wrench" aria-hidden="true"></i></h1>
+              <p>Facilities Request</p>
+              <p><a href="#" class="btn btn-default" role="button" data-toggle="modal" data-target="#facilitiesFundedModal">Info</a></p>
+            </center>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-6 col-md-2">
+        <div class="thumbnail">
+          <div class="caption">
+            <center>
+              <h1><i class="fa fa-calendar" aria-hidden="true"></i></h1>
+              <p>Projects</p>
+              <p><a href="#" class="btn btn-default" role="button" data-toggle="modal" data-target="#fsProjectsModal">Info</a></p>
+            </center>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-6 col-md-2">
+        <div class="thumbnail">
+          <div class="caption">
+            <center>
+              <h1><i class="fa fa-volume-control-phone" aria-hidden="true"></i></h1>
+              <p>Quick Response<br>1 (415) 476-2021</p>
+              <p><a href="tel:+1-415-476-2021" class="btn btn-default" role="button">Call </a></p>
+              
+            </center>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- /Content -->
+
+  <hr>
+
+
+  <!-- =================================
+        MODAL
+  ======================================= -->
+
+  <!-- Housing Info -->
+  <div class="modal fade" id="housingModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-body">
+          <h4>Housing Request</h4>
+          <br>
+          <p>Please use this request for all housing related maintenance issues.</p>
+          <p>Use this type for all Housing related maintenance issues.</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          <a href="new-sr-housing.html"><button type="button" class="btn btn-primary">Create Request</button></a>
+        </div>
+      </div>
+    </div>
+  </div>  <!-- /Housing Info -->
+  
+
+  <!-- Event Set-Ups Info -->
+  <div class="modal fade" id="eventSetupModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <!-- <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="eventSetupModalLabel">Event Set-Ups</h4>
+        </div> -->
+        <div class="modal-body">
+          <h4>Event Set-Up Work Orders</h4>
+          <br>
+          <p>Use this request for custodial set-ups to support events and functions.</p>
+          <p>Set-ups for events and functions are funded by the customer, with the exception of RCO sponsored events.</p>
+          <br>
+          <h4>Setups for Parnassus Campus:</h4>
+          <p>Please book <strong>5 days</strong> in advance to ensure setup can be scheduled.</p>
+          <p>Include the following information in the work description:</p>
+          <ul>
+            <li><strong>Event Date(s)</strong></li>
+            <li><strong>Event Time</strong> (period during which booking is actually taking place)</li>
+            <li><strong>Reserved Time</strong> (total time for which the room is reserved; generally event time plus setup/teardown hours)</li>
+            <li><strong>Required Features:</strong>
+              <ul>
+                <li>easels</li>
+                <li>recycling bins</li>
+                <li>extra trash cans</li>
+                <li>extra chairs and tables</li>
+              </ul>
+            <li><strong>Include</strong> setup style and for special setups include diagram.</li>
+          </ul>
+          <br>
+          <h4>Questions?</h4>
+            <p>Please contact the <strong>Customer Service Center</strong> at <a href="tel:+1-476-2021"><strong>476-2021</strong></a>, or email us at <a href="mailto:fmcustservice@fm.ucsf.edu">fmcustservice@fm.ucsf.edu</a>.</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          <a href="new-sr-event-rco.html"><button type="button" class="btn btn-primary">Create Request</button></a>
+        </div>
+      </div>
+    </div>
+  </div>  <!-- /Event Set-Ups -->
+  
+
+  <!-- Key Request Info -->
+  <div class="modal fade" id="keyRequestModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-body">
+          <h4> Key Request Work Orders</h4>
+          <br>
+          <p>Use this request for ordering keys only.</p>
+          <p>Key requests are funded by the customer.</p>
+          <br>
+          <h4>Questions?</h4>
+          <p>Please contact the <strong>Customer Service Center</strong> at ,
+            or email us at <a href="mailto:fmcustservice@fm.ucsf.edu">fmcustservice@fm.ucsf.edu</a>.</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          <a href="new-key-request.html"><button type="button" class="btn btn-primary">Create Request</button></a>
+        </div>
+      </div>
+    </div>
+  </div>  <!-- /Key Request -->
+  
+
+  <!-- Facilities Funded Info -->
+  <div class="modal fade" id="facilitiesFundedModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content">
+        <div class="modal-body">
+          <h4>Facilities Funded Work</h4>
+          <p>Use this request for regular building maintenance and repair work such as restroom maintenance and burned out light bulbs.</p>
+          <p>Facilities funded work is generally for maintenance of... 
+            <ul>
+              <li>building corridors</li>
+              <li>building systems such as ventilation</li>
+              <li>lobbies</li>
+              <li>restrooms</li>
+              <li>classrooms</li>
+              <li>and other public spaces</li>
+            </ul>
+            While there are exceptions, generally work needed within an office,or lab, or suite will be <strong>CUSTOMER FUNDED WORK</strong> and will need a <strong>DPA/Fund</strong> for recharge.</p>
+            <hr>
+            <p>Following is a partial list of both maintenance services funded by the state and maintenance services that are not state funded and therefore chargeable to the customer. These are examples and this list is not comprehensive.</p>
+          <p>Call the <strong>Customer Service Center</strong> at <a href="tel:+1-476-2021"><strong>476-2021</strong></a> for help in confirming funding source.</p>
+          <br>
+          <!-- ACCORDIAN Area of Service-->
+          <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+            <!-- Custodial Services -->
+            <div class="panel panel-default">
+              <div class="panel-heading" role="tab" id="headingOne">
+                <h4 class="panel-title">
+                  <a id="modalLink" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="false" aria-controls="collapseOne"><i class="fa fa-trash" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Custodial Services</a>
+                </h4>
+              </div>
+              <div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+                <div class="panel-body">
+                  <div class="container">
+                    <div class="row">
+                      <div class="col-lg-4">
+                        <h4>Facilities Funded</h4>
+                        <ul>
+                          <li><strong>Graffiti</strong> removal</li>
+                          <li><strong>Spill</strong> cleanup in public areas</li>
+                          <li><strong>Routine</strong> cleaning services performed daily in <em>"general use"</em> space such as 
+                            <ul>
+                              <li>lobbies</li>
+                              <li>corridors</li>
+                              <li>restrooms</li>
+                              <li>and other public areas</li>
+                            </ul>
+                        <li><strong>Routine</strong>  cleaning services in...
+                          <ul>
+                            <li>labs</li>
+                            <li>offices</li>
+                            <li>classrooms</li>
+                            <li>and other supported areas</li>
+                          </ul>
+                            <em>(See Custodial Frequency Schedule)</em>
+                        </li>
+                        <li><strong>Trash Removal</strong> – regular trash in standard containers</li>
+                        <li><strong>Routine</strong> scheduled pest control</li>
+                        <li><strong>Window washing</strong>
+                          <ul>
+                            <li>Exterior every 2 years</li>
+                            <li>Interior every 3 years (As budget allows)</li>
+                          </ul>
+                        </li>
+                        <li><strong>Routine</strong> services includes...
+                          <ul>
+                            <li>emptying trash</li>
+                            <li>sweeping and/or mopping</li>
+                            <li>vacuuming</li>
+                            <li>polishing floors</li>
+                          </ul>
+                          <em>See the Custodial Frequency Chart (pg 21) for further detail.</em>
+                        </li>
+                        </ul>
+                      </div>
+                      <div class="col-lg-4">
+                        <h4>Customer Funded</h4>
+                        <ul>
+                          <li><strong>Carpet</strong> cleaning beyond established schedule</li>
+                          <li><strong>Event</strong> set ups, table and chair rental</li>
+                          <li><strong>High-clean</strong> requests</li>
+                          <li><strong>Spill</strong> clean-up in department spaces</li>
+                          <li><strong>Project clean-up</strong> over and above routine cleaning</li>
+                          <li>Trash removal of irregular items or excessive accumulations above and beyond everyday norms</li>
+                          <li><strong>Window washing</strong> (more than minimum)</li>
+                          <li><strong>Extraordinary</strong> pest control outside of scheduled frequencies</li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div> <!-- /Custodial Services-->
+           
+            <!-- Carpentry services -->
+            <div class="panel panel-default">
+              <div class="panel-heading" role="tab" id="headingTwo">
+                <h4 class="panel-title">
+                  <a id="modalLink" class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false"
+                    aria-controls="collapseTwo"><i class="fa fa-cubes" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;Carpentry</a>
+                </h4>
+              </div>
+              <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+                <div class="panel-body">
+                  <div class="container">
+                    <div class="row">
+                      <div class="col-lg-4">
+                        <h4>Facilities Funded</h4>
+                        <ul>
+                          <li><strong>Ceiling tile</strong> replacement and repair</li>
+                          <li><strong>Door</strong></li>
+                            <ul>
+                              <li>Repairs</li>
+                              <li>Closures</li>
+                              <li>Doorstop Installation</li>
+                            </ul>
+                          <li><strong>Drywall</strong> and plaster repairs</li>
+                          <li><strong>Restroom</strong></li>
+                            <ul>
+                              <li>Partitions</li>
+                              <li>Mirror replacements</li>
+                            </ul>
+                          <li><strong>Floors</strong></li>
+                            <ul>
+                              <li><strong>Tile</strong> Repairs and replacement in public spaces</li>
+                              <li><strong>Baseboard</strong> repairs</li>
+                              <li>Replacement and/or repair of...</li>
+                                <ul>
+                                  <li>Carpets</li>
+                                  <li>Linoleum</li>
+                                  <li>Vinyl Floor</li>
+                                  <li>Wooden Floor</li>
+                                  <li>Other floor surfaces in public spaces</li>
+                                </ul>
+                            </ul>
+                          <li><strong>Furniture</strong> repair in public spaces</li>
+                          <li><strong>Wooden railings</strong> and steps repair and replacement</li>
+                          <li><strong>Stairs</strong>
+                            <ul>
+                              <li>tread</li>
+                              <li>guard replacements</li>
+                              <li>safety strips</li>
+                            </ul>
+                          </li>
+                          <li><strong>Window</strong> and glass repairs on building exteriors</li>
+                        </ul>
+                      </div>
+                      <div class="col-lg-4">
+                        <h4>Customer Funded</h4>
+                        <ul>
+                          <li><strong>Construction</strong> and/or installation of..
+                            <ul>
+                              <li>cabinets</li>
+                              <li>bookshelves</li>
+                              <li>miscellaneous casework</li>
+                            </ul>
+                          </li>
+                          <li><strong>Door replacements</strong> and/or conversions within controlled space</li>
+                          <li><strong>Earthquake restraints:</strong>
+                            <ul>
+                              <li>shelves</li>
+                              <li>cabinets</li>
+                              <li>gas cylinders</li>
+                              <li>bookshelves</li>
+                              <li>file cabinets</li>
+                              <li>freezers</li>
+                              <li>other furniture or equipment</li>
+                            </ul>
+                          </li>
+                          <li><strong>Picture framing</strong>, picture hanging, whiteboard / chalk board installations or moving</li>
+                          <li><strong>Office furniture</strong> repair</li>
+                          <li><strong>Hanging of</strong> screens or special projection equipment</li>
+                          <li><strong>Mirror</strong> installation or moving</li>
+                          <li><strong>Replacement</strong> and/or repair of...
+                            <ul>
+                              <li>carpets</li>
+                              <li>linoleum</li>
+                              <li>vinyl floors</li>
+                              <li>wooden floors</li>
+                              <li>other floor surfaces in departmental spaces</li>
+                            </ul> 
+                          </li>
+                          <li><strong>Venetian blinds</strong> or draperies
+                            <ul>
+                              <li>Purchase and/or installation</li>
+                              <li>maintenance and repairs</li>
+                            </ul>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div> <!-- /Carpentry Services-->
+            
+            <!-- Electrical Services-->
+            <div class="panel panel-default">
+              <div class="panel-heading" role="tab" id="headingThree">
+                <h4 class="panel-title">
+                  <a id="modalLink" class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false"
+                    aria-controls="collapseThree"><i class="fa fa-bolt" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Electrical</a>
+                </h4>
+              </div>
+              <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+                <div class="panel-body">
+                  <div class="container">
+                    <div class="row">
+                      <div class="col-lg-4">
+                        <h4>Facilities Funded</h4>
+                        <ul>
+                          <li><strong>Ballast</strong> replacement (facility lighting)</li>
+                          <li><strong>Circuit breaker</strong> resets, repair / replacement</li>
+                          <li><strong>Electrical distribution</strong> repair</li>
+                          <li><strong>Emergency generator</strong> and circuit service serving state supportable spaces</li>
+                          <li><strong>Emergency lighting</strong></li>
+                          <li><strong>Fixture</strong> cleaning and relamping: fluorescent and incandescent</li>
+                          <li><strong>Building</strong> facility lighting control systems</li>
+                          <li><strong>Routine</strong> circuit resetting</li>
+                          <li><strong>Handicap</strong> door access controls</li>
+                        </ul>
+                      </div>
+                      <div class="col-lg-4">
+                        <h4>Customer Funded</h4>
+                        <ul>
+                          <li><strong>Lighting requests</strong> for services above baseline</li>
+                          <li><strong>Additional outlets</strong> and circuit requests</li>
+                          <li><strong>Cord replacement</strong> and/or repair</li>
+                          <li><strong>Desk lamps</strong> and relamping</li>
+                          <li><strong>Departmental display</strong> case lighting installation, repair, and relamping</li>
+                          <li><strong>Intercom</strong> repairs and installation</li>
+                          <li><strong>Equipment</strong> installation and hook-up</li>
+                          <li><strong>Temporary power</strong> installations</li>
+                          <li><strong>Special lighting</strong> requests such as UV lamps, Fume Hood lighting</li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div> <!-- /Electrical Services-->
+            
+            <!-- Elevator Services-->
+            <div class="panel panel-default">
+              <div class="panel-heading" role="tab" id="headingFour">
+                <h4 class="panel-title">
+                  <a id="modalLink" class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseFour" aria-expanded="false"
+                    aria-controls="collapseFour"><i class="glyphicon glyphicon-sort" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;&nbsp;Elevator</a>
+                </h4>
+              </div>
+              <div id="collapseFour" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFour">
+                <div class="panel-body">
+                  <div class="container">
+                    <div class="row">
+                      <div class="col-lg-4">
+                        <h4>Facilities Funded</h4>
+                        <ul>
+                          <li><strong>Ballast</strong> replacement (facility lighting)</li>
+                          <li><strong>Circuit breaker</strong> resets, repair / replacement</li>
+                          <li><strong>Electrical distribution</strong> repair</li>
+                          <li><strong>Emergency generator</strong> and circuit service serving state supportable spaces</li>
+                          <li><strong>Emergency lighting</strong></li>
+                          <li><strong>Fixture</strong> cleaning and relamping: fluorescent and incandescent</li>
+                          <li><strong>Building</strong> facility lighting control systems</li>
+                          <li><strong>Routine</strong> circuit resetting</li>
+                          <li><strong>Handicap</strong> door access controls</li>
+                        </ul>
+                      </div>
+                      <div class="col-lg-4">
+                        <h4>Customer Funded</h4>
+                        <ul>
+                          <li><strong>Lighting requests</strong> for services above baseline</li>
+                          <li><strong>Additional outlets</strong> and circuit requests</li>
+                          <li><strong>Cord replacement</strong> and/or repair</li>
+                          <li><strong>Desk lamps</strong> and relamping</li>
+                          <li><strong>Departmental display</strong> case lighting installation, repair, and relamping</li>
+                          <li><strong>Intercom</strong> repairs and installation</li>
+                          <li><strong>Equipment</strong> installation and hook-up</li>
+                          <li><strong>Temporary power</strong> installations</li>
+                          <li><strong>Special lighting</strong> requests such as UV lamps, Fume Hood lighting</li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div> <!-- /Elevator Services-->
+
+            <!-- Fire & Life Safety Services-->
+            <div class="panel panel-default">
+              <div class="panel-heading" role="tab" id="headingFive">
+                <h4 class="panel-title">
+                  <a id="modalLink" class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseFive" aria-expanded="false"
+                    aria-controls="collapseFive"><i class="fa fa-fire-extinguisher" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;&nbsp;Fire and Life Safety</a>
+                </h4>
+              </div>
+              <div id="collapseFive" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFive">
+                <div class="panel-body">
+                  <div class="container">
+                    <div class="row">
+                      <div class="col-lg-4">
+                        <h4>Facilities Funded</h4>
+                        <ul>
+                          <li><strong>Fire extinguishers</strong>, hoses, cabinets, sprinklers</li>
+                          <li><strong>Fire alarms</strong> / smoke detectors and system monitoring</li>
+                        </ul>
+                      </div>
+                      <div class="col-lg-4">
+                        <h4>Customer Funded</h4>
+                        <ul>
+                          <li><strong>Additional</strong> protective devices beyond code requirements</li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div> <!-- /Fire & Life Safety Services-->
+
+            <!-- General Maintenances-->
+            <div class="panel panel-default">
+              <div class="panel-heading" role="tab" id="headingSix">
+                <h4 class="panel-title">
+                  <a id="modalLink" class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseSix" aria-expanded="false"
+                    aria-controls="collapseSix"><i class="fa fa-wrench" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;&nbsp;General Maintenance</a>
+                </h4>
+              </div>
+              <div id="collapseSix" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingSix">
+                <div class="panel-body">
+                  <div class="container">
+                    <div class="row">
+                      <div class="col-lg-4">
+                        <h4>Facilities Funded</h4>
+                        <ul>
+                          <li>Brick, mortar, cement inspection</li>
+                          <li>Public space inspection</li>
+                          <li>Graffiti removal</li>
+                        </ul>
+                      </div>
+                      <div class="col-lg-4">
+                        <h4>Customer Funded</h4>
+                        <ul>
+                          <li>Minor moving services of equipment, furniture, etc.</li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div> <!-- /General Maintenances -->
+            
+            <!-- Landscaping -->
+            <div class="panel panel-default">
+              <div class="panel-heading" role="tab" id="headingSeven">
+                <h4 class="panel-title">
+                  <a id="modalLink" class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseSeven" aria-expanded="false"
+                    aria-controls="collapseSeven"><i class="fa fa-tree" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;&nbsp;Landscaping Services</a>
+                </h4>
+              </div>
+              <div id="collapseSeven" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingSeven">
+                <div class="panel-body">
+                  <div class="container">
+                    <div class="row">
+                      <div class="col-lg-4">
+                        <h4>Facilities Funded</h4>
+                        <ul>
+                          <li><strong>General landscape</strong> maintenance of all non dedicated landscape areas</li>
+                          <li><strong>Hardscape</strong> maintenance and trash removal</li>
+                          <li><strong>Tree</strong> trimming, removal, and replacement</li>
+                          <li><strong>Litter</strong> pickup</li>
+                          <li><strong>Road and walkway</strong> maintenance and repair</li>
+                          <li><strong>Irrigation</strong> system installation and repair</li>
+                          <li><strong>Exterior planter</strong> beds and containers not specifically assigned to a dept</li>
+                          <li><strong>Library planters</strong> and terrace irrigation in state supportable space</li>
+                        </ul>
+                      </div>
+                      <div class="col-lg-4">
+                        <h4>Customer Funded</h4>
+                        <ul>
+                          <li><strong>Project</strong> related landscape needs or repair of damage caused by project work</li>
+                          <li><strong>Special requests</strong> for plantings or color changes</li>
+                          <li><strong>Parking</strong> lot maintenance and cleanup</li>
+                          <li><strong>Special event</strong> preparation and cleanup</li>
+                          <li><strong>Damage and vandalism</strong> to existing landscaping and irrigation systems</li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div> <!-- /Landscaping -->
+            
+            <!-- Lock Shop -->
+            <div class="panel panel-default">
+              <div class="panel-heading" role="tab" id="headingEight">
+                <h4 class="panel-title">
+                  <a id="modalLink" class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseEight" aria-expanded="false"
+                    aria-controls="collapseEight"><i class="fa fa-lock" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Lock Shop</a>
+                </h4>
+              </div>
+              <div id="collapseEight" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingEight">
+                <div class="panel-body">
+                  <div class="container">
+                    <div class="row">
+                      <div class="col-lg-4">
+                        <h4>Facilities Funded</h4>
+                        <ul>
+                          <li><strong>Repair and replacement</strong> of architectural door hardware:
+                            <ul>
+                              <li>locksets</li>
+                              <li>key cylinders</li>
+                              <li>closers</li>
+                              <li>door operators</li>
+                              <li>panic devices</li>
+                            </ul>
+                          </li>
+                          <li><strong>Installation and maintenance</strong> of Electronic Access Control systems for non dedicated exterior and public spaces</li>
+                          <li><strong>Door alarm</strong> installation and maintenance in public spaces</li>
+                          <li><strong>Omni Locks</strong> in Public Spaces</li>
+                        </ul>
+                      </div>
+                      <div class="col-lg-4">
+                        <h4>Customer Funded</h4>
+                        <ul>
+                          <li><strong>Combination lock / Omnilock installation</strong>
+                            <ul>
+                              <li>maintenance</li>
+                              <li>repair</li>
+                            </ul>
+                          </li>
+                          <li><strong>Deadbolt</strong> installation</li>
+                          <li><strong>Electronic access control</strong> installation, maintenance and repair dedicated to departmental space or program</li>
+                          <li><strong>Dedicated intrusion/freezer alarm</strong>
+                            <ul>
+                              <li>installation</li>
+                              <li>maintenance</li>
+                              <li>repairs</li>
+                            </ul>
+                          </li>
+                          <li><strong>Key fabrication</strong> (24-hour turnaround)</li>
+                          <li><strong>Lock</strong> re-keying, installation</li>
+                          <li><strong>Window locks</strong>, cabinet, file, and desk locks</li>
+                          <li><strong>Unlocking cabinets</strong>, desks, and other case goods</li>
+                          <li><strong>Lockouts</strong> (after hours contact UCPD)</li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div> <!-- /Lock Shop -->
+
+            <!-- Mechanical -->
+            <div class="panel panel-default">
+              <div class="panel-heading" role="tab" id="headingNine">
+                <h4 class="panel-title">
+                  <a id="modalLink" class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseNine" aria-expanded="false"
+                    aria-controls="collapseNine"><i class="fa fa-cogs" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;Mechanical</a>
+                </h4>
+              </div>
+              <div id="collapseNine" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingNine">
+                <div class="panel-body">
+                  <div class="container">
+                    <div class="row">
+                      <div class="col-lg-4">
+                        <h4>Facilities Funded</h4>
+                        <ul>
+                          <li>Building Fan maintenance and repair</li>
+                        </ul>
+                      </div>
+                      <div class="col-lg-4">
+                        <h4>Customer Funded</h4>
+                        <ul>
+                          <li>Dedicated fan maintenance and repair</li>
+                          <li>Fumehood maintenance and repair</li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div> <!-- /Mechanical -->
+            
+            <!-- Painting -->
+            <div class="panel panel-default">
+              <div class="panel-heading" role="tab" id="headingTen">
+                <h4 class="panel-title">
+                  <a id="modalLink" class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTen" aria-expanded="false"
+                    aria-controls="collapseTen"><i class="fa fa-paint-brush" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;Painting</a>
+                </h4>
+              </div>
+              <div id="collapseTen" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTen">
+                <div class="panel-body">
+                  <div class="container">
+                    <div class="row">
+                      <div class="col-lg-4">
+                        <h4>Facilities Funded</h4>
+                        <ul>
+                          <li>Painting is done in public spaces, as needed</li>
+                        </ul>
+                      </div>
+                      <div class="col-lg-4">
+                        <h4>Customer Funded</h4>
+                        <ul>
+                          <li>Routine painting and refinishing of all non-state space</li>
+                          <li>Vinyl and/or wallpaper installation or repair</li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div> <!-- /Painting -->
+
+            <!-- Plumbing -->
+            <div class="panel panel-default">
+              <div class="panel-heading" role="tab" id="headingEleven">
+                <h4 class="panel-title">
+                  <a id="modalLink" class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseEleven" aria-expanded="false"
+                    aria-controls="collapseEleven"><i class="fa fa-shower" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;Plumbing</a>
+                </h4>
+              </div>
+              <div id="collapseEleven" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingEleven">
+                <div class="panel-body">
+                  <div class="container">
+                    <div class="row">
+                      <div class="col-lg-4">
+                        <h4>Facilities Funded</h4>
+                        <ul>
+                          <li><strong>Restroom equipment</strong>
+                            <ul>
+                              <li>maintenance</li>
+                              <li>repair</li>
+                              <li>replacement</li>
+                            </ul>
+                          </li>
+                          <li><strong>Drinking fountains</strong> in public spaces</li>
+                          <li><strong>Emergency</strong> eyewash/showers</li>
+                          <li><strong>Facility wide systems</strong>:
+                            <ul>
+                              <li>cooling water</li>
+                              <li>DI Water</li>
+                              <li>gas</li>
+                              <li>vacuum</li>
+                              <li>oxygen etc.</li>
+                            </ul>
+                          </li>
+                          <li><strong>Leaks</strong>, facility drain stoppages, and flooding</li>
+                        </ul>
+                      </div>
+                      <div class="col-lg-4">
+                        <h4>Customer Funded</h4>
+                        <ul>
+                          <li><strong>Laboratory equipment</strong> hook-up and/or installation</li>
+                          <li><strong>Installation</strong> / maintenance of additional eyewash/showers above code requirements</li>
+                          <li><strong>Installation and/or maintenance</strong> of dedicated laboratory systems:
+                            <ul>
+                              <li>DI Water</li>
+                              <li>waste systems</li>
+                              <li>cooling systems</li>
+                              <li>vacuum systems</li>
+                              <li>gases, etc.</li>
+                            </ul>
+                          </li>
+                          <li><strong>Installation</strong> of experimental laboratory equipment</li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div> <!-- /Plumbing -->
+            
+            <!-- Refrigeration /HVAC Maintenance /Repair -->
+            <div class="panel panel-default">
+              <div class="panel-heading" role="tab" id="headingTwelve">
+                <h4 class="panel-title">
+                  <a id="modalLink" class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwelve"
+                    aria-expanded="false" aria-controls="collapseTwelve"><i class="fa fa-thermometer-half" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Refrigeration, HVAC Maintnance, Repair</a>
+                </h4>
+              </div>
+              <div id="collapseTwelve" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwelve">
+                <div class="panel-body">
+                  <div class="container">
+                    <div class="row">
+                      <div class="col-lg-4">
+                        <h4>Facilities Funded</h4>
+                        <ul>
+                          <li>Building Chillers</li>
+                          <li>Building Air Conditioning Units</li>
+                        </ul>
+                      </div>
+                      <div class="col-lg-4">
+                        <h4>Customer Funded</h4>
+                        <ul>
+                          <li>Dedicated Air Conditioning Units</li>
+                          <li>Cold Rooms</li>
+                          <li>Dedicated Chillers</li>
+                          <li>Environmental Growth Chambers</li>
+                          <li>Freezers</li>
+                          <li>Ice Machines</li>
+                          <li>Refrigerators</li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div> <!-- /Refrigeration /HVAC Maintenance /Repair -->
+            
+            <!-- Refuse & Recycling -->
+            <div class="panel panel-default">
+              <div class="panel-heading" role="tab" id="headingThirteen">
+                <h4 class="panel-title">
+                  <a id="modalLink" class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThirteen"
+                    aria-expanded="false" aria-controls="collapseThirteen"><i class="fa fa-recycle" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;&nbsp;Refuse &amp; Recycling</a>
+                </h4>
+              </div>
+              <div id="collapseThirteen" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThirteen">
+                <div class="panel-body">
+                  <div class="container">
+                    <div class="row">
+                      <div class="col-lg-4">
+                        <h4>Facilities Funded</h4>
+                        <ul>
+                          <li>Routine recycling material pickup (Custodial)</li>
+                          <li><strong>Bulky</strong> waste removal (periodic scheduling)</li>
+                        </ul>
+                      </div>
+                      <div class="col-lg-4">
+                        <h4>Customer Funded</h4>
+                        <ul>
+                          <li><strong>Excessive</strong> or unusual recycling materials pickup</li>
+                          <li><strong>Wooden pallets</strong> and excessive or non flattened cardboard or packing materials</li>
+                          <li><strong>Furniture</strong> and special item pickup (outside of scheduled bulky waste pickup)</li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div> <!-- /Refuse & Recycling -->
+
+            <!-- Signage -->
+            <div class="panel panel-default">
+              <div class="panel-heading" role="tab" id="headingForteen">
+                <h4 class="panel-title">
+                  <a id="modalLink" class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseForteen"
+                    aria-expanded="false" aria-controls="collapseForteen"><i class="fa fa-id-card-o" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;Signage</a>
+                </h4>
+              </div>
+              <div id="collapseForteen" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingForteen">
+                <div class="panel-body">
+                  <div class="container">
+                    <div class="row">
+                      <div class="col-lg-4">
+                        <h4>Facilities Funded</h4>
+                      </div>
+                      <div class="col-lg-4">
+                        <h4>Customer Funded</h4>
+                        <ul>
+                          <li>Signage</li>
+                          <li>Name Plates</li>
+                          <li>Holders</li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div> <!-- /Signage -->
+            
+            <!-- Signage -->
+            <div class="panel panel-default">
+              <div class="panel-heading" role="tab" id="headingFifteen">
+                <h4 class="panel-title">
+                  <a id="modalLink" class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseFifteen"
+                    aria-expanded="false" aria-controls="collapseFifteen"><i class="fa fa-building-o" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;&nbsp;Structural Maintenance</a>
+                </h4>
+              </div>
+              <div id="collapseFifteen" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFifteen">
+                <div class="panel-body">
+                  <div class="container">
+                    <div class="row">
+                      <div class="col-lg-4">
+                        <h4>Facilities Funded</h4>
+                        <ul>
+                          <li><strong>Roof</strong> maintenance and repairs</li>
+                          <li><strong>Structural</strong> waterproofing</li>
+                          <li><strong>Building</strong> window leaks and caulking</li>
+                          <li><strong>Gutter</strong> and downspout maintenance</li>
+                        </ul>
+                      </div>
+                      <div class="col-lg-4">
+                        <h4>Customer Funded</h4>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>  <!-- /Signage -->
+
+          
+          <!-- /ACCRODIAN Area of Service -->
+
+            <h4>Questions?</h4>
+            <p>Please contact the <strong>Customer Service Center</strong> at <a href="tel:+1-476-2021"><strong>476-2021</strong></a>,
+              or email us at <a href="mailto:fmcustservice@fm.ucsf.edu">fmcustservice@fm.ucsf.edu</a>.</p>
+          </div>
+
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary">Create Request</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>  <!-- /Facilities Funded -->
+
+  <!-- Projects -->
+  <div class="modal fade" id="fsProjectsModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="fsProjectsModalLabel">Projects Work Order</h4>
+        </div>
+        <div class="modal-body">
+          <p>Whereas other types of Work Orders are for quick and direct simple-to-remedy scopes of work, the Projects tab is for scopesthat would involve general contractors, or design consultants.</p>
+          <p>This might be as simple as installing a door ina corridor or adding a small office within an existing suite.</p>  
+          <p>It might be as complex as a new stem cell research building on the edge of a cliff. If it is work that requires more than a single skilled tradesperson, start here.</p>
+          <br>
+          <h4>Examples:</h4>
+          <ul>
+            <li>Work to be Capitalized</li>
+            <li>Phased Work</li>
+            <li>Renovations that require multiple trades</li>
+            <li>Structural Engineering / Geotechnical Engineering</li>
+            <li>Remodels/ Restorations / Consults</li>
+            <li>Elevator Projects</li>
+            <li>ROM estimates (where design is involved)</li>
+            <li>Work involving corridor penetrations</li>
+            <li>Egress related work</li>
+            <li>DM Projects</li>
+            <li>SEP Projects</li>
+            <li>Major Roofing - with logistics</li>
+            <li>Studies</li>
+            <li>New Buildings</li>
+            <li>New Labs</li>
+            <li>Building Infrastructure replacement/ Improvement</li>
+            <li>Work in Public Areas (lobbies, stairwells, entries)</li>
+          </ul>
+          <br>
+          <h4>Questions?</h4>
+          <p>Please contact the <strong>Customer Service Center</strong> at , or email us at <a href="mailto:fmcustservice@fm.ucsf.edu">fmcustservice@fm.ucsf.edu</a>.</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Create Request</button>
+        </div>
+      </div>
+    </div>
+  </div>  <!-- /Projects-->
+
+
+
+
+
+  <!-- jQuery 2.1.4 -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+  <!-- Bootsrap 3.3.7 -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+    crossorigin="anonymous"></script>
+
+</body>
+</html>

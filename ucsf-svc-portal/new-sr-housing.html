@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <title>UCSF FS Service Portal</title>
+  <!-- bootstrap css -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+    crossorigin="anonymous">
+  <!-- Bootstrap Date-Picker Plugin Stylesheet -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="css/custom.css">
+</head>
+<body>
+
+  <!-- navbar -->
+  <nav class="navbar navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-nav-demo" aria-expanded="false">
+					<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+        <a href="http://www.ucsf.edu/" class="navbar-brand">
+					<span id="ucsf-banner-nav">UC San Francisco</span>
+				</a>
+      </div>
+      <div class="collapse navbar-collapse" id="bs-nav-demo">
+        <ul class="nav navbar-nav navbar-right">
+          <li>
+            <a href=""><span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span> Hidden Item</a>
+          </li>
+          <li>
+            <a href="new-sr.html"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> New Service</a>
+          </li>
+          <li>
+            <a href="https://www.ucsfhealth.org/"><span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span> FAQ</a>
+          </li>
+          <li>
+            <a href="https://www.ucsfhealth.org/"><span class="glyphicon glyphicon-usd" aria-hidden="true"></span> Bills</a>
+          </li>
+          <li>
+            <a href="edit-profile.html"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span> Edit Profile</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <!-- /navbar -->
+
+  <!-- Jumbotron -->
+  <div class="jumbotron">
+    <div class="container">
+        <h2>Xayaseth Boudsady</h2>
+        <p>xayaseth.boudsady@ucsf.edu</p>
+        <p class="text-center"><a href="index.html" class="btn btn-primary btn-md" role="button">Sign Out</a></p>
+    </div>
+  </div>
+  <!-- /Jumbotron-->
+
+
+  <!-- Heading -->
+  <div class="container">
+    <h4><a href="main.html">Return to My Work Orders</a></h4>
+  </div>
+  <!-- /Heading-->
+
+  <hr class="hr-hidden">
+
+  <!-- Form Container -->
+  <div class="container">
+    <form class="form">
+
+      <legend><span class="number">1</span> Location:</legend>
+      <!-- Location Field -->
+      <div class="form-group row">
+        <!-- Building -->
+        <div class="col-sm-5">
+          <label for="building"><span class="glyphicon glyphicon-asterisk requiredField" aria-hidden="true"></span> Building: </label>
+          <select class="form-control" id="building-housing" name="bldg" onchange="javascript: bldgFlrDropdown(this.options[this.selectedIndex].value);">
+          <optgroup label="Mission Bay">
+            <option value="">Select Building</option>
+            <option value="3038">MB Housing East - 1560 3rd St</option>
+            <option value="3037">MB Housing North - 525 Nelson Rising Lane</option>
+            <option value="3036">MB Housing South - 550 Gene Friend Way</option>
+            <option value="3035">MB Housing West - 1505 4th St</option>
+          </optgroup>
+          <optgroup label="Parnassus">
+            <option value="2011">Housing 50 Kirkham St</option>
+            <option value="2005">Housing 1320 3rd Ave</option>
+            <option value="2003">Housing 1322-24 3rd Ave</option>
+            <option value="2276">Housing 1326 3rd Ave</option>
+            <option value="2262">Housing 1332 3rd Ave</option>
+            <option value="2271">Housing 1338 3rd Ave</option>
+            <option value="2267">Housing 1344 3rd Ave</option>
+            <option value="2269">Housing 1350 3rd Ave</option>
+            <option value="2272">Housing 1356 3rd Ave</option>
+            <option value="2273">Housing 1362 3rd Ave</option>
+            <option value="2063">Housing 1414 5th Ave</option>
+            <option value="2061">Housing 1420 5th Ave</option>
+            <option value="2062">Housing 1422-24 5th Ave</option>
+            <option value="2065">Housing 1428 5th Ave</option>
+            <option value="2059">Housing 1432-34 5th Ave</option>
+            <option value="2058">Housing 1440 5th Ave</option>
+            <option value="2046">Housing 1442 5th Ave</option>
+            <option value="2064">Housing 1452 5th Ave</option>
+            <option value="2056">Housing 1454 5th Ave</option>
+            <option value="2060">Housing 1460 5th Ave</option>
+            <option value="2054">Housing 1464 5th Ave</option>
+            <option value="2053">Housing 1468 5th Ave</option>
+            <option value="2029">Housing 1472-74 5th Ave</option>
+            <option value="2028">Housing 1478-80 5th Ave</option>
+            <option value="2030">Housing 1482 5th Ave</option>
+            <option value="2420">Housing 1486-88 5th Ave</option>
+            <option value="2021">Housing 1490 5th Ave</option>
+          </optgroup>
+          <optgroup label="Aldea">
+            <option value="ALDEA">Housing ALDEA (General Site)</option>
+            <option value="3014">Housing Aldea 01 - 50 Johnstone Dr</option>
+            <option value="3020">Housing Aldea 02 - 45 Johnstone Dr</option>
+            <option value="3021">Housing Aldea 03 - 75 Behr Ave</option>
+            <option value="3022">Housing Aldea 04 - 20 Adolph Sutro Ct</option>
+            <option value="3023">Housing Aldea 05 - 85 Behr Ave</option>
+            <option value="3024">Housing Aldea 06 - 30 Adolph Sutro Ct</option>
+            <option value="3025">Housing Aldea 07 - 95 Behr Ave</option>
+            <option value="2308">Housing Aldea 08 - 105 Behr Ave</option>
+            <option value="2310">Housing Aldea 10 - 175 Johnstone Dr</option>
+            <option value="3016">Housing Aldea 11 - 90 Behr Ave</option>
+            <option value="2312">Housing Aldea 12 - 165 Johnstone Dr</option>
+            <option value="3019">Housing Aldea 14 - 80 Behr Ave</option>
+            <option value="3250">Housing Aldea Community Center 155 Johnstone</option>
+          </optgroup>
+        </select>
+        </div> <!-- /Building -->
+        
+        <!-- Floor -->
+        <div class="col-sm-2">
+          <label for="floor"><span class="glyphicon glyphicon-asterisk requiredField" aria-hidden="true"></span> Floor: </label>
+          <script type="text/javascript" language="JavaScript">
+            document.write('<select class="form-control" name="floor" id="floor" onchange="javascript: bldgFlrRoomDropdown(this.options[this.selectedIndex].value);"><option value=""></option></select>')
+          </script>
+          <noscript>
+            <select class="form-control" id="floor" name="floor">
+            <option value="">Floor</option>
+          </select>
+          </noscript>
+        </div> <!-- /Floor -->
+
+        <!-- Room -->
+        <div class="col-sm-2"> 
+          <label for="room">Apartment: </label>
+          <script type="text/javascript" language="JavaScript">
+            document.write('<select class="form-control" name="room" id="room"><option value=""></option></select>')
+          </script>
+          <noscript>
+            <select class="form-control" id="room" name="room">
+            <option value="">Room</option>
+          </select>
+          </noscript>
+        </div> <!-- /Room -->
+        
+        <!-- LocDetails -->
+        <div class="col-sm-3"> 
+          <label for="room">Location: </label>
+            <select class="form-control" id="room" name="room">
+            <option value=""></option>
+            <option value="">Bathroom</option>
+            <option value="">Bedroom</option>
+            <option value="">Building Eterior</option>
+            <option value="">Common Area</option>
+            <option value="">Courtyard</option>
+            <option value="">Elevator Lobby</option>
+            <option value="">Garage</option>
+            <option value="">Kitchen</option>
+            <option value="">Laundry Room</option>
+            <option value="">Housing Office</option>
+            <option value="">Stairwell</option>
+          </select>
+        </div> <!-- /LocDetails -->
+
+      </div> <!-- /Location Field -->
+
+      <hr class="hr-hidden">
+
+      <legend><span class="number">2</span> Description of Work:</legend>
+      <!-- Work Description -->
+      <div class="form-group row">
+        <div class="col-sm-12">
+          <label for="workDesc"><span class="glyphicon glyphicon-asterisk requiredField" aria-hidden="true"></span> Description of Work</label>
+          <textarea class="form-control" rows="5" id="workDesc" name="workDesc" placeholder="Please describe deails of work..."></textarea>
+        </div>
+      </div>  <!-- /Work Description -->
+
+      <hr class="hr-hidden">
+
+      <legend><span class="number">3</span> Contact Information</legend>
+      <!-- Contact Info-->
+      <div class="form-group row">
+        <div class="col-sm-4">
+          <label for="ContactName"><span class="glyphicon glyphicon-asterisk requiredField" aria-hidden="true"></span> Name</label>
+          <input type="text" class="form-control" id="ContactName" maxlength="30" required="required" placeholder="John Smith">
+        </div>
+        <div class="col-sm-4">
+          <label for="ContactPhone"><span class="glyphicon glyphicon-asterisk requiredField" aria-hidden="true"></span> Contact Phone</label>
+          <input type="text" class="form-control" id="ContactPhone" maxlength="14" required="required" placeholder="123-457-7890">
+        </div>
+        <div class="col-sm-4">
+          <label for="ContactEmail"><span class="glyphicon glyphicon-asterisk requiredField" aria-hidden="true"></span> Email address</label>
+          <input type="email" class="form-control" id="ContactEmail" placeholder="john.smith@ucsf.edu" maxlength="64" required="required">
+        </div>
+      </div> <!-- /Contact Info-->
+      
+      <hr class="hr-hidden">
+
+      <div class="form-group row">
+        <div class="col-sm-2">
+          <button type="submit" name="Submit" value="Submit" class="btn btn-primary">Submit</button>
+        </div>
+      </div>
+
+      
+
+    </form> <!-- Form -->
+  </div> <!-- Form Container -->
+ 
+
+  <hr>
+
+
+
+
+
+  <!-- jQuery 2.1.4 -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+  <!-- Bootsrap 3.3.7 -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+    crossorigin="anonymous"></script>
+  <!-- Form Scripting -->
+  <script src="script/form-housing-bldg.js"></script>
+
+</body>
+</html>

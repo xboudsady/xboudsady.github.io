@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <title>UCSF FS Service Portal</title>
+  <!-- bootstrap css -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+    crossorigin="anonymous">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="css/custom.css">
+</head>
+<body>
+
+  <!-- navbar -->
+  <nav class="navbar navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-nav-demo" aria-expanded="false">
+					<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+        <a href="http://www.ucsf.edu/" class="navbar-brand">
+					<span id="ucsf-banner-nav">UC San Francisco</span>
+				</a>
+      </div>
+      <div class="collapse navbar-collapse" id="bs-nav-demo">
+        <ul class="nav navbar-nav navbar-right">
+          <li>
+            <a href="http://campuslifeservices.ucsf.edu/facilities/" target="_blank">Facilities Services</a>
+          </li>
+          <li>
+            <a href="http://www.cpfm.ucsf.edu/" target="_blank">Capital Programs</a>
+          </li>
+          <li>
+            <a href="https://www.ucsfhealth.org/" target="_blank">UCSF Medical Center</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <!-- /navbar -->
+
+  <!-- Jumbotron -->
+  <div class="jumbotron">
+    <div class="container">
+      <h1>Work Order Submittal &amp; Tracking</h1>
+    </div>
+  </div>
+  <!-- /Jumbotron-->
+
+
+  <!-- Login Form -->
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6">
+          <form class="form-horizontal">
+            <div class="form-group">
+              <label for="inputEmail3" class="col-sm-2 control-label">Email</label>
+              <div class="col-sm-10">
+                <input type="email" class="form-control" id="inputEmail3" placeholder="Email">
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="inputPassword3" class="col-sm-2 control-label">Password</label>
+              <div class="col-sm-10">
+                <input type="password" class="form-control" id="inputPassword3" placeholder="Password">
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="col-sm-offset-2 col-sm-10">
+                <a href="main.html">
+                  <button type="button" class="btn btn-default">Sign in <i class="fa fa-sign-in" aria-hidden="true"></i></button>
+                </a>
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class="col-md-6">
+          <p>Click <a href="#">here</a> <i class="fa fa-sign-in" aria-hidden="true"></i> to be re-directed to Maximo Login Page</p>
+          <p>Click <a href="#">here</a> <i class="fa fa-sign-in" aria-hidden="true"></i> to login via MyAccess</p>
+        </div>
+      </div>
+    </div>
+  <!-- /Login Form-->
+
+
+
+  <!-- Content -->
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-6 col-md-4">
+        <div class="thumbnail">
+          <div class="caption">
+            <center>
+              <h1><i class="fa fa-user-plus" aria-hidden="true"></i></h1>
+              <p>New Account</p>
+              <p><a href="register.html" class="btn btn-default" role="button">Register</a></p>
+            </center>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-6 col-md-4">
+        <div class="thumbnail">
+          <div class="caption">
+            <center>
+              <h1><i class="fa fa-undo" aria-hidden="true"></i></h1>
+              <p>Password Rest</p>
+              <p><a href="pass-reset.html" class="btn btn-default" role="button">Reset</a></p>
+            </center>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-6 col-md-4">
+        <div class="thumbnail">
+          <div class="caption">
+            <center>
+              <h1><i class="fa fa-phone" aria-hidden="true"></i></h1>
+              <p>Customer Support</p>
+              <p><a href="tel:+1-415-476-2021" class="btn btn-default" role="button">Call</a></p>
+            </center>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- /Content -->
+
+  <hr>
+
+  <div class="container">
+    <p>If you are unable or do not wish to create an FMTrack account, please email Facilities directly at <a href="mailto:Facilities@ucsf.edu">Facilities@ucsf.edu</a>. Be
+    sure to include a description of the issue, specific location (building, floor, room) as well as your email and phone
+    number.</p>
+
+    <p>In the event of an <span id="emergency">emergency</span> building related issue requiring immediate attention call the Customer Service Center at <a href="tel:1-415-476-2021">415-476-2021</a>.</p>
+  </div>
+
+
+  <!-- jQuery first, then bootstrap js -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+    crossorigin="anonymous"></script>
+
+</body>
+</html>

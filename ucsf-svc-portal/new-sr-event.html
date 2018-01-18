@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <title>UCSF FS Service Portal</title>
+  <!-- bootstrap css -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+    crossorigin="anonymous">
+  <!-- Bootstrap Date-Picker Plugin Stylesheet -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="css/custom.css">
+</head>
+<body>
+
+  <!-- navbar -->
+  <nav class="navbar navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-nav-demo" aria-expanded="false">
+					<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+        <a href="http://www.ucsf.edu/" class="navbar-brand">
+        <span id="ucsf-banner-nav">UC San Francisco</span>
+				</a>
+      </div>
+      <div class="collapse navbar-collapse" id="bs-nav-demo">
+        <ul class="nav navbar-nav navbar-right">
+          <li>
+            <a href=""><span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span> Hidden Item</a>
+          </li>
+          <li>
+            <a href="new-sr.html"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> New Service</a>
+          </li>
+          <li>
+            <a href="https://www.ucsfhealth.org/"><span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span> FAQ</a>
+          </li>
+          <li>
+            <a href="https://www.ucsfhealth.org/"><span class="glyphicon glyphicon-usd" aria-hidden="true"></span> Bills</a>
+          </li>
+          <li>
+            <a href="edit-profile.html"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span> Edit Profile</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <!-- /navbar -->
+
+  <!-- Jumbotron -->
+  <div class="jumbotron">
+    <div class="container">
+        <h2>Xayaseth Boudsady</h2>
+        <p>xayaseth.boudsady@ucsf.edu</p>
+        <p class="text-center"><a href="index.html" class="btn btn-primary btn-md" role="button">Sign Out</a></p>
+    </div>
+  </div>
+  <!-- /Jumbotron-->
+
+
+  <!-- Heading -->
+  <div class="container">
+    <h4><a href="main.html">Return to My Work Orders</a></h4>
+    <h3>Event Setup</h3>
+  </div>
+  <!-- /Heading-->
+
+  <hr class="hr-hidden">
+
+  <!-- Form Container -->
+  <div class="container">
+    <form class="form">
+
+      <!-- Location Field -->
+      <legend><span class="number">1</span> Location:</legend>
+      
+      <div class="form-group row">
+        <!-- Building -->
+        <div class="col-sm-5">
+          <label for="building"><span class="glyphicon glyphicon-asterisk requiredField" aria-hidden="true"></span> Building: </label>
+          <select class="form-control" id="building-housing" name="bldg" onchange="javascript: bldgFlrDropdown(this.options[this.selectedIndex].value);">
+          <optgroup label="Mission Bay">
+            <option value="">Select Building</option>
+            <option value="3038">MB Housing East - 1560 3rd St</option>
+            <option value="3037">MB Housing North - 525 Nelson Rising Lane</option>
+            <option value="3036">MB Housing South - 550 Gene Friend Way</option>
+            <option value="3035">MB Housing West - 1505 4th St</option>
+          </optgroup>
+          <optgroup label="Parnassus">
+            <option value="2011">Housing 50 Kirkham St</option>
+            <option value="2005">Housing 1320 3rd Ave</option>
+            <option value="2003">Housing 1322-24 3rd Ave</option>
+            <option value="2276">Housing 1326 3rd Ave</option>
+          </optgroup>
+        </select>
+        </div> <!-- /Building -->
+        
+        <!-- Floor -->
+        <div class="col-sm-2">
+          <label for="floor"><span class="glyphicon glyphicon-asterisk requiredField" aria-hidden="true"></span> Floor: </label>
+          <script type="text/javascript" language="JavaScript">
+            document.write('<select class="form-control" name="floor" id="floor" onchange="javascript: bldgFlrRoomDropdown(this.options[this.selectedIndex].value);"><option value=""></option></select>')
+          </script>
+          <noscript>
+            <select class="form-control" id="floor" name="floor">
+            <option value="">Floor</option>
+          </select>
+          </noscript>
+        </div> <!-- /Floor -->
+
+        <!-- Room -->
+        <div class="col-sm-2"> 
+          <label for="room">Room: </label>
+          <script type="text/javascript" language="JavaScript">
+            document.write('<select class="form-control" name="room" id="room"><option value=""></option></select>')
+          </script>
+          <noscript>
+            <select class="form-control" id="room" name="room">
+            <option value="">Room</option>
+          </select>
+          </noscript>
+        </div> <!-- /Room -->
+        
+        
+      </div> <!-- /Location Field -->
+
+      <!-- Sensitive Area -->
+      <div class="form-group row">
+        <div class="col-sm-4">
+          <label for="floor"><span class="glyphicon glyphicon-asterisk requiredField" aria-hidden="true"></span>Is this a sensitive area or special occupancy?</label>
+        </div>
+        <div class="col-sm-2">
+          <label class="radio-inline">
+            <input type="radio" name="opSensitive" id="opSensitiveNo" value="N" checked> No
+          </label>
+          <label class="radio-inline">
+            <input type="radio" name="opSensitive" id="opSensitiveYes" value="Y"> Yes
+          </label>
+        </div>
+      </div> <!-- /Sensitive Area -->
+
+      <!-- Hidden Sensitive Area -->
+      <div id="idSensArea">
+        <div class="form-group row">
+          <div class="col-sm-3">
+            <label for="room"><span class="glyphicon glyphicon-asterisk requiredField" aria-hidden="true"></span> Type: </label>
+            <select class="form-control" id="ctlSensType" name="room">
+            <option value=""></option>
+            <option value="BSL3">BSL3</option>
+            <option value="Clean Room">Clean Room</option>
+            <option value="Animal Care">Animal Care</option>
+            <option value="Other">Other (Specify to Right)</option>
+          </select>
+          </div>
+          <div class="col-sm-6">
+            <label for="ctlSensTypeText"> Other</label>
+            <input type="text" class="form-control" id="ctlSensTypeText" maxlength="32">
+          </div>
+        </div>
+        <div class="form-group row">
+          <div class="col-sm-12">
+            <label for="workDesc">Instructions to enter space:</label>
+            <textarea class="form-control" rows="5" id="workDesc" name="workDesc" placeholder="Provide details of sensitive instructions prior to work..."></textarea>
+          </div>
+        </div>
+      </div>
+       <!-- /Hidden Sensitive Area -->
+      
+      
+
+      <hr class="hr-hidden">
+
+      <!-- Work Description -->
+      <legend><span class="number">2</span> Description of Work:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" data-toggle="modal" data-target="#ev-setup-descWO-Modal"><i class="fa fa-info-circle" aria-hidden="true"></i> Info</a></legend>
+      
+      <div class="form-group row">
+        <div class="col-sm-12">
+          <label for="workDesc"><span class="glyphicon glyphicon-asterisk requiredField" aria-hidden="true"></span> Description of Work</label> 
+          <textarea class="form-control" rows="5" id="workDesc" name="workDesc" placeholder="Please describe deails of work..."></textarea>
+        </div>
+      </div> 
+      <!-- /Work Description -->
+
+      <hr class="hr-hidden">
+
+      <!-- Additional Question -->
+      <legend><span class="number">2a</span> Additional Questions:</legend>
+      
+      <div class="form-group row">
+        <div class="col-sm-3">
+          <label for="attendees">Date of Event:</label>
+          <input class="form-control" id="date" name="date" placeholder="MM/DD/YYYY" type="text">
+        </div>
+        <div class="col-sm-3">
+          <label for="attendees">Start Time:</label>
+          <input class="form-control" id="" name="" type="text">
+        </div>
+        <div class="col-sm-3">
+          <label for="attendees">End Time:</label>
+          <input class="form-control" id="" name="" type="text">
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <div class="col-sm-3">
+          <label for="attendees">Setup Time:</label>
+          <input class="form-control" id="" name="" type="text">
+        </div>
+        <div class="col-sm-3">
+          <label for="attendees">Breakdown Time:</label>
+          <input class="form-control" id="" name="" type="text">
+        </div>
+      </div>
+
+
+      <!-- /Additional Question -->
+
+      <hr class="hr-hidden">
+
+      <legend><span class="number">3</span> Contact Information</legend>
+      <!-- Contact Info-->
+      <div class="form-group row">
+        <div class="col-sm-4">
+          <label for="DeptName"><span class="glyphicon glyphicon-asterisk requiredField" aria-hidden="true"></span> Department Name:</label>
+          <input type="text" class="form-control" id="DeptName" maxlength="40" required="required" value="Campus Life Services: Facilities Services">
+        </div>
+        <div class="col-sm-4">
+          <label for="ContactName"><span class="glyphicon glyphicon-asterisk requiredField" aria-hidden="true"></span> Primary Contact:</label>
+          <input type="text" class="form-control" id="ContactName" maxlength="40" required="required" value="Xayaseth (Seth) Boudsady">
+        </div>
+        <div class="col-sm-4">
+          <label for="ContactTitle"><span class="glyphicon glyphicon-asterisk requiredField" aria-hidden="true"></span> Title</label>
+          <input type="email" class="form-control" id="ContactTitle" maxlength="80" required="required" value="Business System Analyst">
+        </div>
+      </div>
+      <div class="form-group row">
+        <div class="col-sm-4">
+          <label for="ContactPhone"><span class="glyphicon glyphicon-asterisk requiredField" aria-hidden="true"></span> Phone:</label>
+          <input type="text" class="form-control" id="ontactPhone" maxlength="40" required="required" value="415-774-6713">
+        </div>
+        <div class="col-sm-1">
+          <label for="ContactBox">Box:</label>
+          <input type="text" class="form-control" id="ContactBox" maxlength="4" required="required" value="9999">
+        </div>
+        <div class="col-sm-3">
+          <label for="ContactFax">Fax:</label>
+          <input type="text" class="form-control" id="ContactFax" maxlength="14" required="required">
+        </div>
+        <div class="col-sm-4">
+          <label for="ContactEmail"><span class="glyphicon glyphicon-asterisk requiredField" aria-hidden="true"></span> Email address</label>
+          <input type="email" class="form-control" id="ContactEmail" maxlength="64" required="required" value="xayaseth.boudsady@ucsf.edu">
+        </div>
+      </div>
+      <!-- /Contact Info-->
+
+      <hr class="hr-hidden">
+
+      <legend><span class="number">4</span> Site</legend>
+      <!-- Site Contact Info-->
+      <div class="form-group row">
+        <div class="col-sm-4">
+          <label for="ContactName"><span class="glyphicon glyphicon-asterisk requiredField" aria-hidden="true"></span> Name</label>
+          <input type="text" class="form-control" id="ContactName" maxlength="30" required="true">
+        </div>
+        <div class="col-sm-4">
+          <label for="ContactPhone"><span class="glyphicon glyphicon-asterisk requiredField" aria-hidden="true"></span> Primary Contact:</label>
+          <input type="text" class="form-control" id="ContactPhone" maxlength="14">
+        </div>
+        <div class="col-sm-4">
+          <label for="exampleInputEmail1"><span class="glyphicon glyphicon-asterisk requiredField" aria-hidden="true"></span> Email address</label>
+          <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Email">
+        </div>
+      </div> <!-- /Contact Info-->
+      
+      <hr class="hr-hidden">
+
+      <div class="form-group row">
+        <div class="col-sm-2">
+          <button type="submit" name="Submit" value="Submit" class="btn btn-primary">Submit</button>
+        </div>
+      </div>
+
+      
+
+    </form> <!-- Form -->
+  </div> <!-- Form Container -->
+ 
+
+  <hr>
+
+    <!-- =================================
+        MODAL
+  ======================================= -->
+
+    <!-- Housing Info -->
+    <div class="modal fade" id="ev-setup-descWO-Modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="ev-setup-descWO-Label">Event Seteveup</h4>
+          </div>
+          <div class="modal-body">
+            <p>Please book 5 days in advance to ensure setup can be scheduled. Include the following information in the work description:</p>
+            <ul>
+              <li><strong>Event Date(s)</strong></li>
+              <li><strong>Event Time</strong> (period during which booking is actually taking place)</li>
+              <li><strong>Setup/Teardown Hours</strong> (the time added to event time to allow staff to prepare a room or cleanup an event)</li>
+              <li><strong>Reserved Time</strong> (total time for which the room is reserved; generally event time plus setup/teardown hours)</li>
+              <li><strong>Required Features:</strong>
+                <ul>
+                  <li>easels</li>
+                  <li>recycling bins</li>
+                  <li>extra trash cans</li>
+                  <li>extra chairs</li>
+                  <li>extra tables</li>
+                </ul>
+              </li>
+              <li><strong>Include</strong> setup style and for special setups include diagram.</li>
+            </ul>
+            <br>
+            <h4>Questions?</h4>
+            <p>Please contact the <strong>Customer Service Center</strong> at , or email us at <a href="mailto:fmcustservice@fm.ucsf.edu">fmcustservice@fm.ucsf.edu</a>.</p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- /Housing Info -->
+
+    
+
+
+
+
+  <!-- jQuery 2.1.4 -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+  <!-- Bootsrap 3.3.7 -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+    crossorigin="anonymous"></script>
+  <!-- Bootstrap Date-Picker Plugin 1.4.1 -->
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
+
+  <!-- Form Scripting -->
+  <script src="script/form-housing-bldg.js"></script>
+
+  <script>
+    $(document).ready(function () {
+      var date_input = $('input[name="date"]'); //our date input has the name "date"
+      var container = $('.bootstrap-iso form').length > 0 ? $('.bootstrap-iso form').parent() : "body";
+      var options = {
+        format: 'mm/dd/yyyy',
+        container: container,
+        todayHighlight: true,
+        autoclose: true,
+      };
+      date_input.datepicker(options);
+    })
+  </script>
+
+
+
+
+
+</body>
+</html>

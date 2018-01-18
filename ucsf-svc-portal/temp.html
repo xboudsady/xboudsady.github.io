@@ -1,0 +1,2976 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+
+
+<html>
+
+<head>
+  <meta name="viewport" content="Width = device-width" />
+  <link rel="SHORTCUT ICON" href="images/fmtrackicon.ico" />
+  <title>FMTrack</title>
+  <link rel="stylesheet" type="text/css" href="tcal.css" />
+  <link rel="stylesheet" type="text/css" href="fmtrack.css" />
+  <script language="Javascript" type="text/javascript" src="tcal.js"></script>
+
+
+  <script language="Javascript" type="text/javascript">
+    function procLink(vaction) {
+      document.myform.forwardto.value = vaction;
+      document.myform.submit();
+    };
+
+    function elementexists(id) {
+      if (document.getElementById(id) != null) {
+        return true;
+      } else {
+        return false;
+      };
+    };
+
+    function setEventHandler(vElem, vEvent, vFunc) {
+      if (vElem.addEventListener)
+        vElem.addEventListener(vEvent, vFunc, false); //everything else    
+      else if (vElem.attachEvent)
+        vElem.attachEvent('on' + vEvent, vFunc); //IE only
+    };
+
+
+    function clearoptSiteContact() {
+      if (document.getElementById("optSiteContactP").checked != 0) {
+        document.getElementById("optSiteContactP").checked = 0
+      };
+      if (document.getElementById("optSiteContactO").checked == 0) {
+        document.getElementById("optSiteContactO").checked = true
+      };
+    };
+
+    function floorChange() {
+      var floorctl, roomctl, floorval;
+      floorctl = document.getElementById("floor");
+      roomctl = document.getElementById("room");
+      floorval = floorctl.value.toUpperCase();
+      if (floorval.length == 1) {
+        if (!document.getElementById("rooms_" + floorval)) {
+          if (document.getElementById("rooms_0" + floorval)) {
+            floorval = "0" + floorval;
+          };
+        };
+      };
+      floorctl.value = floorval;
+      roomctl.setAttribute("list", "rooms_" + floorval);
+    };
+
+    function roomChange() {
+      var roomctl;
+      var roomval;
+      roomctl = document.getElementById("room");
+      roomval = roomctl.value.toUpperCase();
+      roomctl.value = roomval;
+    };
+
+    function setSiteContact() {
+      if (document.getElementById("optSiteContactP").checked != 0) {
+        document.getElementById("SiteContactName").value = document.getElementById("ContactName").value;
+        document.getElementById("SiteContactEmail").value = document.getElementById("ContactEmail").value;
+        document.getElementById("SiteContactPhone").value = document.getElementById("ContactPhone").value;
+      };
+      if (document.getElementById("optSiteContactO").checked != 0) {
+        document.getElementById("SiteContactName").value = "";
+        document.getElementById("SiteContactEmail").value = "";
+        document.getElementById("SiteContactPhone").value = "";
+      };
+    };
+
+    function setBUDefaults(linenum) {
+      var ctl;
+      ctl = document.getElementById("BusUnit_" + linenum);
+      if (ctl.options[ctl.selectedIndex].text == 'SFMED' || ctl.options[ctl.selectedIndex].text == 'SFFPO') {
+        document.getElementById("Func_" + linenum).value = '42';
+        document.getElementById("Fund_" + linenum).value = '5020';
+        document.getElementById("Proj_" + linenum).value = '1111111';
+      };
+    };
+
+    // COA VALIDATE FUNCTIONS FOLLOW
+    function coakeypress(e) {
+      if (e.keyCode == 13) {
+        return false;
+      } else {
+        return true;
+      }
+    };
+
+
+    function htmlEntities(str) {
+      return String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(
+        /[\n]/g, '<br>').replace(/ /g, '&nbsp;');
+    };
+
+    function uppercase(strID) {
+      document.getElementById(strID).value = document.getElementById(strID).value.toUpperCase();
+    };
+
+    function clrSpeed(lineNum) {
+      document.getElementById("Speed_" + lineNum).value = "";
+    };
+
+    function checkcoa(linenum, cacheoption, vCtlName) {
+      var strURL;
+      var xmlhttp;
+      var x;
+      var aResponse;
+      var strResponse;
+
+      function checkcoaResponse() {
+        if (xmlhttp.readyState != 4) {
+          return;
+        }
+        if (xmlhttp.status != 200) {
+          document.getElementById("diagmsg").innerHTML = 'x';
+          return;
+        };
+        strResponse = xmlhttp.responseText;
+        // returns separated by ` : Validity Flag [0], Message [1], desc_business_unit [2], desc_account [3], desc_altacct [4], desc_fund_code [5], desc_deptid [6], desc_project_id [7], desc_function [8],  @desc_activity_period [9], @desc_flexfield [10]
+        aResponse = strResponse.split("`");
+        if (aResponse.length == 1) {
+          document.getElementById("diagmsg").innerHTML = 'x';
+        } else if (aResponse[0] != "V") {
+          document.getElementById("diagmsg").innerHTML = 'Line ' + linenum + ': ' + htmlEntities(aResponse[1]) +
+            '&nbsp;';
+        } else {
+          if (vCtlName != '' && aResponse.length >= 11) {
+            switch (vCtlName) {
+              case 'Fund':
+                if (aResponse[5] != '')
+                  document.getElementById("infomsg").innerHTML = 'Fund ' + document.getElementById("Fund_" + linenum).value +
+                  ' = ' + aResponse[5];
+                break;
+              case 'DeptID':
+                if (aResponse[6] != '')
+                  document.getElementById("infomsg").innerHTML = 'DeptID ' + document.getElementById("DeptID_" +
+                    linenum).value + ' = ' + aResponse[6];
+                break;
+              case 'Proj':
+                if (aResponse[7] != '')
+                  document.getElementById("infomsg").innerHTML = 'Proj ' + document.getElementById("Proj_" + linenum).value +
+                  ' = ' + aResponse[7];
+                break;
+              case 'Func':
+                if (aResponse[8] != '')
+                  document.getElementById("infomsg").innerHTML = 'Func ' + document.getElementById("Func_" + linenum).value +
+                  ' = ' + aResponse[8];
+                break;
+              case 'Flex':
+                if (aResponse[10] != '')
+                  document.getElementById("infomsg").innerHTML = 'Flex ' + document.getElementById("Flex_" + linenum).value +
+                  ' = ' + aResponse[10];
+                break;
+            };
+          };
+        };
+        if (aResponse.length >= 11) {
+          // document.getElementById("BusUnit_" + linenum).setAttribute("title",aResponse[2]);
+          document.getElementById("Fund_" + linenum).setAttribute("title", aResponse[5]);
+          document.getElementById("DeptID_" + linenum).setAttribute("title", aResponse[6]);
+          document.getElementById("Proj_" + linenum).setAttribute("title", aResponse[7]);
+          document.getElementById("Func_" + linenum).setAttribute("title", aResponse[8]);
+          document.getElementById("Flex_" + linenum).setAttribute("title", aResponse[10]);
+        };
+      };
+      document.getElementById("diagmsg").innerHTML = "";
+      document.getElementById("infomsg").innerHTML = "";
+
+      strURL = 'https://www.cpfm.ucsf.edu/rest/prod/coa/validate?business_unit=' + encodeURIComponent(getControlValue(
+          document.getElementById("BusUnit_" + linenum)))
+
+        +
+        '&account=-' +
+        '&fund_code=' + encodeURIComponent(document.getElementById("Fund_" + linenum).value) +
+        '&deptid=' + encodeURIComponent(document.getElementById("DeptID_" + linenum).value) +
+        '&project_id=' + encodeURIComponent(document.getElementById("Proj_" + linenum).value) +
+        '&function=' + encodeURIComponent(document.getElementById("Func_" + linenum).value) +
+        '&flexfield=' + encodeURIComponent(document.getElementById("Flex_" + linenum).value)
+
+        //+ '&altacct=' + encodeURIComponent(document.myform.altacct.value )
+        +
+        '&activity_period=-' +
+        '&usecache=' + cacheoption +
+        '&errsep=' + encodeURIComponent(", ") +
+        '&test=' + Math.random();
+
+      if (window.XMLHttpRequest) { // code for IE7+, Firefox, Chrome, Opera, Safari
+        xmlhttp = new XMLHttpRequest();
+      } else { // code for IE6, IE5
+        xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+      };
+      xmlhttp.open("GET", strURL, true);
+      xmlhttp.onreadystatechange = checkcoaResponse;
+      xmlhttp.send();
+    };
+
+    function getSpeedKey(linenum) {
+      var strURL;
+      var xmlhttp;
+      var x, y, i;
+      var strResult;
+      var aResult;
+
+      function getSpeedKeyResponse() {
+        if (xmlhttp.readyState != 4) {
+          return;
+        }
+        if (xmlhttp.status != 200) {
+          document.getElementById("diagmsg").innerHTML = 'x';
+          return;
+        };
+        strResult = htmlEntities(xmlhttp.responseText);
+        aResult = strResult.split("`");
+        x = 1;
+        if (aResult[0].substr(0, 2) == "A:") {
+          x = Number(aResult[0].substr(2));
+          aResult[0] = "A";
+        };
+        if (aResult[0] == "A") {
+          for (i = 0; i < x; i++) {
+            y = i * 8;
+            if (!document.getElementById("Fund_" + (linenum + i))) {
+              addBillRow();
+            };
+            setControlValue(document.getElementById("BusUnit_" + (linenum + i)), aResult[y + 1]);
+            document.getElementById("Fund_" + (linenum + i)).value = aResult[y + 2];
+            document.getElementById("DeptID_" + (linenum + i)).value = aResult[y + 3];
+            document.getElementById("Proj_" + (linenum + i)).value = aResult[y + 4];
+            document.getElementById("Func_" + (linenum + i)).value = aResult[y + 5];
+            document.getElementById("Flex_" + (linenum + i)).value = aResult[y + 6];
+
+            if (!isNaN(aResult[y + 8]) && aResult[y + 8].length > 0) {
+              document.getElementById("billpct_" + (linenum + i)).value = aResult[y + 8];
+              calctotalpct();
+            };
+            checkcoa((linenum + i), 'S', '');
+          };
+        } else if (aResult[0] == "E") {
+          document.getElementById("diagmsg").innerHTML = strResult;
+        } else {
+          document.getElementById("diagmsg").innerHTML = document.getElementById("Speed_" + linenum).value +
+            " is not a valid Speed Type!";
+        };
+      };
+      document.getElementById("diagmsg").innerHTML = "";
+      document.getElementById("infomsg").innerHTML = "";
+      document.getElementById("Speed_" + linenum).value = document.getElementById("Speed_" + linenum).value.toUpperCase();
+      if (document.getElementById("Speed_" + linenum).value == "") {
+        return
+      };
+
+      strURL = 'https://www.cpfm.ucsf.edu/rest/prod/coa/speedkey/' + encodeURIComponent(document.getElementById(
+        "Speed_" + linenum).value) + "?user=xayaseth%2Eboudsady%40ucsf%2Eedu";
+
+      if (window.XMLHttpRequest) { // code for IE7+, Firefox, Chrome, Opera, Safari
+        xmlhttp = new XMLHttpRequest();
+      } else { // code for IE6, IE5
+        xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+      };
+      xmlhttp.open("GET", strURL, true);
+      xmlhttp.onreadystatechange = getSpeedKeyResponse;
+      xmlhttp.send();
+      return true;
+    };
+
+
+    // COA FIELD LOOKUP FUNCTIONS FOLLOW
+    var strLookupTable = "",
+      strLookupField = "",
+      strLookupSrcControlID = "",
+      strLookupSearchText = "",
+      intLookupLineNum = 1,
+      intMaxRows = 2000;
+    var strLookupSrcControlIDLast = "",
+      strLookupSearchTextLast = "";
+
+    function lookupSrcSet(strTableName, strFieldName, strControlID, linenum) {
+      if (strControlID != "")
+        if (strLookupSrcControlIDLast != strControlID || strLookupSearchTextLast != document.getElementById(
+            strControlID).value) {
+          addLookupOption("", "Enter partial text in " + strFieldName + " field and click 'Lookup' to list values.",
+            true, "black");
+          document.getElementById("ctlLookup").style.color = 'black';
+          strLookupSrcControlIDLast = "";
+        };
+      strLookupSrcControlID = strControlID;
+      strLookupTable = strTableName;
+      strLookupField = strFieldName;
+      intLookupLineNum = linenum;
+      document.getElementById("ctlLookupLable").innerHTML = strFieldName + " Lookup:";
+      document.getElementById("ctlLookupLable2").innerHTML = strFieldName;
+      document.getElementById("lookupMsg").innerHTML = "";
+      if (strControlID != "") {
+        document.getElementById("cmdLookup").style.display = "inline";
+      } else {
+        //document.getElementById("cmdLookup").style.display="none";
+        clearSelect("ctlLookup");
+        strLookupSrcControlIDLast = "";
+      };
+    };
+
+    function clearSelect(strControlID) {
+      var ctl = document.getElementById(strControlID);
+      ctl.selectedIndex = -1;
+      while (ctl.options.length > 0) {
+        ctl.remove(0);
+      };
+    };
+
+    function setSelectValue(ctl, strValue) {
+      var x;
+      var strVal = "";
+      var strValueU = strValue.toUpperCase();
+      for (x = ctl.options.length - 1; x >= 0; x = x - 1) {
+        if (!ctl.options[x].value) {
+          strVal = ctl.options[x].text;
+        } else {
+          strVal = ctl.options[x].value;
+        };
+        if (strVal.toUpperCase() == strValueU) {
+          ctl.selectedIndex = x;
+          break;
+        };
+      };
+    };
+
+    function setControlValue(ctl, strValue) {
+      if (ctl.type == "select-one" || ctl.type == "select-multiple") {
+        setSelectValue(ctl, strValue);
+      } else {
+        ctl.value = strValue;
+      };
+    };
+
+    function getControlValue(ctl) {
+      if (ctl.type == "select-one") {
+        if (!ctl.options[ctl.selectedIndex].value) {
+          return ctl.options[ctl.selectedIndex].text;
+        } else {
+          return ctl.options[ctl.selectedIndex].value;
+        }
+      } else {
+        return ctl.value;
+      };
+    };
+
+    function addLookupOption(strValue, strText, fClearAndSelect, strColor) {
+      var ctl = document.getElementById("ctlLookup");
+      var voption = document.createElement("option");
+      if (fClearAndSelect) {
+        clearSelect("ctlLookup");
+      }
+      voption.value = strValue;
+      voption.text = strText;
+      if (strColor) {
+        voption.setAttribute("style", "color: " + strColor + ";");
+        voption.style.color = strColor
+      };
+      ctl.add(voption);
+      if (fClearAndSelect) {
+        document.getElementById("ctlLookup").selectedIndex = 0;
+      };
+    };
+
+    function lookupChange(ctlLookup) {
+      var vVal = ctlLookup.options[ctlLookup.selectedIndex].value;
+      var ctl = document.getElementById(strLookupSrcControlID);
+      if (vVal != "") {
+        setControlValue(ctl, vVal);
+        if ("createEvent" in document) {
+          var evt = document.createEvent("HTMLEvents");
+          evt.initEvent("change", false, true);
+          ctl.dispatchEvent(evt);
+        } else
+          ctl.fireEvent("onchange");
+        //ctl.onchange();
+      };
+    };
+
+    function lookupRefresh() {
+      var x, strURL, strSearchText, strParam1 = "",
+        strLookupMsg = "";
+      if (strLookupSrcControlID == "") {
+        addLookupOption("", "Enter text in " + strFieldName + " field and click 'Lookup' to list values.", true,
+          "black");
+        document.getElementById("ctlLookup").style.color = 'black';
+        return;
+      };
+      strSearchText = document.getElementById(strLookupSrcControlID).value;
+      if (strLookupSrcControlIDLast == strLookupSrcControlID && strLookupSearchTextLast == strSearchText) {
+        return;
+      };
+
+      document.getElementById("ctlLookupLable").innerHTML = strLookupField + " Lookup:";
+      document.getElementById("ctlLookupLable2").innerHTML = strLookupField;
+      strSearchText = document.getElementById(strLookupSrcControlID).value;
+
+      function lookupResponse() {
+        var strResult, intPos, intCnt, strCnt, aResults, intLen, x, fNoResults = 1,
+          intSelItem = 0;
+        if (xmlhttp.readyState != 4) {
+          return;
+        }
+        strResult = xmlhttp.responseText;
+        intPos = strResult.indexOf("~");
+        if (intPos > 0) {
+          strCnt = strResult.substr(0, intPos);
+          if (!isNaN(strCnt)) {
+            intCnt = Number(strCnt);
+            if (intCnt > 0)
+              if (intCnt < intMaxRows) {
+                aResults = strResult.split("|");
+                intLen = aResults.length;
+                addLookupOption('', 'Please select a value for ' + strLookupField + ' - rows=' + intCnt.toString(),
+                  true, 'darkgreen');
+                for (var x = 1; x < intLen - 1; x = x + 2) {
+                  if (aResults[x + 1].length > 1) {
+                    addLookupOption(aResults[x], (aResults[x] + " - " + aResults[x + 1]), false, "black");
+                  } else {
+                    addLookupOption(aResults[x], (aResults[x]), false, "black");
+                  };
+                };
+                document.getElementById("ctlLookup").style.color = 'darkgreen';
+                if (intLen == 3) {
+                  if (strSearchText == aResults[1]) {
+                    document.getElementById("ctlLookup").selectedIndex = 1;
+                  };
+                };
+                fNoResults = 0;
+
+              }
+            else {
+              addLookupOption('', 'Too many rows returned, be more specific.  rows=' + intCnt.toString() + ', max=' +
+                intMaxRows.toString(), true, 'darkred');
+              fNoResults = 0;
+              document.getElementById("ctlLookup").style.color = 'darkred';
+            };
+          };
+        };
+        if (fNoResults == 1) {
+          addLookupOption('', 'No results for "' + strSearchText + '"', true, 'darkred');
+          document.getElementById("ctlLookup").style.color = 'darkred';
+        }
+      };
+      addLookupOption('', 'Refreshing...', true, "black");
+
+      strURL = 'https://www.cpfm.ucsf.edu/rest/prod/coa/getValues/?table=' + strLookupTable + '&searchText=' +
+        strSearchText + '&maxrows=' + intMaxRows.toString();
+
+      if (strLookupTable == "gl_coa_speed_key") {
+        strParam1 = document.getElementById("DeptID_" + intLookupLineNum).value;
+        if (strParam1.length == 6) {
+          strLookupMsg = "<br>&nbsp;&nbsp;&nbsp;Limited to DeptID=" + strParam1 +
+            ' &nbsp;(clear deptid to remove the limit)';
+        } else {
+          strParam1 = ""
+        };
+      };
+      if (strLookupTable == "gl_coa_function") {
+        strParam1 = document.getElementById("DeptID_" + intLookupLineNum).value;
+        if (strParam1.length == 6) {
+          //strParam1=""; //disabled
+          strLookupMsg = "<br>&nbsp;&nbsp;&nbsp;Limited to DeptID=" + strParam1 +
+            ' &nbsp;(clear deptid to remove the limit)';
+        } else {
+          strParam1 = ""
+        };
+      };
+      if (strLookupTable == "gl_coa_flexfield") {
+        strParam1 = document.getElementById("BusUnit_" + intLookupLineNum).value;
+        strLookupMsg = "<br>&nbsp;&nbsp;&nbsp;Listing Limited by Business Unit";
+      };
+      if (strParam1 != "") {
+        strURL = strURL + "&param1=" + strParam1;
+      };
+      document.getElementById("lookupMsg").innerHTML = strLookupMsg;
+      if (window.XMLHttpRequest) { // code for IE7+, Firefox, Chrome, Opera, Safari
+        xmlhttp = new XMLHttpRequest();
+      } else { // code for IE6, IE5
+        xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+      };
+      xmlhttp.open("GET", strURL, true);
+      xmlhttp.onreadystatechange = lookupResponse;
+      xmlhttp.send();
+    };
+  </script>
+
+
+
+  <script language="Javascript" type="text/javascript">
+    function parsecurrency(vValue) {
+      vValue = vValue.toString();
+      vValue = vValue.toString().replace(/[$),]/g, '');
+      vValue = vValue.replace("(", '-');
+      vValue = vValue.replace(/&nbsp;/gi, '');
+      vValue = parseFloat(vValue);
+      return vValue;
+    };
+
+    function calctotalpct() {
+      var vTotal = 0,
+        vValue, vBillLinesCnt, x, vCtl;
+      if ((document.getElementById("pcttotal") != null) & (document.getElementById("BillLinesCnt") != null)) {
+        vBillLinesCnt = document.getElementById("BillLinesCnt").value;
+        for (x = 1; x <= vBillLinesCnt; x++) {
+          vCtl = "billpct_" + x;
+          if (document.getElementById(vCtl) != null) {
+            vValue = parsecurrency(document.getElementById("billpct_" + x).value);
+            if (!isNaN(vValue)) {
+              vTotal = vTotal + vValue;
+            };
+          };
+        };
+        if (vTotal != 100) {
+          document.getElementById("pcttotal").innerHTML = "Billing lines total " + vTotal + "% (must total 100%)";
+        } else {
+          document.getElementById("pcttotal").innerHTML = "";
+        };
+      };
+    };
+
+    function addBillRow() {
+      var tbl = null;
+      var lastRow = 0,
+        row, iteration;
+      var vcell, velem, vTemp;;
+      tbl = document.getElementById("BillTbl");
+
+      if (tbl != null) {
+        lastRow = tbl.rows.length;
+        iteration = lastRow;
+        row = tbl.insertRow(lastRow);
+        document.getElementById("BillLinesCnt").value = lastRow;
+
+
+        vcell = row.insertCell(0);
+        velem = document.createElement('input');
+        velem.type = 'text';
+        velem.name = "Speed_" + iteration;
+        velem.id = velem.name;
+        //velem.setAttribute("onchange", "getSpeedKey(" + iteration +  ");");
+        setEventHandler(velem, 'change', function () {
+          getSpeedKey(iteration)
+        });
+        //velem.setAttribute("onfocus", "lookupSrcSet('gl_coa_speed_key','SpeedType',this.id," + iteration + ");");
+        setEventHandler(velem, 'focus', function () {
+          lookupSrcSet('gl_coa_speed_key', 'SpeedType', 'Speed_' + iteration, iteration);
+        });
+        velem.size = 12;
+        velem.maxLength = 10;
+        vcell.appendChild(velem);
+
+        vcell = row.insertCell(1);
+        vTemp = "clrSpeed(" + iteration + "); setBUDefaults(" + iteration + " ); checkcoa(" + iteration + ",'S','');";
+        vcell.innerHTML = '<select name="BusUnit_' + iteration + '" id="BusUnit_' + iteration + '" onchange="' + vTemp +
+          '"><option selected value="SFCMP">SFCMP<option value="SFFPO">SFFPO<option value="SFLPH">SFLPH<option value="SFMED">SFMED</select>';
+
+        vcell = row.insertCell(2);
+        velem = document.createElement('input');
+        velem.type = 'text';
+        velem.name = "Fund_" + iteration;
+        velem.id = velem.name;
+        //velem.setAttribute("onchange", "uppercase('Fund_" + iteration + "'); clrSpeed(" + iteration + "); checkcoa(" + iteration + ",'S','Fund');");
+        setEventHandler(velem, 'change', function () {
+          uppercase('Fund_' + iteration);
+          clrSpeed(iteration);
+          checkcoa(iteration, 'S', 'Fund');
+        });
+        //velem.setAttribute("onfocus", "lookupSrcSet('gl_coa_fund_code','Fund',this.id," + iteration + ");");
+        setEventHandler(velem, 'focus', function () {
+          lookupSrcSet('gl_coa_fund_code', 'Fund', 'Fund_' + iteration, iteration);
+        });
+        velem.size = 5;
+        velem.maxLength = 4;
+        vcell.appendChild(velem);
+
+        vcell = row.insertCell(3);
+        velem = document.createElement('input');
+        velem.type = 'text';
+        velem.name = "DeptID_" + iteration;
+        velem.id = velem.name;
+        //velem.setAttribute("onchange", "uppercase('DeptID_" + iteration + "'); clrSpeed(" + iteration + "); checkcoa(" + iteration + ",'S','DeptID');");
+        //velem.setAttribute("onfocus", "lookupSrcSet('gl_coa_deptid','DeptID',this.id," + iteration + ");");
+        setEventHandler(velem, 'change', function () {
+          uppercase('DeptID_' + iteration);
+          clrSpeed(iteration);
+          checkcoa(iteration, 'S', 'DeptID');
+        });
+        setEventHandler(velem, 'focus', function () {
+          lookupSrcSet('gl_coa_deptid', 'DeptID', 'DeptID_' + iteration, iteration);
+        });
+        //setEventHandler(velem,'focus',new Function("lookupSrcSet('gl_coa_deptid','DeptID','DeptID_" + iteration + "'," + iteration + ");")); 
+
+        velem.size = 7;
+        velem.maxLength = 6;
+        vcell.appendChild(velem);
+
+        vcell = row.insertCell(4);
+        velem = document.createElement('input');
+        velem.type = 'text';
+        velem.name = "Proj_" + iteration;
+        velem.id = velem.name;
+        //velem.setAttribute("onchange", "uppercase('Proj_" + iteration + "'); clrSpeed(" + iteration + "); checkcoa(" + iteration + ",'S','Proj');");
+        //velem.setAttribute("onfocus", "lookupSrcSet('gl_coa_project_id','Project',this.id," + iteration + ");");
+        setEventHandler(velem, 'change', function () {
+          uppercase('Proj_' + iteration);
+          clrSpeed(iteration);
+          checkcoa(iteration, 'S', 'Proj');
+        });
+        setEventHandler(velem, 'focus', function () {
+          lookupSrcSet('gl_coa_project_id', 'Project', 'Proj_' + iteration, iteration);
+        });
+
+        velem.size = 8;
+        velem.maxLength = 7;
+        vcell.appendChild(velem);
+
+        vcell = row.insertCell(5);
+        velem = document.createElement('input');
+        velem.type = 'text';
+        velem.name = "Func_" + iteration;
+        velem.id = velem.name;
+        //velem.setAttribute("onchange", "uppercase('Func_" + iteration + "'); clrSpeed(" + iteration + "); checkcoa(" + iteration + ",'S','Func');");
+        //velem.setAttribute("onfocus", "lookupSrcSet('gl_coa_function','Function',this.id," + iteration + ");");
+        setEventHandler(velem, 'change', function () {
+          uppercase('Func_' + iteration);
+          clrSpeed(iteration);
+          checkcoa(iteration, 'S', 'Func');
+        });
+        setEventHandler(velem, 'focus', function () {
+          lookupSrcSet('gl_coa_function', 'Function', 'Func_' + iteration, iteration);
+        });
+
+        velem.setAttribute("list", "functionlist");
+        velem.size = 3;
+        velem.maxLength = 2;
+        vcell.appendChild(velem);
+
+        vcell = row.insertCell(6);
+        velem = document.createElement('input');
+        velem.type = 'text';
+        velem.name = "Flex_" + iteration;
+        velem.id = velem.name;
+        //velem.setAttribute("onchange", "uppercase('Flex_" + iteration + "'); clrSpeed(" + iteration + "); checkcoa(" + iteration + ",'S','Flex');");
+        //velem.setAttribute("onfocus", "lookupSrcSet('gl_coa_flexfield','Flexfield',this.id," + iteration + ");");
+        setEventHandler(velem, 'change', function () {
+          uppercase('Flex_' + iteration);
+          clrSpeed(iteration);
+          checkcoa(iteration, 'S', 'Flex');
+        });
+        setEventHandler(velem, 'focus', function () {
+          lookupSrcSet('gl_coa_flexfield', 'Flexfield', 'Flex_' + iteration, iteration);
+        });
+
+        velem.size = 6;
+        velem.maxLength = 6;
+        vcell.appendChild(velem);
+
+        vcell = row.insertCell(7);
+        velem = document.createElement('input');
+        velem.type = 'text';
+        velem.name = "BillBox_" + iteration;
+        velem.id = velem.name;
+        velem.size = 5;
+        velem.maxLength = 4;
+        vcell.appendChild(velem);
+
+        vcell = row.insertCell(8);
+        vcell.innerHTML = '<input type="text" name="billpct_' + iteration + '" id="billpct_' + iteration +
+          '" onchange="calctotalpct();" size="6" maxLength="6">';
+
+
+      };
+    };
+
+    function blanketUpdate() {
+
+      if (document.getElementById("BlanketNum").value == '') {
+        document.getElementById("Fund_1").setAttribute("required", "required");
+        document.getElementById("DeptID_1").setAttribute("required", "required");
+        document.getElementById("Proj_1").setAttribute("required", "required");
+        document.getElementById("Func_1").setAttribute("required", "required");
+        document.getElementById("BillBox_1").setAttribute("required", "required");
+      } else {
+        document.getElementById("Fund_1").removeAttribute("required");
+        document.getElementById("DeptID_1").removeAttribute("required");
+        document.getElementById("Proj_1").removeAttribute("required");
+        document.getElementById("Func_1").removeAttribute("required");
+        document.getElementById("BillBox_1").removeAttribute("required");
+      };
+    };
+
+
+    window.onload = function () {
+      document.getElementById("myform").reset();
+      calctotalpct();
+    }
+  </script>
+
+
+
+</head>
+
+<body>
+
+  <map name="Map">
+	<area shape="rect" coords="0,2,292,29" href="http://www.ucsf.edu/" />
+	<area shape="rect" coords="300,2,374,29" href="http://www.ucsf.edu/about-ucsf/" />
+	<area shape="rect" coords="379,2,462,29" href="http://www.ucsf.edu/search" />
+	<area shape="rect" coords="466,2,599,29" href="http://www.ucsfhealth.org/" />
+	</map>
+  <map name="Map2">
+	<area shape="rect" coords="30,2,260,35" href="http://campuslifeservices.ucsf.edu/facilities/"  />
+	<area shape="rect" coords="450,2,670,35" href="/cp/"  />
+	</map>
+  <table cellspacing="0" cellpadding="0" border="0" width="950">
+    <tr>
+      <td colspan=2 nowrap bgcolor="#797979"><img src="/fmtrack2/images/ucsfbanner.gif" border="0" width="800" height="31" usemap="#Map"></td>
+    </tr>
+    <tr>
+      <td colspan=2 nowrap bgcolor="#FFFFFF"><img src="/fmtrack2/images/fmtracknew.gif" border="0" width="950" height="37" usemap="#Map2" /></td>
+    </tr>
+    <tr>
+      <td class="apptitle2" nowrap>&nbsp;&nbsp;<a href=" /fmtrack2/index.cfm" class="apptitle2">FMTrack / Maximo - Online Work Order Submittal and Tracking</a></td>
+      <td class="apptitle2" align=right nowrap><a href="http://campuslifeservices.ucsf.edu/facilities/services/customer_service_center" class="apptitle2">Facilities Customer Service</a>&nbsp;&nbsp;</td>
+    </tr>
+    <tr>
+      <td style="padding-bottom:8px;">&nbsp;&nbsp;<b><span style="color:#909850;">Xayaseth Boudsady </span></b>&nbsp;&nbsp;&nbsp;(xayaseth.boudsady@ucsf.edu)</td>
+      <td align=right><span style="font-size:small;"><a href="mailto:facilities@ucsf.edu">facilities@ucsf.edu</a></span>&nbsp;&nbsp;</td>
+    </tr>
+  </table>
+
+  <span style="display: none;">
+<datalist id="functionlist">
+	<option value="40">40 Instruction<option value="41">41 Clinical education<option value="42">42 Med center, teaching hospitals<option value="43">43 Academic support<option value="44">44 Organized &amp; sponsored research<option value="45">45 Faculty support<option value="46">46 Clinical ops (patient care)<option value="60">60 Libraries<option value="62">62 Public service<option value="64">64 Operation &amp; maint of plant<option value="68">68 Student services<option value="72">72 Institutional support &amp; admin<option value="76">76 Auxiliary enterprises<option value="78">78 Student financial aid<option value="79">79 ICR Research<option value="80">80 Provisions for allocation<option value="81">81 Capital projects
+</datalist> 
+</span>
+
+
+  <div id="wrapper2">
+
+    <table>
+      <tr>
+        <td><a href=" wr.cfm" onclick="procLink('wr'); return false;">Return to Work Order Type Selection</a>&nbsp;&nbsp;&nbsp;</td>
+        <td><a href=" index.cfm" onclick="procLink('index'); return false;">Return to My Work Orders</a></td>
+      </tr>
+    </table>
+    <br>
+
+    <form name="myform" id="myform" action=" wr3submit.cfm" method="post">
+
+      <input type="hidden" name="srcpage" value="/fmtrack2/wr3.cfm">
+      <input type="hidden" name="forwardto" value="">
+
+      <input type="hidden" name="Q1" value="s">
+
+      <input type="hidden" name="Q2" value="s">
+
+      <input type="hidden" name="Q2a" value="s">
+
+      <input type="hidden" name="Q2b" value="s">
+
+      <input type="hidden" name="Q3" value="s">
+
+
+      <input type="hidden" name="wrtype" value="kr">
+
+
+
+
+
+
+      <!-- PPR -->
+
+
+
+      <!-- SOR -->
+
+
+      <b><span style="font-size: large;"> Work Order</span></b>
+
+      <table>
+        <tr>
+          <td colspan=2>
+            <hr />
+          </td>
+        </tr>
+        <tr>
+          <td colspan=2><b>Work Information</b><input type="hidden" name="WOUpdSeq" value="100"></td>
+        </tr>
+        <tr>
+          <td align=right><span style="color: red;">* </span>Location of Work:</td>
+          <td>
+
+            <input type="Hidden" name="bldg" value="3052">
+            <b>MB Hospital</b> &nbsp;&nbsp; (3052)
+            <span style="display: none;">
+	
+		<datalist id="floorlist"><option value="01"><option value="02"><option value="03"><option value="04"><option value="05"><option value="06"><option value="07"></datalist>
+	<datalist id="rooms_01">
+    <option value="A1430">
+      <option value="A1440">
+      <option value="A1440A">
+      <option value="A1440B">
+      <option value="A1440C">
+      <option value="A1440D">
+      <option value="A1450">
+      <option value="A1454">
+      <option value="A1461">
+      <option value="A1461A">
+      <option value="A1461B">
+      <option value="A1465">
+      <option value="A1465A">
+      <option value="A1465B">
+      <option value="A1466">
+      <option value="A1475">
+      <option value="A1504">
+      <option value="A1508">
+      <option value="A1510">
+      <option value="A1510A">
+      <option value="A1510B">
+      <option value="A1510C">
+      <option value="A1511">
+      <option value="A1512A">
+      <option value="A1513">
+      <option value="A1514">
+      <option value="A1514A">
+      <option value="A1515">
+      <option value="A1515A">
+      <option value="A1516">
+      <option value="A1517">
+      <option value="A1517A">
+      <option value="A1518">
+      <option value="A1519">
+      <option value="A1520">
+      <option value="A1521">
+      <option value="A1521A">
+      <option value="A1522">
+      <option value="A1525">
+      <option value="A1527">
+      <option value="A1527A">
+      <option value="A1529">
+      <option value="A1530">
+      <option value="A1531">
+      <option value="A1533">
+      <option value="A1534">
+      <option value="A1535">
+      <option value="A1539">
+      <option value="A1540">
+      <option value="A1541">
+      <option value="A1543">
+      <option value="A1545">
+      <option value="A1546">
+      <option value="A1547">
+      <option value="A1550">
+      <option value="A1551">
+      <option value="A1551A">
+      <option value="A1552">
+      <option value="A1553">
+      <option value="A1555">
+      <option value="A1556">
+      <option value="A1557">
+      <option value="A1558">
+      <option value="A1559">
+      <option value="A1560">
+      <option value="A1574">
+      <option value="A1574A">
+      <option value="A1574B">
+      <option value="A1574C">
+      <option value="A1574D">
+      <option value="A1574F">
+      <option value="A1574G">
+      <option value="A1574H">
+      <option value="A1574J">
+      <option value="A1601">
+      <option value="A1601A">
+      <option value="A1602">
+      <option value="A1602A">
+      <option value="A1602B">
+      <option value="A1602C">
+      <option value="A1603">
+      <option value="A1604">
+      <option value="A1604A">
+      <option value="A1609">
+      <option value="A1611">
+      <option value="A1613">
+      <option value="A1615">
+      <option value="A1617A">
+      <option value="A1617B">
+      <option value="A1630">
+      <option value="A1630A">
+      <option value="A1640">
+      <option value="A1640A">
+      <option value="A1640B">
+      <option value="A1641">
+      <option value="A1642">
+      <option value="A1651">
+      <option value="A1651A">
+      <option value="A1C40">
+      <option value="A1C41">
+      <option value="A1C42">
+      <option value="A1C43">
+      <option value="A1C44">
+      <option value="A1C45">
+      <option value="A1C46">
+      <option value="A1C47">
+      <option value="A1C50">
+      <option value="A1C60">
+      <option value="A1C61">
+      <option value="A1C62">
+      <option value="A1E40">
+      <option value="A1E41">
+      <option value="A1E42">
+      <option value="A1E43">
+      <option value="A1E44">
+      <option value="A1E45">
+      <option value="A1E46">
+      <option value="A1E47">
+      <option value="A1F50">
+      <option value="A1F51">
+      <option value="A1J40">
+      <option value="A1J41">
+      <option value="A1J60">
+      <option value="A1J61">
+      <option value="A1L40">
+      <option value="A1L50">
+      <option value="A1L51">
+      <option value="A1L52">
+      <option value="A1M50">
+      <option value="A1S40">
+      <option value="A1S41">
+      <option value="A1S50">
+      <option value="A1S51">
+      <option value="A1T41">
+      <option value="A1T42">
+      <option value="A1T43">
+      <option value="A1T60">
+      <option value="A1T61">
+      <option value="A1X40">
+      <option value="C1401">
+      <option value="C1401A">
+      <option value="C1405">
+      <option value="C1405A">
+      <option value="C1408">
+      <option value="C1412">
+      <option value="C1422">
+      <option value="C1432">
+      <option value="C1653">
+      <option value="C1655">
+      <option value="C1683">
+      <option value="C1701">
+      <option value="C1703">
+      <option value="C1705">
+      <option value="C1705A">
+      <option value="C1705B">
+      <option value="C1709">
+      <option value="C1710">
+      <option value="C1710A">
+      <option value="C1710B">
+      <option value="C1711">
+      <option value="C1713">
+      <option value="C1714">
+      <option value="C1714A">
+      <option value="C1715">
+      <option value="C1716">
+      <option value="C1718">
+      <option value="C1718A">
+      <option value="C1719">
+      <option value="C1720">
+      <option value="C1721">
+      <option value="C1721A">
+      <option value="C1722">
+      <option value="C1723">
+      <option value="C1724">
+      <option value="C1725">
+      <option value="C1726">
+      <option value="C1728">
+      <option value="C1729">
+      <option value="C1730">
+      <option value="C1732">
+      <option value="C1733">
+      <option value="C1733A">
+      <option value="C1733B">
+      <option value="C1733C">
+      <option value="C1733D">
+      <option value="C1733E">
+      <option value="C1733F">
+      <option value="C1733G">
+      <option value="C1733H">
+      <option value="C1733I">
+      <option value="C1739">
+      <option value="C1739A">
+      <option value="C1739B">
+      <option value="C1739C">
+      <option value="C1740">
+      <option value="C1743">
+      <option value="C1743A">
+      <option value="C1743B">
+      <option value="C1743C">
+      <option value="C1744">
+      <option value="C1747">
+      <option value="C1747A">
+      <option value="C1747B">
+      <option value="C1747C">
+      <option value="C1747D">
+      <option value="C1747E">
+      <option value="C1747F">
+      <option value="C1747G">
+      <option value="C1747H">
+      <option value="C1747I">
+      <option value="C1747J">
+      <option value="C1747K">
+      <option value="C1747L">
+      <option value="C1747M">
+      <option value="C1747N">
+      <option value="C1747O">
+      <option value="C1747P">
+      <option value="C1747Q">
+      <option value="C1747R">
+      <option value="C1747S">
+      <option value="C1747T">
+      <option value="C1748">
+      <option value="C1750">
+      <option value="C1751">
+      <option value="C1751A">
+      <option value="C1751B">
+      <option value="C1751C">
+      <option value="C1752">
+      <option value="C1752A">
+      <option value="C1752B">
+      <option value="C1752C">
+      <option value="C1753">
+      <option value="C1754">
+      <option value="C1754A">
+      <option value="C1755">
+      <option value="C1756">
+      <option value="C1756A">
+      <option value="C1756B">
+      <option value="C1756C">
+      <option value="C1757">
+      <option value="C1758">
+      <option value="C1758A">
+      <option value="C1758B">
+      <option value="C1758C">
+      <option value="C1758D">
+      <option value="C1758E">
+      <option value="C1758F">
+      <option value="C1758G">
+      <option value="C1758H">
+      <option value="C1758J">
+      <option value="C1758K">
+      <option value="C1758L">
+      <option value="C1758M">
+      <option value="C1758N">
+      <option value="C1758P">
+      <option value="C1758Q">
+      <option value="C1758R">
+      <option value="C1758S">
+      <option value="C1758T">
+      <option value="C1758U">
+      <option value="C1758V">
+      <option value="C1758W">
+      <option value="C1758X">
+      <option value="C1758Y">
+      <option value="C1758Z">
+      <option value="C1758ZA">
+      <option value="C1758ZB">
+      <option value="C1761D">
+      <option value="C1767">
+      <option value="C1767A">
+      <option value="C1767B">
+      <option value="C1767C">
+      <option value="C1767D">
+      <option value="C1767E">
+      <option value="C1767F">
+      <option value="C1768">
+      <option value="C1769">
+      <option value="C1769A">
+      <option value="C1770">
+      <option value="C1771">
+      <option value="C1773">
+      <option value="C1775">
+      <option value="C1777">
+      <option value="C1778">
+      <option value="C1780">
+      <option value="C1780A">
+      <option value="C1782">
+      <option value="C1784">
+      <option value="C1786">
+      <option value="C1786A">
+      <option value="C1786D">
+      <option value="C1795">
+      <option value="C1795A">
+      <option value="C1795B">
+      <option value="C1795C">
+      <option value="C1795N">
+      <option value="C1795S">
+      <option value="C1801">
+      <option value="C1803">
+      <option value="C1805">
+      <option value="C1805A">
+      <option value="C1805B">
+      <option value="C1805C">
+      <option value="C1805D">
+      <option value="C1805E">
+      <option value="C1805F">
+      <option value="C1805G">
+      <option value="C1806">
+      <option value="C1806A">
+      <option value="C1806B">
+      <option value="C1806C">
+      <option value="C1807">
+      <option value="C1808">
+      <option value="C1808A">
+      <option value="C1808B">
+      <option value="C1808C">
+      <option value="C1810">
+      <option value="C1811">
+      <option value="C1812">
+      <option value="C1813">
+      <option value="C1814">
+      <option value="C1814A">
+      <option value="C1814B">
+
+      <option value="C1814C">
+      <option value="C1815">
+      <option value="C1815A">
+      <option value="C1815B">
+      <option value="C1815C">
+      <option value="C1817">
+      <option value="C1818">
+      <option value="C1819">
+      <option value="C1820">
+      <option value="C1820A">
+      <option value="C1821">
+      <option value="C1823">
+      <option value="C1825">
+      <option value="C1827">
+      <option value="C1828">
+      <option value="C1829">
+      <option value="C1830">
+      <option value="C1831">
+      <option value="C1832">
+      <option value="C1833">
+      <option value="C1834">
+      <option value="C1835">
+      <option value="C1836">
+      <option value="C1837">
+      <option value="C1838">
+      <option value="C1839">
+      <option value="C1840">
+      <option value="C1841">
+      <option value="C1842">
+      <option value="C1843">
+      <option value="C1844">
+      <option value="C1845">
+      <option value="C1846">
+      <option value="C1847">
+      <option value="C1848">
+      <option value="C1849">
+      <option value="C1850">
+      <option value="C1851">
+      <option value="C1852">
+      <option value="C1853">
+      <option value="C1854">
+      <option value="C1855">
+      <option value="C1856">
+      <option value="C1857">
+      <option value="C1858">
+      <option value="C1859">
+      <option value="C1860">
+      <option value="C1861">
+      <option value="C1862">
+      <option value="C1863">
+                                                                                                                    <option
+                                                                                                                      value="C1864">
+                                                                                                                      <option
+                                                                                                                        value="C1865">
+                                                                                                                        <option
+                                                                                                                          value="C1866">
+                                                                                                                          <option
+                                                                                                                            value="C1867">
+                                                                                                                            <option
+                                                                                                                              value="C1868">
+                                                                                                                              <option
+                                                                                                                                value="C1868A">
+                                                                                                                                <option
+                                                                                                                                  value="C1868B">
+                                                                                                                                  <option
+                                                                                                                                    value="C1868V">
+                                                                                                                                    <option
+                                                                                                                                      value="C1869A">
+                                                                                                                                      <option
+                                                                                                                                        value="C1869B">
+                                                                                                                                        <option
+                                                                                                                                          value="C1869C">
+                                                                                                                                          <option
+                                                                                                                                            value="C1869D">
+                                                                                                                                            <option
+                                                                                                                                              value="C1869E">
+                                                                                                                                              <option
+                                                                                                                                                value="C1869F">
+                                                                                                                                                <option
+                                                                                                                                                  value="C1870">
+                                                                                                                                                  <option
+                                                                                                                                                    value="C1871">
+                                                                                                                                                    <option
+                                                                                                                                                      value="C1873">
+                                                                                                                                                      <option
+                                                                                                                                                        value="C1875">
+                                                                                                                                                        <option
+                                                                                                                                                          value="C1875A">
+                                                                                                                                                          <option
+                                                                                                                                                            value="C1877">
+                                                                                                                                                            <option
+                                                                                                                                                              value="C1878">
+                                                                                                                                                              <option
+                                                                                                                                                                value="C1879">
+                                                                                                                                                                <option
+                                                                                                                                                                  value="C1880">
+                                                                                                                                                                  <option
+                                                                                                                                                                    value="C1881">
+                                                                                                                                                                    <option
+                                                                                                                                                                      value="C1882">
+                                                                                                                                                                      <option
+                                                                                                                                                                        value="C1883">
+                                                                                                                                                                        <option
+                                                                                                                                                                          value="C1884">
+                                                                                                                                                                          <option
+                                                                                                                                                                            value="C1885">
+                                                                                                                                                                            <option
+                                                                                                                                                                              value="C1886">
+                                                                                                                                                                              <option
+                                                                                                                                                                                value="C1887">
+                                                                                                                                                                                <option
+                                                                                                                                                                                  value="C1888">
+                                                                                                                                                                                  <option
+                                                                                                                                                                                    value="C1889">
+                                                                                                                                                                                    <option
+                                                                                                                                                                                      value="C1891">
+                                                                                                                                                                                      <option
+                                                                                                                                                                                        value="C1892">
+                                                                                                                                                                                        <option
+                                                                                                                                                                                          value="C1893">
+                                                                                                                                                                                          <option
+                                                                                                                                                                                            value="C1894">
+                                                                                                                                                                                            <option
+                                                                                                                                                                                              value="C1895">
+                                                                                                                                                                                              <option
+                                                                                                                                                                                                value="C1896">
+                                                                                                                                                                                                <option
+                                                                                                                                                                                                  value="C1897">
+                                                                                                                                                                                                  <option
+                                                                                                                                                                                                    value="C1901">
+                                                                                                                                                                                                    <option
+                                                                                                                                                                                                      value="C1903">
+                                                                                                                                                                                                      <option
+                                                                                                                                                                                                        value="C1905">
+                                                                                                                                                                                                        <option
+                                                                                                                                                                                                          value="C1907">
+                                                                                                                                                                                                          <option
+                                                                                                                                                                                                            value="C1907A">
+                                                                                                                                                                                                            <option
+                                                                                                                                                                                                              value="C1907B">
+                                                                                                                                                                                                              <option
+                                                                                                                                                                                                                value="C1910">
+                                                                                                                                                                                                                <option
+                                                                                                                                                                                                                  value="C1911">
+                                                                                                                                                                                                                  <option
+                                                                                                                                                                                                                    value="C1913">
+                                                                                                                                                                                                                    <option
+                                                                                                                                                                                                                      value="C1915">
+                                                                                                                                                                                                                      <option
+                                                                                                                                                                                                                        value="C1915A">
+                                                                                                                                                                                                                        <option
+                                                                                                                                                                                                                          value="C1920">
+                                                                                                                                                                                                                          <option
+                                                                                                                                                                                                                            value="C1922">
+                                                                                                                                                                                                                            <option
+                                                                                                                                                                                                                              value="C1924">
+                                                                                                                                                                                                                              <option
+                                                                                                                                                                                                                                value="C1925">
+                                                                                                                                                                                                                                <option
+                                                                                                                                                                                                                                  value="C1925A">
+                                                                                                                                                                                                                                  <option
+                                                                                                                                                                                                                                    value="C1926">
+                                                                                                                                                                                                                                    <option
+                                                                                                                                                                                                                                      value="C1928">
+                                                                                                                                                                                                                                      <option
+                                                                                                                                                                                                                                        value="C1930">
+                                                                                                                                                   <option
+                                                                                                                                                                                                    value="C1932">
+                                                                                                                                                                                                   <option
+                                                                                                                                                                                                                  value="C1932A">
+                                                                                                                                                                                                              <option
+                                                                                                                                                                                                                        value="C1932B">
+                                                                                                                                                                                                                                              <option
+                                                                                                                                                                                                               value="C1932C">
+                                                                                                                                                                                                                                                <option
+                                                                                                                                                                                                          value="C1934">
+                                                                                                                                                                                                                                                  <option
+                                                                                                                                                                                                   value="C1935">
+                                                                                                                                                                                                                                                    <option
+                                                                                                                                                                                                                                                      value="C1936">
+                                                                                                                                                                                                                                                      <option
+                                                                                                                                                                                                                                                        value="C1938">
+                                                                                                                                                                                                                                                        <option
+                                                                                                                                                                                                                                                          value="C1940">
+                                                                                                                                                                                                                                                          <option
+                                                                                                                                                                                                                                                            value="C1940A">
+                                                                                                                                                                                                                                                            <option
+                                                                                                                                                                                                                                                              value="C1941">
+                                                                                                                                                                                                                                                              <option
+                                                                                                                                                                                                                                                                value="C1942">
+                                                                                                                                                                                                                                                                <option
+                                                                                                                                                                                                                                                                  value="C1943">
+                                                                                                                                                                                                                                                                  <option
+                                                                                                                                                                                                                                                                    value="C1943A">
+                                                                                                                                                                                                                                                                    <option
+                                                                                                                                                                                                                                                                      value="C1948">
+                                                                                                                                                                                                                                                                      <option
+                                                                                                                                                                                                                                                                        value="C1948A">
+                                                                                                                                                                                                                                                                        <option
+                                                                                                                                                                                                                                                                          value="C1948B">
+                                                                                                                                                                                                                                                                          <option
+                                                                                                                                                                                                                                                                            value="C1950">
+                                                                                                                                                                                                                                                                            <option
+                                                                                                                                                                                                                                                                              value="C1952">
+                                                                                                                                                                                                                                                                              <option
+                                                                                                                                                                                                                                                                                value="C1C10">
+                                                                                                                                                                                                                                                                                <option
+                                                                                                                                                                                                                                                                                  value="C1C11">
+                                                                                                                                                                                                                                                                                  <option
+                                                                                                                                                                                                                                                                                    value="C1C70">
+                                                                                                                                                                                                                                                                                    <option
+                                                                                                                                                                                                                                                                                      value="C1C71">
+                                                                                                                                                                                                                                                                                      <option
+                                                                                                                                                                                                                                                                                        value="C1C72">
+                                                                                                                                                                                                                                                                                        <option
+                                                                                                                                                                                                                                                                                          value="C1C80">
+                                                                                                                                                                                                                                                                                          <option
+                                                                                                                                                                                                                                                                                            value="C1C81">
+                                                                                                                                                                                                                                                                                            <option
+                                                                                                                                                                                                                                                                                              value="C1C82">
+                                                                                                                                                                                                                                                                                              <option
+                                                                                                                                                                                                                                                                                                value="C1C90">
+                                                                                                                                                                                                                                                                                                <option
+                                                                                                                                                                                                                                                                                                  value="C1C92">
+                                                                                                                                                                                                                                                                                                  <option
+                                                                                                                                                                                                                                                                                                    value="C1C93">
+                                                                                                                                                                                                                                                                                                    <option
+                                                                                                                                                                                                                                                                                                      value="C1C94N">
+                                                                                                                                                                                                                                                                                                      <option
+                                                                                                                                                                                                                                                                                                        value="C1C94S">
+                                                                                                                                                                                                                                                                                                        <option
+                                                                                                                                                                                                                                                                                                          value="C1E80">
+                                                                                                                                                                                                                                                                                                          <option
+                                                                                                                                                                                                                                                                                                            value="C1E90">
+                                                                                                                                                                                                                                                                                                            <option
+                                                                                                                                                                                                                                                                                                              value="C1E91">
+                                                                                                                                                                                                                                                                                                              <option
+                                                                                                                                                                                                                                                                                                                value="C1E92">
+                                                                                                                                                                                                                                                                                                                <option
+                                                                                                                                                                                                                                                                                                                  value="C1E93">
+                                                                                                                                                                                                                                                                                                                  <option
+                                                                                                                                                                                                                                                                                                                    value="C1E94">
+                                                                                                                                                                                                                                                                                                                    <option
+                                                                                                                                                                                                                                                                                                                      value="C1E95">
+                                                                                                                                                                                                                                                                                                                      <option
+                                                                                                                                                                                                                                                                                                                        value="C1F80">
+                                                                                                                                                                                                                                                                                                                        <option
+                                                                                                                                                                                                                                                                                                                          value="C1F81">
+                                                                                                                                                                                                                                                                                                                          <option
+                                                                                                                                                                                                                                                                                                                            value="C1F90">
+                                                                                                                                                                                                                                                                                                                            <option
+                                                                                                                                                                                                                                                                                                                              value="C1J80">
+                                                                                                                                                                                                                                                                                                                              <option
+                                                                                                                                                                                                                                                                                                                                value="C1L80">
+                                                                                                                                                                                                                                                                                                                                <option
+                                                                                                                                                                                                                                                                                                                                  value="C1L90">
+                                                                                                                                                                                                                                                                                                                                  <option
+                                                                                                                                                                                                                                                                                                                                    value="C1M80">
+                                                                                                                                                                                                                                                                                                                                    <option
+                                                                                                                                                                                                                                                                                                                                      value="C1S80">
+                                                                                                                                                                                                                                                                                                                                      <option
+                                                                                                                                                                                                                                                                                                                                        value="C1S81">
+                                                                                                                                                                                                                                                                                                                                        <option
+                                                                                                                                                                                                                                                                                                                                          value="C1S90">
+                                                                                                                                                                                                                                                                                                                                          <option
+                                                                                                                                                                                                                                                                                                                                            value="C1S91">
+                                                                                                                                                                                                                                                                                                                                            <option
+                                                                                                                                                                                                                                                                                                                                              value="C1T90">
+                                                                                                                                                                                                                                                                                                                                              <option
+                                                                                                                                                                                                                                                                                                                                                value="C1T91">
+                                                                                                                                                                                                                                                                                                                                                <option
+                                                                                                                                                                                                                                                                                                                                                  value="M1391">
+                                                                                                                                                                                                                                                                                                                                                  <option
+                                                                                                                                                                                                                                                                                                                                                    value="M1391A">
+                                                                                                                                                                                                                                                                                                                                                    <option
+                                                                                                                                                                                                                                                                                                                                                      value="M1391B">
+                                                                                                                                                                                                                                                                                                                                                      <option
+                                                                                                                                                                                                                                                                                                                                                        value="M1C32">
+                                                                                                                                                                                                                                                                                                                                                        <option
+                                                                                                                                                                                                                                                                                                                                                          value="M1C33">
+                                                                                                                                                                                                                                                                                                                                                          </datalist>
+  <datalist id="rooms_02">
+    <option value="A2421">
+    <option value="A2423">
+    <option value="A2425">
+    <option value="A2427">
+    <option value="A2429">
+    <option value="A2430">
+    <option value="A2431">
+    <option value="A2432">
+    <option value="A2433">
+    <option value="A2435">
+    <option value="A2437">
+    <option value="A2438">
+    <option value="A2439">
+    <option value="A2440">
+    <option value="A2441">
+    <option value="A2442">
+    <option value="A2443">
+    <option value="A2444">
+    <option value="A2445">
+    <option value="A2446">
+    <option value="A2447">
+    <option value="A2448">
+    <option value="A2449">
+    <option value="A2450">
+    <option value="A2460">
+    <option value="A2462">
+    <option value="A2465">
+    <option value="A2470">
+    <option value="A2472">
+    <option value="A2481">
+    <option value="A2483">
+    <option value="A2501">
+    <option value="A2501A">
+    <option value="A2505">
+    <option value="A2509">
+    <option value="A2509A">
+    <option value="A2509B">
+    <option value="A2513">
+    <option value="A2515">
+    <option value="A2519">
+    <option value="A2519A">
+    <option value="A2520">
+    <option value="A2521">
+    <option value="A2522">
+    <option value="A2522A">
+    <option value="A2523">
+    <option value="A2525">
+    <option value="A2525A">
+    <option value="A2526">
+    <option value="A2527">
+    <option value="A2530">
+    <option value="A2532">
+    <option value="A2534">
+    <option value="A2535">
+    <option value="A2536">
+    <option value="A2538">
+    <option value="A2539">
+    <option value="A2540">
+    <option value="A2540A">
+    <option value="A2541">
+    <option value="A2542">
+    <option value="A2543">
+    <option value="A2545">
+    <option value="A2547">
+    <option value="A2549">
+    <option value="A2551">
+    <option value="A2552">
+    <option value="A2553">
+    <option value="A2554">
+    <option value="A2555">
+    <option value="A2556">
+    <option value="A2557">
+    <option value="A2558">
+    <option value="A2559">
+    <option value="A2560">
+    <option value="A2560A">
+    <option value="A2561">
+    <option value="A2562">
+    <option value="A2563">
+    <option value="A2564">
+    <option value="A2565">
+    <option value="A2566">
+    <option value="A2567">
+    <option value="A2569">
+    <option value="A2569A">
+    <option value="A2571">
+    <option value="A2572">
+    <option value="A2573">
+    <option value="A2574">
+    <option value="A2574A">
+    <option value="A2575">
+    <option value="A2577">
+    <option value="A2579">
+    <option value="A2581">
+    <option value="A2583">
+    <option value="A2584">
+    <option value="A2585">
+    <option value="A2586">
+    <option value="A2587">
+    <option value="A2588">
+    <option value="A2589">
+    <option value="A2590">
+    <option value="A2591">
+    <option value="A2592">
+    <option value="A2593">
+    <option value="A2595">
+    <option value="A2597">
+    <option value="A2599">
+    <option value="A2601">
+    <option value="A2602">
+    <option value="A2603">
+    <option value="A2605">
+    <option value="A2607">
+    <option value="A2609">
+    <option value="A2610">
+    <option value="A2611">
+    <option value="A2613">
+    <option value="A2615">
+    <option value="A2617">
+    <option value="A2619">
+    <option value="A2621">
+    <option value="A2623">
+    <option value="A2625">
+    <option value="A2626">
+    <option value="A2630">
+    <option value="A2632">
+    <option value="A2634">
+    <option value="A2636">
+    <option value="A2638">
+    <option value="A2640">
+    <option value="A2642">
+    <option value="A2644">
+    <option value="A2646">
+    <option value="A2648">
+    <option value="A2650">
+    <option value="A2651">
+    <option value="A2652">
+    <option value="A2653">
+    <option value="A2655">
+    <option value="A2657">
+    <option value="A2659">
+    <option value="A2660">
+    <option value="A2660A">
+    <option value="A2661">
+    <option value="A2662">
+    <option value="A2663">
+    <option value="A2665">
+    <option value="A2666">
+    <option value="A2667">
+    <option value="A2668">
+    <option value="A2669">
+    <option value="A2670">
+    <option value="A2671">
+    <option value="A2681">
+    <option value="A2683">
+    <option value="A2683A">
+    <option value="A2685">
+    <option value="A2687">
+    <option value="A2C40">
+    <option value="A2C41">
+    <option value="A2C42">
+    <option value="A2C43">
+    <option value="A2C44">
+    <option value="A2C45">
+    <option value="A2C46">
+    <option value="A2C47">
+    <option value="A2C49">
+    <option value="A2C50">
+    <option value="A2C51">
+    <option value="A2E40">
+    <option value="A2E41">
+    <option value="A2E42A">
+    <option value="A2E42">
+    <option value="A2E43">
+    <option value="A2E44">
+    <option value="A2E45">
+    <option value="A2E46">
+    <option value="A2E47">
+    <option value="A2F50">
+    <option value="A2F51">
+    <option value="A2L40">
+    <option value="A2L50">
+    <option value="A2L51">
+    <option value="A2S40">
+    <option value="A2S41">
+    <option value="A2S50">
+    <option value="A2S51">
+    <option value="A2SS40">
+    <option value="A2SS50">
+    <option value="A2SS52">
+    <option value="A2SS54">
+    <option value="A2SS55">
+    <option value="A2T41">
+    <option value="A2T42">
+    <option value="C2401">
+    <option value="C2403">
+    <option value="C2405">
+    <option value="C2407">
+    <option value="C2409">
+    <option value="C2410">
+    <option value="C2411">
+    <option value="C2413">
+    <option value="C2415">
+    <option value="C2417">
+    <option value="C2419">
+    <option value="C2675">
+    <option value="C2675A">
+    <option value="C2687A">
+    <option value="C2700">
+    <option value="C2701">
+    <option value="C2702">
+    <option value="C2703">
+    <option value="C2703A">
+    <option value="C2704">
+    <option value="C2705">
+    <option value="C2705A">
+    <option value="C2706">
+    <option value="C2707">
+    <option value="C2707A">
+    <option value="C2710">
+    <option value="C2710A">
+    <option value="C2712">
+    <option value="C2712A">
+    <option value="C2713">
+    <option value="C2715">
+    <option value="C2717">
+    <option value="C2720">
+    <option value="C2720A">
+    <option value="C2721">
+    <option value="C2721A">
+    <option value="C2721B">
+    <option value="C2721C">
+    <option value="C2721D">
+    <option value="C2725">
+    <option value="C2726">
+    <option value="C2726A">
+    <option value="C2730">
+    <option value="C2731">
+    <option value="C2732">
+    <option value="C2733">
+    <option value="C2734">
+    <option value="C2735">
+    <option value="C2735A">
+    <option value="C2736">
+    <option value="C2738">
+    <option value="C2740">
+    <option value="C2742">
+    <option value="C2744">
+    <option value="C2745">
+    <option value="C2746">
+    <option value="C2748">
+    <option value="C2750">
+    <option value="C2752">
+    <option value="C2800">
+    <option value="C2801">
+    <option value="C2802">
+    <option value="C2802A">
+    <option value="C2803">
+    <option value="C2804">
+    <option value="C2805">
+    <option value="C2806">
+    <option value="C2807">
+    <option value="C2808">
+    <option value="C2809">
+    <option value="C2810">
+    <option value="C2810A">
+    <option value="C2811">
+    <option value="C2812">
+    <option value="C2813">
+    <option value="C2814">
+    <option value="C2815">
+    <option value="C2816">
+    <option value="C2816A">
+    <option value="C2817">
+    <option value="C2818">
+    <option value="C2819">
+    <option value="C2820">
+    <option value="C2821">
+    <option value="C2822">
+    <option value="C2823">
+    <option value="C2824">
+    <option value="C2825">
+    <option value="C2826">
+    <option value="C2826A">
+    <option value="C2831">
+    <option value="C2833">
+    <option value="C2835">
+    <option value="C2835A">
+    <option value="C2837">
+    <option value="C2839">
+    <option value="C2840">
+    <option value="C2841">
+    <option value="C2842">
+    <option value="C2843">
+    <option value="C2845">
+    <option value="C2846">
+    <option value="C2847">
+    <option value="C2848">
+    <option value="C2849">
+    <option value="C2850">
+    <option value="C2851">
+    <option value="C2852">
+    <option value="C2853">
+    <option value="C2854">
+    <option value="C2855">
+    <option value="C2856">
+    <option value="C2857">
+    <option value="C2858">
+    <option value="C2859">
+    <option value="C2860">
+    <option value="C2860A">
+    <option value="C2861">
+    <option value="C2862">
+    <option value="C2863">
+    <option value="C2865">
+    <option value="C2866">
+    <option value="C2867">
+    <option value="C2869">
+    <option value="C2870">
+    <option value="C2870A">
+    <option value="C2871">
+    <option value="C2873">
+    <option value="C2874">
+    <option value="C2875">
+    <option value="C2877">
+    <option value="C2877A">
+    <option value="C2879">
+    <option value="C2880">
+    <option value="C2901">
+    <option value="C2902">
+    <option value="C2903">
+    <option value="C2905">
+    <option value="C2907">
+    <option value="C2909">
+    <option value="C2910">
+    <option value="C2911">
+    <option value="C2912">
+    <option value="C2913">
+    <option value="C2913M">
+    <option value="C2913N">
+    <option value="C2913P">
+    <option value="C2913Q">
+    <option value="C2914">
+    <option value="C2915">
+    <option value="C2917">
+    <option value="C2920">
+    <option value="C2920A">
+    <option value="C2920B">
+    <option value="C2920C">
+    <option value="C2920D">
+    <option value="C2920E">
+    <option value="C2920F">
+    <option value="C2920G">
+    <option value="C2920H">
+    <option value="C2920J">
+    <option value="C2920K">
+    <option value="C2920L">
+    <option value="C2920Z">
+    <option value="C2928">
+    <option value="C2931">
+    <option value="C2933">
+    <option value="C2940">
+    <option value="C2941">
+    <option value="C2942">
+    <option value="C2943">
+    <option value="C2944">
+    <option value="C2945">
+    <option value="C2946">
+    <option value="C2946A">
+    <option value="C2949">
+    <option value="C2950">
+    <option value="C2950A">
+    <option value="C2951">
+    <option value="C2C49">
+    <option value="C2C80">
+    <option value="C2C90">
+    <option value="C2C91">
+    <option value="C2C92">
+    <option value="C2C93">
+    <option value="C2E80">
+    <option value="C2E90">
+    <option value="C2E91">
+    <option value="C2E92">
+    <option value="C2E93">
+    <option value="C2E94">
+    <option value="C2E95">
+    <option value="C2F80">
+    <option value="C2F90">
+    <option value="C2J40">
+    <option value="C2J80">
+    <option value="C2L80">
+    <option value="C2L90">
+    <option value="C2S80">
+    <option value="C2S81">
+    <option value="C2S90">
+    <option value="C2S91">
+    <option value="C2SS80">
+    <option value="C2SS90">
+    <option value="M2391">
+    <option value="M2393">
+    <option value="M2C32"></datalist>
+  <datalist id="rooms_03">
+    <option value="A3459">
+    <option value="A3461">
+    <option value="A3461A">
+    <option value="A3470">
+    <option value="A3471">
+    <option value="A3473">
+    <option value="A3481">
+    <option value="A3481A">
+    <option value="A3501">
+    <option value="A3501A">
+    <option value="A3503">
+    <option value="A3503A">
+    <option value="A3504">
+    <option value="A3505">
+    <option value="A3506">
+    <option value="A3507">
+    <option value="A3507A">
+    <option value="A3508">
+    <option value="A3509">
+    <option value="A3510">
+    <option value="A3511">
+    <option value="A3511A">
+    <option value="A3512">
+    <option value="A3514">
+    <option value="A3515">
+    <option value="A3515A">
+    <option value="A3516">
+    <option value="A3518">
+    <option value="A3519">
+    <option value="A3519A">
+    <option value="A3520">
+    <option value="A3522">
+    <option value="A3523">
+    <option value="A3523A">
+    <option value="A3524">
+    <option value="A3525">
+    <option value="A3526">
+    <option value="A3527">
+    <option value="A3527A">
+    <option value="A3528">
+    <option value="A3529">
+    <option value="A3530">
+    <option value="A3531">
+    <option value="A3531A">
+    <option value="A3532">
+    <option value="A3533">
+    <option value="A3534">
+    <option value="A3535">
+    <option value="A3535A">
+    <option value="A3537">
+    <option value="A3539">
+    <option value="A3539A">
+    <option value="A3543">
+    <option value="A3543A">
+    <option value="A3545">
+    <option value="A3545A">
+    <option value="A3546">
+    <option value="A3547">
+    <option value="A3547A">
+    <option value="A3547B">
+    <option value="A3548">
+    <option value="A3549">
+    <option value="A3549A">
+    <option value="A3551">
+    <option value="A3551A">
+    <option value="A3553">
+    <option value="A3553A">
+    <option value="A3555">
+    <option value="A3556">
+    <option value="A3557">
+    <option value="A3557A">
+    <option value="A3559">
+    <option value="A3560">
+    <option value="A3561">
+    <option value="A3561A">
+    <option value="A3562">
+    <option value="A3564">
+    <option value="A3565">
+    <option value="A3565A">
+    <option value="A3566">
+    <option value="A3568">
+    <option value="A3569">
+    <option value="A3569A">
+    <option value="A3570">
+    <option value="A3572">
+    <option value="A3573">
+    <option value="A3573A">
+    <option value="A3574">
+    <option value="A3577">
+    <option value="A3577A">
+    <option value="A3578">
+    <option value="A3578A">
+    <option value="A3579">
+    <option value="A3579A">
+    <option value="A3580">
+    <option value="A3581">
+    <option value="A3581A">
+    <option value="A3581B">
+    <option value="A3582">
+    <option value="A3588">
+    <option value="A3589">
+    <option value="A3589A">
+    <option value="A3596">
+    <option value="A3596A">
+    <option value="A3598">
+    <option value="A3599">
+    <option value="A3602">
+    <option value="A3602A">
+    <option value="A3606">
+    <option value="A3606A">
+    <option value="A3610">
+    <option value="A3611">
+    <option value="A3611A">
+    <option value="A3611B">
+    <option value="A3611C">
+    <option value="A3611D">
+    <option value="A3611E">
+    <option value="A3611F">
+    <option value="A3611G">
+    <option value="A3619">
+    <option value="A3619A">
+    <option value="A3619B">
+    <option value="A3619C">
+    <option value="A3619D">
+    <option value="A3619E">
+    <option value="A3619F">
+    <option value="A3622">
+    <option value="A3625">
+    <option value="A3626">
+    <option value="A3627">
+    <option value="A3628">
+    <option value="A3628A">
+    <option value="A3629">
+    <option value="A3630">
+    <option value="A3632">
+    <option value="A3632A">
+    <option value="A3634">
+    <option value="A3635">
+    <option value="A3638">
+    <option value="A3652">
+    <option value="A3654">
+    <option value="A3655">
+    <option value="A3656">
+    <option value="A3657">
+    <option value="A3658">
+    <option value="A3659">
+    <option value="A3660">
+    <option value="A3662">
+    <option value="A3663">
+    <option value="A3664">
+    <option value="A3665">
+    <option value="A3666">
+    <option value="A3667">
+    <option value="A3668">
+    <option value="A3669">
+    <option value="A3670">
+    <option value="A3672">
+    <option value="A3673">
+    <option value="A3701">
+    <option value="A3702">
+    <option value="A3704">
+    <option value="A3706">
+    <option value="A3708">
+    <option value="A3709">
+    <option value="A3710">
+    <option value="A3711">
+    <option value="A3720">
+    <option value="A3720S">
+    <option value="A3721">
+    <option value="A3721A">
+    <option value="A3725">
+    <option value="A3725A">
+    <option value="A3728">
+    <option value="A3729">
+    <option value="A3729A">
+    <option value="A3730">
+    <option value="A3730Z">
+    <option value="A3732">
+    <option value="A3733">
+    <option value="A3733A">
+    <option value="A3734">
+    <option value="A3736">
+    <option value="A3737">
+    <option value="A3737A">
+    <option value="A3738">
+    <option value="A3740">
+    <option value="A3741">
+    <option value="A3741A">
+    <option value="A3745">
+    <option value="A3745A">
+    <option value="A3745B">
+    <option value="A3748">
+    <option value="A3749">
+    <option value="A3749A">
+    <option value="A3750">
+    <option value="A3751">
+    <option value="A3751A">
+    <option value="A3753">
+    <option value="A3761">
+    <option value="A3762">
+    <option value="A3763">
+    <option value="A3764">
+    <option value="A3765">
+    <option value="A3766">
+    <option value="A3767">
+    <option value="A3769">
+    <option value="A3770">
+    <option value="A3771">
+    <option value="A3772">
+    <option value="A3773">
+    <option value="A3774">
+    <option value="A3775">
+    <option value="A3840">
+    <option value="A3841">
+    <option value="A3841A">
+    <option value="A3843">
+    <option value="A3843A">
+    <option value="A3845">
+    <option value="A3846">
+    <option value="A3846A">
+    <option value="A3847">
+    <option value="A3847A">
+    <option value="A3847B">
+    <option value="A3848">
+    <option value="A3849">
+    <option value="A3849A">
+    <option value="A3851">
+    <option value="A3851A">
+    <option value="A3853">
+    <option value="A3853A">
+    <option value="A3856">
+    <option value="A3857">
+    <option value="A3857A">
+    <option value="A3858">
+    <option value="A3860">
+    <option value="A3861">
+    <option value="A3861A">
+    <option value="A3862">
+    <option value="A3863">
+    <option value="A3864">
+    <option value="A3865">
+    <option value="A3865A">
+    <option value="A3866">
+    <option value="A3868">
+    <option value="A3868A">
+    <option value="A3869">
+    <option value="A3869A">
+    <option value="A3870">
+    <option value="A3871">
+    <option value="A3872">
+    <option value="A3873">
+    <option value="A3873A">
+    <option value="A3877">
+    <option value="A3877A">
+    <option value="A3878">
+    <option value="A3878A">
+    <option value="A3879">
+    <option value="A3879A">
+    <option value="A3880">
+    <option value="A3C40">
+    <option value="A3C41">
+    <option value="A3C42">
+    <option value="A3C43">
+    <option value="A3C44">
+    <option value="A3C45">
+    <option value="A3C46">
+    <option value="A3C47">
+    <option value="A3C48">
+    <option value="A3C51">
+    <option value="A3C61">
+    <option value="A3C70">
+    <option value="A3C71">
+    <option value="A3E40">
+    <option value="A3E41">
+    <option value="A3E42">
+    <option value="A3E43">
+    <option value="A3E44">
+    <option value="A3E45">
+    <option value="A3E46">
+    <option value="A3E47">
+    <option value="A3F50">
+    <option value="A3J60">
+    <option value="A3L50">
+    <option value="A3S40">
+    <option value="A3S41">
+    <option value="A3S50">
+    <option value="A3S51">
+    <option value="A3SS40">
+    <option value="A3SS50">
+    <option value="A3SS52">
+    <option value="A3SS53">
+    <option value="A3SS54">
+    <option value="A3SS55">
+    <option value="A3SS56">
+    <option value="A3T41">
+    <option value="A3T42">
+    <option value="C3401">
+    <option value="C3403">
+    <option value="C3405">
+    <option value="C3407">
+    <option value="C3408">
+    <option value="C3409">
+    <option value="C3410">
+    <option value="C3413">
+    <option value="C3414">
+    <option value="C3416">
+    <option value="C3417">
+    <option value="C3418">
+    <option value="C3419">
+    <option value="C3419A">
+    <option value="C3420">
+    <option value="C3421">
+    <option value="C3422">
+    <option value="C3423">
+    <option value="C3425">
+    <option value="C3635A">
+    <option value="C3635B">
+    <option value="C3635C">
+    <option value="C3635D">
+    <option value="C3635E">
+    <option value="C3635F">
+    <option value="C3635G">
+    <option value="C3636">
+    <option value="C3636A">
+    <option value="C3641">
+    <option value="C3643">
+    <option value="C3647">
+    <option value="C3649">
+    <option value="C3650A">
+    <option value="C3786">
+    <option value="C3801">
+    <option value="C3801A">
+    <option value="C3802">
+    <option value="C3803">
+    <option value="C3804">
+    <option value="C3805">
+    <option value="C3806">
+    <option value="C3807">
+    <option value="C3808">
+    <option value="C3810">
+    <option value="C3810A">
+    <option value="C3811">
+    <option value="C3812">
+    <option value="C3813">
+    <option value="C3814">
+    <option value="C3815">
+    <option value="C3816">
+    <option value="C3817">
+    <option value="C3819">
+    <option value="C3821">
+    <option value="C3823">
+    <option value="C3825">
+    <option value="C3880">
+    <option value="C3881">
+    <option value="C3882">
+    <option value="C3883">
+    <option value="C3884">
+    <option value="C3885">
+    <option value="C3887">
+    <option value="C3888">
+    <option value="C3889">
+    <option value="C3890">
+    <option value="C3891">
+    <option value="C3892">
+    <option value="C3893">
+    <option value="C3893A">
+    <option value="C3895">
+    <option value="C3896">
+    <option value="C3897">
+    <option value="C3897N">
+    <option value="C3898">
+    <option value="C3899">
+    <option value="C3899A">
+    <option value="C3899B">
+    <option value="C3899C">
+    <option value="C3900">
+    <option value="C3901">
+    <option value="C3903">
+    <option value="C3905">
+    <option value="C3906">
+    <option value="C3907">
+    <option value="C3908">
+    <option value="C3909">
+    <option value="C3910">
+    <option value="C3911">
+    <option value="C3913">
+    <option value="C3914">
+    <option value="C3915">
+    <option value="C3916">
+    <option value="C3917">
+    <option value="C3918">
+    <option value="C3919">
+    <option value="C3921">
+    <option value="C3923">
+    <option value="C3924">
+    <option value="C3925">
+    <option value="C3925A">
+    <option value="C3926">
+    <option value="C3927">
+    <option value="C3928">
+    <option value="C3929">
+    <option value="C3930">
+    <option value="C3931">
+    <option value="C3933">
+    <option value="C3934">
+    <option value="C3934A">
+    <option value="C3935">
+    <option value="C3936">
+    <option value="C3937">
+    <option value="C3940">
+    <option value="C3941">
+    <option value="C3943">
+    <option value="C3944">
+    <option value="C3945">
+    <option value="C3946">
+    <option value="C3947">
+    <option value="C3948">
+    <option value="C3950">
+    <option value="C3951">
+    <option value="C3952">
+    <option value="C3954">
+    <option value="C3956">
+    <option value="C3958">
+    <option value="C3960">
+    <option value="C3961">
+    <option value="C3962">
+    <option value="C3963">
+    <option value="C3964">
+    <option value="C3965">
+    <option value="C3966">
+    <option value="C3967">
+    <option value="C3968">
+    <option value="C3970">
+    <option value="C3971">
+    <option value="C3973">
+    <option value="C3975">
+    <option value="C3976">
+    <option value="C3978">
+    <option value="C3979">
+    <option value="C3980">
+    <option value="C3981">
+    <option value="C3983">
+    <option value="C3985">
+    <option value="C3987">
+    <option value="C3989">
+    <option value="C3989A">
+    <option value="C3990">
+    <option value="C3991">
+    <option value="C3994">
+    <option value="C3C49">
+    <option value="C3C49A">
+    <option value="C3C62">
+    <option value="C3C62W">
+    <option value="C3C63">
+    <option value="C3C80">
+    <option value="C3C81">
+    <option value="C3C81A">
+    <option value="C3C82">
+    <option value="C3E80">
+    <option value="C3E90">
+    <option value="C3E91">
+    <option value="C3E92">
+    <option value="C3E93">
+    <option value="C3E94">
+    <option value="C3E95">
+    <option value="C3F80">
+    <option value="C3F90">
+    <option value="C3J40">
+    <option value="C3L40">
+    <option value="C3L90">
+    <option value="C3S80">
+    <option value="C3S81">
+    <option value="C3S90">
+    <option value="C3S91">
+    <option value="C3SS80">
+    <option value="C3SS82">
+    <option value="C3SS83">
+    <option value="C3SS84">
+    <option value="C3SS85">
+    <option value="C3SS90">
+    <option value="M3391">
+    <option value="M3395">
+    <option value="M3395A">
+    <option value="M3395B">
+    <option value="M3395C">
+    <option value="M3395D">
+    <option value="M3395E">
+    <option value="M3395F">
+    <option value="M3395G">
+    <option value="M3C32"></datalist>
+  <datalist id="rooms_04">
+    <option value="A4471">
+    <option value="A4471A">
+    <option value="A4481">
+    <option value="A4501">
+    <option value="A4503">
+    <option value="A4505">
+    <option value="A4507">
+    <option value="A4507A">
+    <option value="A4513">
+    <option value="A4513A">
+    <option value="A4513B">
+    <option value="A4515">
+    <option value="A4516">
+    <option value="A4517">
+    <option value="A4519">
+    <option value="A4519A">
+    <option value="A4520">
+    <option value="A4521">
+    <option value="A4523">
+    <option value="A4524">
+    <option value="A4525">
+    <option value="A4526">
+    <option value="A4527">
+    <option value="A4528">
+    <option value="A4529">
+    <option value="A4530">
+    <option value="A4530A">
+    <option value="A4531">
+    <option value="A4533">
+    <option value="A4534">
+    <option value="A4535">
+    <option value="A4537">
+    <option value="A4539">
+    <option value="A4543">
+    <option value="A4543A">
+    <option value="A4545">
+    <option value="A4546">
+    <option value="A4547">
+    <option value="A4547A">
+    <option value="A4549">
+    <option value="A4550">
+    <option value="A4551">
+    <option value="A4553">
+    <option value="A4555">
+    <option value="A4556">
+    <option value="A4557">
+    <option value="A4559">
+    <option value="A4560">
+    <option value="A4561">
+    <option value="A4562">
+    <option value="A4564">
+    <option value="A4565">
+    <option value="A4566">
+    <option value="A4568">
+    <option value="A4569">
+    <option value="A4570">
+    <option value="A4572">
+    <option value="A4573">
+    <option value="A4574">
+    <option value="A4576">
+    <option value="A4577">
+    <option value="A4578">
+    <option value="A4578A">
+    <option value="A4580">
+    <option value="A4581">
+    <option value="A4583">
+    <option value="A4585">
+    <option value="A4586">
+    <option value="A4586A">
+    <option value="A4587">
+    <option value="A4589">
+    <option value="A4591">
+    <option value="A4592">
+    <option value="A4593">
+    <option value="A4595">
+    <option value="A4596">
+    <option value="A4596A">
+    <option value="A4596B">
+    <option value="A4596C">
+    <option value="A4596D">
+    <option value="A4596E">
+    <option value="A4596F">
+    <option value="A4596G">
+    <option value="A4596H">
+    <option value="A4597">
+    <option value="A4598">
+    <option value="A4598A">
+    <option value="A4598B">
+    <option value="A4598C">
+    <option value="A4C40">
+    <option value="A4C41">
+    <option value="A4C42">
+    <option value="A4C43">
+    <option value="A4C44">
+    <option value="A4C46">
+    <option value="A4C47">
+    <option value="A4C51">
+    <option value="A4E40">
+    <option value="A4E41">
+    <option value="A4E42">
+    <option value="A4E43">
+    <option value="A4E44">
+    <option value="A4E45">
+    <option value="A4E46">
+    <option value="A4E47">
+    <option value="A4F50">
+    <option value="A4L50">
+    <option value="A4S40">
+    <option value="A4S41">
+    <option value="A4S50">
+    <option value="A4S51">
+    <option value="A4SS40">
+    <option value="A4SS50">
+    <option value="A4SS51">
+    <option value="A4SS52">
+    <option value="A4SS53">
+    <option value="A4SS54">
+    <option value="A4SS55">
+    <option value="A4SS56">
+    <option value="A4T41">
+    <option value="A4T42">
+    <option value="C4401">
+    <option value="C4403">
+    <option value="C4411">
+    <option value="C4411A">
+    <option value="C4411B">
+    <option value="C4411C">
+    <option value="C4411D">
+    <option value="C4411E">
+    <option value="C4411F">
+    <option value="C4411G">
+    <option value="C4411H">
+    <option value="C4411J">
+    <option value="C4411K">
+    <option value="C4411L">
+    <option value="C4411M">
+    <option value="C4411N">
+    <option value="C4451">
+    <option value="C4457">
+    <option value="C4459">
+    <option value="C4459A">
+    <option value="C4459B">
+    <option value="C4459C">
+    <option value="C4459D">
+    <option value="C4459E">
+    <option value="C4459F">
+    <option value="C4601">
+    <option value="C4601A">
+    <option value="C4601B">
+    <option value="C4601C">
+    <option value="C4601D">
+    <option value="C4601E">
+    <option value="C4601F">
+    <option value="C4601G">
+    <option value="C4601H">
+    <option value="C4601J">
+    <option value="C4601K">
+    <option value="C4601L">
+    <option value="C4615A">
+    <option value="C4617">
+    <option value="C4617A">
+    <option value="C4619">
+    <option value="C4619A">
+    <option value="C4620">
+    <option value="C4621">
+    <option value="C4621A">
+    <option value="C4621B">
+    <option value="C4621C">
+    <option value="C4621D">
+    <option value="C4621E">
+    <option value="C4621F">
+    <option value="C4624">
+    <option value="C4624A">
+    <option value="C4624B">
+    <option value="C4624C">
+    <option value="C4624D">
+    <option value="C4624E">
+    <option value="C4625">
+    <option value="C4626">
+    <option value="C4701">
+    <option value="C4702">
+    <option value="C4703">
+    <option value="C4704">
+    <option value="C4704A">
+    <option value="C4704B">
+    <option value="C4704C">
+    <option value="C4704D">
+    <option value="C4704E">
+    <option value="C4704F">
+    <option value="C4704G">
+    <option value="C4704H">
+    <option value="C4704I">
+    <option value="C4704J">
+    <option value="C4705">
+    <option value="C4706">
+    <option value="C4707">
+    <option value="C4708">
+    <option value="C4708A">
+    <option value="C4708B">
+    <option value="C4708C">
+    <option value="C4708D">
+    <option value="C4708E">
+    <option value="C4708F">
+    <option value="C4710">
+    <option value="C4711">
+    <option value="C4712">
+    <option value="C4729">
+    <option value="C4730">
+    <option value="C4731">
+    <option value="C4732">
+    <option value="C4733">
+    <option value="C4735">
+    <option value="C4737">
+    <option value="C4741">
+    <option value="C4744">
+    <option value="C4745">
+    <option value="C4749">
+    <option value="C4750">
+    <option value="C4750A">
+    <option value="C4750B">
+    <option value="C4751">
+    <option value="C4751A">
+    <option value="C4805">
+    <option value="C4809">
+    <option value="C4811">
+    <option value="C4815">
+    <option value="C4816">
+    <option value="C4817">
+    <option value="C4820">
+    <option value="C4822">
+    <option value="C4824">
+    <option value="C4825">
+    <option value="C4826">
+    <option value="C4827">
+    <option value="C4828">
+    <option value="C4829">
+    <option value="C4831">
+    <option value="C4831A">
+    <option value="C4833">
+    <option value="C4834">
+    <option value="C4835">
+    <option value="C4836">
+    <option value="C4837">
+    <option value="C4838">
+    <option value="C4839">
+    <option value="C4840">
+    <option value="C4843">
+    <option value="C4844">
+    <option value="C4846">
+    <option value="C4847">
+    <option value="C4847A">
+    <option value="C4848">
+    <option value="C4849">
+    <option value="C4851">
+    <option value="C4853">
+    <option value="C4855">
+    <option value="C4856">
+    <option value="C4857">
+    <option value="C4859">
+    <option value="C4861">
+    <option value="C4864">
+    <option value="C4865">
+    <option value="C4866">
+    <option value="C4868">
+    <option value="C4869">
+    <option value="C4870">
+    <option value="C4872">
+    <option value="C4873">
+    <option value="C4874">
+    <option value="C4876">
+    <option value="C4877">
+    <option value="C4878">
+    <option value="C4880">
+    <option value="C4881">
+    <option value="C4882">
+    <option value="C4884">
+    <option value="C4885">
+    <option value="C4885A">
+    <option value="C4886">
+    <option value="C4888">
+    <option value="C4889">
+    <option value="C4889A">
+    <option value="C4890">
+    <option value="C4890A">
+    <option value="C4892">
+    <option value="C4893">
+    <option value="C4893A">
+    <option value="C4894">
+    <option value="C4895">
+    <option value="C4896">
+    <option value="C4897">
+    <option value="C4897A">
+    <option value="C4898">
+    <option value="C4898A">
+    <option value="C4898B">
+    <option value="C4898C">
+    <option value="C4899">
+    <option value="C4899A">
+    <option value="C4899B">
+    <option value="C4901">
+    <option value="C4901A">
+    <option value="C4904">
+    <option value="C4905">
+    <option value="C4905A">
+    <option value="C4906">
+    <option value="C4907">
+    <option value="C4907A">
+    <option value="C4909">
+    <option value="C4910">
+    <option value="C4911">
+    <option value="C4911A">
+    <option value="C4912">
+    <option value="C4915">
+    <option value="C4915A">
+    <option value="C4919">
+    <option value="C4920">
+    <option value="C4922">
+    <option value="C4924">
+    <option value="C4925">
+    <option value="C4926">
+    <option value="C4928">
+    <option value="C4930">
+    <option value="C4932">
+    <option value="C4933">
+    <option value="C4934">
+    <option value="C4934A">
+    <option value="C4934B">
+    <option value="C4935">
+    <option value="C4939">
+    <option value="C4939A">
+    <option value="C4940">
+    <option value="C4943">
+    <option value="C4945">
+    <option value="C4947">
+    <option value="C4951">
+    <option value="C4955">
+    <option value="C4956">
+    <option value="C4958">
+    <option value="C4959">
+    <option value="C4960">
+    <option value="C4961">
+    <option value="C4962">
+    <option value="C4963">
+    <option value="C4965">
+    <option value="C4967">
+    <option value="C4968">
+    <option value="C4970">
+    <option value="C4971">
+    <option value="C4972">
+    <option value="C4974">
+    <option value="C4975">
+    <option value="C4976">
+    <option value="C4977">
+    <option value="C4979">
+    <option value="C4980">
+    <option value="C4981">
+    <option value="C4982">
+    <option value="C4982A">
+    <option value="C4982B">
+    <option value="C4983">
+    <option value="C4984">
+    <option value="C4987">
+    <option value="C4988">
+    <option value="C4989">
+    <option value="C4990">
+    <option value="C4992">
+    <option value="C4C45">
+    <option value="C4C47">
+    <option value="C4C60">
+    <option value="C4C61">
+    <option value="C4C90">
+    <option value="C4C92">
+    <option value="C4E48">
+    <option value="C4E80">
+    <option value="C4E90">
+    <option value="C4E91">
+    <option value="C4E92">
+    <option value="C4E93">
+    <option value="C4E94">
+    <option value="C4E95">
+    <option value="C4F80">
+    <option value="C4F90">
+    <option value="C4L40">
+    <option value="C4L90">
+    <option value="C4S80">
+    <option value="C4S81">
+    <option value="C4S90">
+    <option value="C4S91">
+    <option value="C4SS80">
+    <option value="C4SS81">
+    <option value="C4SS82">
+    <option value="C4SS83">
+    <option value="C4SS84">
+    <option value="C4SS90">
+    <option value="C4SS91">
+    <option value="M4391">
+    <option value="M4395">
+    <option value="M4395A">
+    <option value="M4395B">
+    <option value="M4395C">
+    <option value="M4395D">
+    <option value="M4395E">
+    <option value="M4395F">
+    <option value="M4395G">
+    <option value="M4397">
+    <option value="M4C32"></datalist>
+  <datalist id="rooms_05">
+    <option value="A5158">
+    <option value="A5451"><option value="A5453"><option value="A5459"><option value="A5461"><option value="A5471"><option value="A5473"><option value="A5475"><option value="A5477"><option value="A5477A"><option value="A5481"><option value="A5501"><option value="A5501A"><option value="A5503"><option value="A5503A"><option value="A5504"><option value="A5505"><option value="A5507"><option value="A5507A"><option value="A5508"><option value="A5509"><option value="A5510"><option value="A5511"><option value="A5511A"><option value="A5512"><option value="A5515"><option value="A5515A"><option value="A5516"><option value="A5519"><option value="A5519A"><option value="A5520"><option value="A5522"><option value="A5523"><option value="A5523A"><option value="A5524"><option value="A5525"><option value="A5526"><option value="A5527"><option value="A5527A"><option value="A5528"><option value="A5529"><option value="A5530"><option value="A5531"><option value="A5531A"><option value="A5533"><option value="A5534"><option value="A5535"><option value="A5535A"><option value="A5537"><option value="A5539"><option value="A5539A"><option value="A5542"><option value="A5543"><option value="A5543A"><option value="A5545"><option value="A5545A"><option value="A5547"><option value="A5547A"><option value="A5547B"><option value="A5548"><option value="A5549"><option value="A5549A"><option value="A5549B"><option value="A5550"><option value="A5551"><option value="A5551A"><option value="A5553"><option value="A5553A"><option value="A5555"><option value="A5556"><option value="A5557"><option value="A5557A"><option value="A5559"><option value="A5560"><option value="A5561"><option value="A5561A"><option value="A5562"><option value="A5564"><option value="A5565"><option value="A5565A"><option value="A5566"><option value="A5568"><option value="A5569"><option value="A5569A"><option value="A5570"><option value="A5572"><option value="A5573"><option value="A5573A"><option value="A5574"><option value="A5577"><option value="A5577A"><option value="A5578"><option value="A5578A"><option value="A5580"><option value="A5581"><option value="A5581A"><option value="A5582"><option value="A5585"><option value="A5585A"><option value="A5588"><option value="A5589"><option value="A5589A"><option value="A5590"><option value="A5592"><option value="A5593"><option value="A5593A"><option value="A5594"><option value="A5595"><option value="A5596"><option value="A5597"><option value="A5597A"><option value="A5598"><option value="A5599"><option value="A5C40"><option value="A5C41A"><option value="A5C41B"><option value="A5C41C"><option value="A5C42"><option value="A5C43"><option value="A5C44"><option value="A5C45"><option value="A5C46"><option value="A5C47"><option value="A5E40"><option value="A5E41"><option value="A5E42"><option value="A5E43"><option value="A5E44"><option value="A5E45"><option value="A5E46"><option value="A5E47"><option value="A5F50"><option value="A5L50"><option value="A5S40"><option value="A5S41"><option value="A5S50"><option value="A5S51"><option value="A5SS40"><option value="A5SS50"><option value="A5SS51"><option value="A5SS52"><option value="A5SS53"><option value="A5SS54"><option value="A5SS55"><option value="A5SS56"><option value="A5T41"><option value="A5T42"><option value="A5U50"><option value="C5411"><option value="C5411A"><option value="C5411B"><option value="C5411C"><option value="C5411D"><option value="C5431"><option value="C5431A"><option value="C5433"><option value="C5433A"><option value="C5441"><option value="C5441A"><option value="C5441B"><option value="C5441C"><option value="C5441D"><option value="C5441E"><option value="C5801"><option value="C5801A"><option value="C5803"><option value="C5803A"><option value="C5804"><option value="C5805"><option value="C5806"><option value="C5807"><option value="C5807A"><option value="C5808"><option value="C5809"><option value="C5810"><option value="C5811"><option value="C5811A"><option value="C5812"><option value="C5814"><option value="C5815"><option value="C5815A"><option value="C5816"><option value="C5819"><option value="C5819A"><option value="C5820"><option value="C5822"><option value="C5823"><option value="C5823A"><option value="C5824"><option value="C5825"><option value="C5826"><option value="C5827"><option value="C5827A"><option value="C5828"><option value="C5829"><option value="C5831"><option value="C5831A"><option value="C5833"><option value="C5834"><option value="C5835"><option value="C5835A"><option value="C5836"><option value="C5837"><option value="C5838"><option value="C5839"><option value="C5839A"><option value="C5840"><option value="C5842"><option value="C5843"><option value="C5843A"><option value="C5843B"><option value="C5844"><option value="C5847"><option value="C5847A"><option value="C5847B"><option value="C5848"><option value="C5849"><option value="C5849A"><option value="C5849B"><option value="C5851"><option value="C5851A"><option value="C5853"><option value="C5853A"><option value="C5855"><option value="C5856"><option value="C5857"><option value="C5857A"><option value="C5859"><option value="C5861"><option value="C5861A"><option value="C5864"><option value="C5865"><option value="C5865A"><option value="C5866"><option value="C5868"><option value="C5869"><option value="C5869A"><option value="C5870"><option value="C5872"><option value="C5873"><option value="C5873A"><option value="C5874"><option value="C5877"><option value="C5877A"><option value="C5878"><option value="C5880"><option value="C5881"><option value="C5881A"><option value="C5884"><option value="C5885"><option value="C5885A"><option value="C5889"><option value="C5889A"><option value="C5892"><option value="C5893"><option value="C5893A"><option value="C5894"><option value="C5895"><option value="C5896"><option value="C5897"><option value="C5897A"><option value="C5898"><option value="C5899"><option value="C5899A"><option value="C5901"><option value="C5902"><option value="C5903"><option value="C5904"><option value="C5905"><option value="C5906"><option value="C5907"><option value="C5907A"><option value="C5907B"><option value="C5909"><option value="C5910"><option value="C5911"><option value="C5911A"><option value="C5912"><option value="C5912A"><option value="C5914"><option value="C5915"><option value="C5915A"><option value="C5916"><option value="C5917"><option value="C5918"><option value="C5919"><option value="C5919A"><option value="C5920"><option value="C5924"><option value="C5933"><option value="C5933A"><option value="C5935"><option value="C5935A"><option value="C5935B"><option value="C5939"><option value="C5939A"><option value="C5940"><option value="C5943"><option value="C5943A"><option value="C5945"><option value="C5947"><option value="C5947A"><option value="C5951"><option value="C5951A"><option value="C5955"><option value="C5955A"><option value="C5956"><option value="C5958"><option value="C5959"><option value="C5959A"><option value="C5960"><option value="C5961"><option value="C5962"><option value="C5963"><option value="C5963A"><option value="C5965"><option value="C5967"><option value="C5967A"><option value="C5968"><option value="C5970"><option value="C5971"><option value="C5971A"><option value="C5972"><option value="C5974"><option value="C5975"><option value="C5975A"><option value="C5976"><option value="C5979"><option value="C5981"><option value="C5982"><option value="C5983"><option value="C5985"><option value="C5986"><option value="C5986A"><option value="C5986B"><option value="C5986C"><option value="C5986D"><option value="C5987"><option value="C5988"><option value="C5989"><option value="C5990"><option value="C5C47"><option value="C5C80"><option value="C5C90"><option value="C5C92"><option value="C5C99"><option value="C5E48"><option value="C5E80"><option value="C5E90"><option value="C5E91"><option value="C5E92"><option value="C5E93"><option value="C5E94"><option value="C5E95"><option value="C5F80"><option value="C5F90"><option value="C5J80"><option value="C5L40"><option value="C5L90"><option value="C5S80"><option value="C5S81"><option value="C5S90"><option value="C5S91"><option value="C5SS80"><option value="C5SS81"><option value="C5SS82"><option value="C5SS83"><option value="C5SS84"><option value="C5SS85"><option value="C5SS90"><option value="C5SS91"><option value="C5U80"><option value="C5U81"><option value="M5391"><option value="M5395"><option value="M5395A"><option value="M5395B"><option value="M5395C"><option value="M5395D"><option value="M5395E"><option value="M5395F"><option value="M5395G"><option value="M5397"><option value="M5C32"></datalist>
+  <datalist id="rooms_06">
+    <option value="A6457"><option value="A6457A"><option value="A6457B"><option value="A6457C"><option value="A6457D"><option value="A6457E"><option value="A6457F"><option value="A6457G"><option value="A6461"><option value="A6471"><option value="A6481"><option value="A6501"><option value="A6501A"><option value="A6503"><option value="A6503A"><option value="A6504"><option value="A6505"><option value="A6507"><option value="A6507A"><option value="A6509"><option value="A6510"><option value="A6511"><option value="A6511A"><option value="A6512"><option value="A6514"><option value="A6515"><option value="A6515A"><option value="A6519"><option value="A6519A"><option value="A6520"><option value="A6522"><option value="A6523"><option value="A6523A"><option value="A6524"><option value="A6525"><option value="A6526"><option value="A6527"><option value="A6527A"><option value="A6528"><option value="A6529"><option value="A6530"><option value="A6531"><option value="A6531A"><option value="A6532"><option value="A6533"><option value="A6534"><option value="A6535"><option value="A6535A"><option value="A6537"><option value="A6539"><option value="A6539A"><option value="A6543"><option value="A6543A"><option value="A6545"><option value="A6545A"><option value="A6547"><option value="A6547A"><option value="A6547B"><option value="A6548"><option value="A6549"><option value="A6549A"><option value="A6549B"><option value="A6550"><option value="A6551"><option value="A6551A"><option value="A6553"><option value="A6553A"><option value="A6555"><option value="A6556"><option value="A6557"><option value="A6557A"><option value="A6559"><option value="A6560"><option value="A6561"><option value="A6561A"><option value="A6562"><option value="A6564"><option value="A6565"><option value="A6565A"><option value="A6566"><option value="A6568"><option value="A6569"><option value="A6569A"><option value="A6570"><option value="A6572"><option value="A6573"><option value="A6573A"><option value="A6574"><option value="A6577"><option value="A6577A"><option value="A6578"><option value="A6578A"><option value="A6580"><option value="A6581"><option value="A6581A"><option value="A6582"><option value="A6585"><option value="A6585A"><option value="A6588"><option value="A6589"><option value="A6589A"><option value="A6590"><option value="A6592"><option value="A6593"><option value="A6593A"><option value="A6594"><option value="A6595"><option value="A6596"><option value="A6597"><option value="A6597A"><option value="A6598"><option value="A6599"><option value="A6C40"><option value="A6C41"><option value="A6C42"><option value="A6C43"><option value="A6C44"><option value="A6C45"><option value="A6C46"><option value="A6C47"><option value="A6E40"><option value="A6E41"><option value="A6E42"><option value="A6E43"><option value="A6E44"><option value="A6E45"><option value="A6E46"><option value="A6E47"><option value="A6F50"><option value="A6L50"><option value="A6S40"><option value="A6S41"><option value="A6S50"><option value="A6S51"><option value="A6SS40"><option value="A6SS50"><option value="A6SS51"><option value="A6SS52"><option value="A6SS53"><option value="A6SS54"><option value="A6SS55"><option value="A6SS56"><option value="A6SS81"><option value="A6T41"><option value="A6T42"><option value="A6U50"><option value="C6411"><option value="C6413"><option value="C6413A"><option value="C6413B"><option value="C6415"><option value="C6421"><option value="C6421A"><option value="C6421B"><option value="C6421C"><option value="C6431"><option value="C6431A"><option value="C6431B"><option value="C6431C"><option value="C6441"><option value="C6451"><option value="C6451A"><option value="C6451B"><option value="C6801"><option value="C6804"><option value="C6805"><option value="C6806"><option value="C6807"><option value="C6807A"><option value="C6807B"><option value="C6808"><option value="C6809"><option value="C6810"><option value="C6811"><option value="C6811A"><option value="C6812"><option value="C6814"><option value="C6815"><option value="C6815A"><option value="C6816"><option value="C6819"><option value="C6819A"><option value="C6822"><option value="C6823"><option value="C6823A"><option value="C6824"><option value="C6825"><option value="C6826"><option value="C6827"><option value="C6827A"><option value="C6828"><option value="C6829"><option value="C6829A"><option value="C6830"><option value="C6831"><option value="C6831A"><option value="C6833"><option value="C6834"><option value="C6835"><option value="C6835A"><option value="C6836"><option value="C6837"><option value="C6838"><option value="C6839"><option value="C6839A"><option value="C6840"><option value="C6843"><option value="C6843A"><option value="C6843B"><option value="C6844"><option value="C6846"><option value="C6847"><option value="C6847A"><option value="C6847B"><option value="C6848"><option value="C6849"><option value="C6849A"><option value="C6849B"><option value="C6851"><option value="C6851A"><option value="C6853"><option value="C6853A"><option value="C6855"><option value="C6856"><option value="C6857"><option value="C6857A"><option value="C6859"><option value="C6861"><option value="C6861A"><option value="C6864"><option value="C6865"><option value="C6865A"><option value="C6866"><option value="C6868"><option value="C6869"><option value="C6869A"><option value="C6870"><option value="C6872"><option value="C6873"><option value="C6873A"><option value="C6874"><option value="C6877"><option value="C6877A"><option value="C6878"><option value="C6880"><option value="C6881"><option value="C6881A"><option value="C6881B"><option value="C6882"><option value="C6884"><option value="C6885"><option value="C6885A"><option value="C6889"><option value="C6889A"><option value="C6892"><option value="C6893"><option value="C6893A"><option value="C6894"><option value="C6895"><option value="C6896"><option value="C6897"><option value="C6898"><option value="C6899"><option value="C6901"><option value="C6901A"><option value="C6901B"><option value="C6902"><option value="C6904"><option value="C6906"><option value="C6907"><option value="C6907A"><option value="C6907B"><option value="C6908"><option value="C6909"><option value="C6910"><option value="C6911"><option value="C6911A"><option value="C6911B"><option value="C6912"><option value="C6913"><option value="C6914"><option value="C6915"><option value="C6915A"><option value="C6915B"><option value="C6916"><option value="C6916A"><option value="C6917"><option value="C6918"><option value="C6920"><option value="C6922"><option value="C6923"><option value="C6923A"><option value="C6923B"><option value="C6924"><option value="C6935"><option value="C6935A"><option value="C6935B"><option value="C6937"><option value="C6939"><option value="C6939A"><option value="C6939B"><option value="C6940"><option value="C6943"><option value="C6943A"><option value="C6943B"><option value="C6945"><option value="C6955"><option value="C6955A"><option value="C6955B"><option value="C6956"><option value="C6958"><option value="C6959"><option value="C6959A"><option value="C6959B"><option value="C6960"><option value="C6961"><option value="C6962"><option value="C6963"><option value="C6963A"><option value="C6963B"><option value="C6964"><option value="C6965"><option value="C6968"><option value="C6971"><option value="C6971A"><option value="C6971B"><option value="C6972"><option value="C6972A"><option value="C6975"><option value="C6975A"><option value="C6975B"><option value="C6976"><option value="C6981"><option value="C6983"><option value="C6984"><option value="C6985"><option value="C6987"><option value="C6988"><option value="C6989"><option value="C6C47"><option value="C6C80"><option value="C6C90"><option value="C6C92"><option value="C6E48"><option value="C6E80"><option value="C6E90"><option value="C6E91"><option value="C6E92"><option value="C6E93"><option value="C6E94"><option value="C6E95"><option value="C6F80"><option value="C6F90"><option value="C6L40"><option value="C6L90"><option value="C6S80"><option value="C6S81"><option value="C6S90"><option value="C6S91"><option value="C6SS80"><option value="C6SS82"><option value="C6SS83"><option value="C6SS84"><option value="C6SS90"><option value="C6SS91"><option value="C6U80"><option value="C6U81"><option value="M6391"><option value="M6395"><option value="M6395A"><option value="M6395B"><option value="M6395C"><option value="M6395D"><option value="M6395E"><option value="M6395F"><option value="M6395G"><option value="M6397"><option value="M6C32"></datalist>
+  <datalist id="rooms_07">
+    <option value="A7C46"><option value="A7E47"><option value="A7L40"><option value="A7L44"><option value="A7M42"><option value="A7M46"><option value="A7M49"><option value="A7S40"><option value="C7L90"><option value="C7M48"><option value="C7M80"><option value="C7M92">
+		</datalist>
+	
+	</span>
+
+
+
+          </td>
+        </tr>
+
+        <tr>
+          <td align=right>&nbsp;</td>
+          <td>
+
+            <span style="color: red;">* </span> Floor:
+            <input type="Text" name="floor" id="floor" onchange="floorChange();" size="4" value="" required="required" class="rqd" list="floorlist"
+              autocorrect="off" autocomplete="off"> &nbsp;&nbsp;&nbsp;
+            <span style="color: red;">* </span> Room: <input type="Text" style="margin-bottom:6px;" name="room" id="room"
+              size="10" onchange="roomChange();" autocomplete="off" autocorrect="off" required="required" value="" class="rqd">
+
+            <input type="Hidden" value="ppr" name="Type">
+          </td>
+        </tr>
+
+        <tr>
+          <td>&nbsp;</td>
+          <td>
+            <span style="color: red;">* </span>Is this a sensitive area or special occupancy? <input type="radio" name="optSensitive"
+              value="N" checked onclick="document.getElementById('idSensArea').style.display='none';">No &nbsp;&nbsp;
+            <input type="radio" style="margin-bottom:10px;" name="optSensitive" value="Y" onclick="document.getElementById('idSensArea').style.display='inline';">Yes
+            <div id="idSensArea" style="display: none;"><br> Type: <select name="ctlSensType" class="rqd">
+			<option selected></option><option value="BSL3" >BSL3</option>
+			<option value="Animal Care" >Clean Room</option>
+			<option value="Clean Room" >Animal Care</option>
+			<option value="Other" >Other (specify to right)</select> &nbsp;
+              <input name="ctlSensTypeText" type="Text" size="30" maxlength="32" style="margin-bottom: 10px;" value=""><br>              Instructions to enter space:<br>
+              <textarea name="ctlEntryInstructions" cols="70" rows="4" wrap="soft" style="margin-bottom: 10px;" class="rqd"></textarea><br>              Does this work need to be scheduled in advance? <input type="radio" name="optInAdvance" value="N" checked>              &nbsp;&nbsp;
+              <input type="radio" name="optInAdvance" value="Y">Yes<br> &nbsp;&nbsp;&nbsp; <i>Note: checking yes may result in additional time to complete work.</i><br>&nbsp;
+            </div>
+          </td>
+        </tr>
+
+        <tr>
+          <td align=right nowrap><span style="color: red;">* </span>Description of Work:</td>
+          <td><textarea name="WorkDesc" rows="6" cols="70" wrap="soft" required="required" class="rqd"></textarea> </td>
+        </tr>
+
+        <tr>
+          <td align=right nowrap>Department Ref Num:</td>
+          <td><input type="Text" name="DeptRef" maxlength="16" value=""></td>
+        </tr>
+
+
+        <tr>
+          <td colspan=2>
+            <hr />
+          </td>
+        </tr>
+        <tr>
+          <td colspan=2><b>Contact Information</b></td>
+        </tr>
+
+        <tr>
+          <td align=right nowrap><span style="color: red;">* </span>Department Name:</td>
+          <td><input type="Text" name="DeptName" id="DeptName" size=40 value="CPFM" maxlength="80" required="required"></td>
+        </tr>
+        <tr>
+          <td align=right nowrap><span style="color: red;">* </span>Primary Contact:</td>
+          <td><input type="Text" name="ContactName" id="ContactName" size=40 value="Xayaseth Boudsady" maxlength="30" required="required"></td>
+        </tr>
+        <tr>
+          <td align=right><span style="color: red;">* </span>Title:</td>
+          <td><input type="Text" name="ContactTitle" id="ContactTitle" size=40 value="Business Systems Analyst" maxlength="80"
+              required="required"></td>
+        </tr>
+
+        <tr>
+          <td align=right><span style="color: red;">*&nbsp;</span>Phone:</td>
+          <td><input type="Text" name="ContactPhone" id="ContactPhone" value="209-552-5486" maxlength="14" required="required">&nbsp;&nbsp;&nbsp;
+            <span style="color: red;">*&nbsp;</span>Box# <input type="Text" name="ContactBox" value="" maxlength="4" required="required"
+              class="rqd">&nbsp;&nbsp;&nbsp;FAX#
+            <input type="Text" name="ContactFAX" value="" maxlength="14"></td>
+        </tr>
+        <tr>
+          <td align=right><span style="color: red;">* </span>Email:</td>
+          <td><input type="Text" name="ContactEmail" id="ContactEmail" size=60 value="xayaseth.boudsady@ucsf.edu" maxlength="64"
+              required="required"></td>
+        </tr>
+        <tr>
+          <td colspan=2>&nbsp;</td>
+        </tr>
+
+
+        <tr>
+          <td align=right nowrap>
+            <u>Site Contact</u>
+          </td>
+          <td><input type="Radio" name="optSiteContact" id="optSiteContactP" value="P" onclick="setSiteContact();">Same as Primary
+            Contact &nbsp;&nbsp; <input type="Radio" name="optSiteContact" id="optSiteContactO" value="O" onclick="setSiteContact();"
+              checked>Other
+          </td>
+        </tr>
+        <tr>
+          <td align=right nowrap>Site Contact Name:</td>
+          <td><input type="Text" name="SiteContactName" id="SiteContactName" size=40 value="" class="rqd" maxlength="30" onchange="clearoptSiteContact();"></td>
+        </tr>
+        <tr>
+          <td align=right>Phone:</td>
+          <td><input type="Text" name="SiteContactPhone" id="SiteContactPhone" value="" class="rqd" maxlength="14" onchange="clearoptSiteContact();"></td>
+        </tr>
+        <tr>
+          <td align=right>Email:</td>
+          <td><input type="Text" name="SiteContactEmail" id="SiteContactEmail" size=60 value="" class="rqd" maxlength="64" onchange="clearoptSiteContact();"></td>
+        </tr>
+
+        <tr>
+          <td colspan=2>
+            <hr />
+          </td>
+        </tr>
+
+        <tr>
+          <td align=right nowrap><b>Billing Information</b><a name="billinfo" id="billinfo"> </a><input type="hidden" name="BillLinesCnt" value="1"
+              id="BillLinesCnt"></td>
+          <td>
+            <table cellpadding="2" cellspacing="1" border="0" id="BillTbl">
+              <thead>
+                <tr>
+                  <td nowrap>SpeedType &nbsp;<a href="#" tabindex="-1" onclick="alert('The SpeedType is a shorthand code for an entire set of chartfields (similar to the old SpeedChart).' + 
+						' You can also type a work order number in this field to use an existing work order as a template.' + 
+						' For the lookup function you can enter a DeptID first to limit lookup of SpeedTypes to that DeptID'); return false;">?</a>
+                  </td>
+                  <td nowrap><span style="color: red;">*</span>Bus. Unit</td>
+                  <td nowrap><span style="color: red;">*</span>Fund</td>
+                  <td nowrap><span style="color: red;">*</span>Dept ID</td>
+                  <td nowrap><span style="color: red;">*</span>Proj ID</td>
+                  <td nowrap><span style="color: red;">*</span>Func</td>
+                  <td nowrap>Flex</td>
+                  <td nowrap><span style="color: red;">*</span>Billing Box</td>
+                  <td nowrap><span style="color: red;">*</span>Percent</td>
+                </tr>
+              </thead>
+              <tbody id="BillLines">
+
+                <tr>
+
+                  <td nowrap><input type="Text" name="Speed_1" id="Speed_1" title="Enter Peoplesoft Speed Type (or FMTrack Work Order Number to use as a template)"
+                      size=12 onchange="getSpeedKey(1);" onfocus="lookupSrcSet('gl_coa_speed_key','SpeedType',this.id,1);"></td>
+                  <td nowrap><select name="BusUnit_1" id="BusUnit_1" onchange="clrSpeed(1); setBUDefaults(1); checkcoa(1,'S','');">
+					<option selected value="SFCMP">SFCMP<option  value="SFFPO">SFFPO<option  value="SFLPH">SFLPH<option  value="SFMED">SFMED
+					</select></td>
+                  <td nowrap><input type="text" name="Fund_1" id="Fund_1" class="rqd" required="required" size=5 maxlength="4" onchange="uppercase('Fund_1'); clrSpeed(1); checkcoa(1,'S','Fund');"
+                      onfocus="lookupSrcSet('gl_coa_fund_code','Fund',this.id,1);"></td>
+                  <td nowrap><input type="text" name="DeptID_1" id="DeptID_1" class="rqd" required="required" size=7 maxlength="6" onchange="uppercase('DeptID_1'); clrSpeed(1); checkcoa(1,'S', 'DeptID');"
+                      onfocus="lookupSrcSet('gl_coa_deptid','DeptID',this.id,1);"></td>
+                  <td nowrap><input type="Text" name="Proj_1" id="Proj_1" class="rqd" required="required" size=8 maxlength="7" onchange="uppercase('Proj_1'); clrSpeed(1); checkcoa(1,'S','Proj');"
+                      onfocus="lookupSrcSet('gl_coa_project_id','Project',this.id,1);"></td>
+                  <td nowrap><input type="Text" name="Func_1" id="Func_1" class="rqd" required="required" size=3 maxlength="2" list="functionlist"
+                      onchange="uppercase('Func_1'); clrSpeed(1); checkcoa(1,'S','Func');" onfocus="lookupSrcSet('gl_coa_function','Function',this.id,1);"></td>
+                  <td nowrap><input type="Text" name="Flex_1" id="Flex_1" size=6 maxlength="6" onchange="uppercase('Flex_1'); clrSpeed(1); checkcoa(1,'S','Flex');"
+                      onfocus="lookupSrcSet('gl_coa_flexfield','Flexfield',this.id,1);"></td>
+                  <td nowrap><input type="text" name="BillBox_1" id="BillBox_1" Size=5 class="rqd" required="required" maxlength="4"
+                      onchange="uppercase('BillBox_1');" onfocus="lookupSrcSet('','','',1);"></td>
+                  <td nowrap><input type="text" name="billpct_1" id="billpct_1" onchange="calctotalpct();" required="required" value="100"
+                      size=6 maxlength="6" onfocus="lookupSrcSet('','','',1);"></td>
+                </tr>
+
+
+              </tbody>
+            </table>
+          </td>
+        </tr>
+        <tr>
+          <td>&nbsp;</td>
+          <td><input type="submit" name="btnaddrow" value="Add row" onclick="javascript: addBillRow(); return false;">&nbsp;
+            <span id="infomsg" style="color: gray;"></span> <span id="diagmsg" style="color: red; font-weight: bold;"></span>            &nbsp; <span id="pcttotal" style="color: red;"></span></td>
+        </tr>
+        <tr>
+          <td>&nbsp;</td>
+          <td>Optional: Use the lookup feature below if you want to lookup values for a particular field. Enter the start of
+            the code or any portion of the description in one of the fields above and click the Lookup button.</td>
+        </tr>
+        <tr>
+          <td align=right><span id="ctlLookupLable">Lookup:</span></td>
+          <td nowrap>
+            <select name="ctlLookup" id="ctlLookup" style="width: 550px; color: black; font-weight: bold;" onchange="lookupChange(this)"></select>&nbsp;
+            <img src="lookup.gif" name="cmdLookup" id="cmdLookup" onclick="lookupRefresh();" border="0" align="bottom" style="vertical-align: text-bottom;">            <span id="ctlLookupLable2"></span>
+            <span id="lookupMsg" style="font-style: italic; color: darkgreen;"></span>
+          </td>
+        </tr>
+        <tr>
+          <td><span style="font-size:x-small;">&nbsp;</span></td>
+          <td>
+            <span style="font-size:x-small;">Note: Activity Period: when applicable, will be pulled from a central table.</span>
+
+
+          </td>
+        </tr>
+        <tr>
+          <td align=right nowrap>or Blanket #:</td>
+          <td><input type="Text" name="BlanketNum" id="BlanketNum" size=6 value="" maxlength="6" onchange="blanketUpdate();">&nbsp;&nbsp;
+            <span style="font-size:small;">(only for customers that have FS blanket numbers set up)</span>
+          </td>
+        </tr>
+
+        <tr>
+          <td colspan=2>&nbsp;</td>
+        </tr>
+        <tr>
+          <td nowrap>
+            <u>Approval Information</u>
+          </td>
+          <td><span style="font-size: small;">Approver must be authorized to commit funds on behalf of your department</span></td>
+        </tr>
+        <tr>
+          <td align=right nowrap><span style="color: red;">* </span>Approver Name:</td>
+          <td><input type="Text" name="ApproverName" size=40 value="" maxlength="64" required="required" class="rqd"></td>
+        </tr>
+        <tr>
+          <td align=right><span style="color: red;">* </span>Title:</td>
+          <td><input type="Text" name="ApproverTitle" size=40 value="" maxlength="80" required="required" class="rqd"></td>
+        </tr>
+        <tr>
+          <td align=right><span style="color: red;">* </span>Phone:</td>
+          <td><input type="Text" name="ApproverPhone" value="" maxlength="255" required="required" class="rqd">&nbsp;&nbsp;&nbsp;
+            <span style="color: red;">*&nbsp;</span>Box# <input type="Text" name="ApproverBox" value="" maxlength="4" required="required"
+              class="rqd">&nbsp;&nbsp;&nbsp;FAX#
+            <input type="Text" name="ApproverFAX" value=""></td>
+        </tr>
+        <tr>
+          <td align=right><span style="color: red;">* </span>Email:</td>
+          <td><input type="Text" name="ApproverEmail" size=60 value="" maxlength="64" required="required" class="rqd"></td>
+        </tr>
+
+        <tr>
+          <td colspan=2>
+            <hr />
+          </td>
+        </tr>
+        <tr>
+          <td>&nbsp;</td>
+          <td><input type="Submit" name="Submit" value="Submit">&nbsp;&nbsp;&nbsp;&nbsp; <span style="color: red; font-size: small;">* Indicates Required Fields</span></td>
+        </tr>
+      </table>
+      <br>
+    </form>
+
+
+  </div>
+</body>
+
+</html>

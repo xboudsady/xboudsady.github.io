@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <title>UCSF FS Service Portal</title>
+  <!-- bootstrap css -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+    crossorigin="anonymous">
+  <!-- Bootstrap Date-Picker Plugin Stylesheet -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="css/custom.css">
+</head>
+<body>
+
+  <!-- navbar -->
+  <nav class="navbar navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-nav-demo" aria-expanded="false">
+					<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+        <a href="http://www.ucsf.edu/" class="navbar-brand">
+        <span id="ucsf-banner-nav">UC San Francisco</span>
+				</a>
+      </div>
+      <div class="collapse navbar-collapse" id="bs-nav-demo">
+        <ul class="nav navbar-nav navbar-right">
+          <li>
+            <a href=""><span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span> Hidden Item</a>
+          </li>
+          <li>
+            <a href="new-sr.html"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> New Service</a>
+          </li>
+          <li>
+            <a href="https://www.ucsfhealth.org/"><span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span> FAQ</a>
+          </li>
+          <li>
+            <a href="https://www.ucsfhealth.org/"><span class="glyphicon glyphicon-usd" aria-hidden="true"></span> Bills</a>
+          </li>
+          <li>
+            <a href="edit-profile.html"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span> Edit Profile</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <!-- /navbar -->
+
+  <!-- Jumbotron -->
+  <div class="jumbotron">
+    <div class="container">
+        <h2>Xayaseth Boudsady</h2>
+        <p>xayaseth.boudsady@ucsf.edu</p>
+        <p class="text-center"><a href="index.html" class="btn btn-primary btn-md" role="button">Sign Out</a></p>
+    </div>
+  </div>
+  <!-- /Jumbotron-->
+
+
+  <!-- Heading -->
+  <div class="container">
+    <h4><a href="main.html">Return to My Work Orders</a></h4>
+    <h3>Key Request</h3>
+  </div>
+  <!-- /Heading-->
+
+  <hr class="hr-hidden">
+
+  <!-- Form Container -->
+  <div class="container">
+    <form class="form">
+
+      <!-- Location Field -->
+      <legend><span class="number">1</span> Location: <span style="color:#afafaf"> (For Key)</span></legend> 
+      
+      <div class="form-group row">
+        <!-- Building -->
+        <div class="col-sm-5">
+          <label for="building"><span class="glyphicon glyphicon-asterisk requiredField" aria-hidden="true"></span> Building: </label>
+          <select class="form-control" id="building-housing" name="bldg" onchange="javascript: bldgFlrDropdown(this.options[this.selectedIndex].value);">
+          <optgroup label="Laurel Heights">
+            <option value="">Select Building</option>
+            <option value="2450">Laurel Heights - 3333 California St</option>
+            <option value="2451">Laurel Heights Annex - 3333 California St</option>
+          </optgroup>
+          <optgroup label="Mission Bay">
+            <option value="3066">566 Minnesota St</option>
+            <option value="3067">580 Minnesota St</option>
+            <option value="3065">590 Minnesota St</option>
+            <option value="3064">600 Minnesota St</option>
+            <option value="3043">654 Minnesota St</option>
+            <option value="3049">Child Care Ctr - 1555 6th St</option>
+            <option value="3011">Hunters Pt - 831 Palou St</option>
+            <option value="MB24T">MB 24 Trailer</option>
+            <option value="3034">Byers Hall (QB3) (24C) - 1700 4th St</option>
+            <option value="3046">Central Power Plant</option>
+            <option value="3003">Community Ctr (Rutter/21B) - 1675 Owens St</option>
+            <option value="3045">CVRB 17A/B (Smith) - 555 Mission Bay Blvd S</option>
+            <option value="3080">East Campus Block 33</option>
+            <option value="3055">Energy Center - 1830 3rd St</option>
+            <option value="3002">Genentech Hall (24 A/B) - 600 16th St</option>
+            <option value="2605">General Improvements</option>
+            <option value="MBGRND">Grounds</option>
+            <option value="2316">Helen Diller Family Cancer - 1450 Third St</option>
+            <option value="3052">Hospital - 1855 &amp; 1875 4th St</option>
+          </optgroup>
+        </select>
+        </div> <!-- /Building -->
+        
+        <!-- Floor -->
+        <div class="col-sm-2">
+          <label for="floor"><span class="glyphicon glyphicon-asterisk requiredField" aria-hidden="true"></span> Floor: </label>
+          <script type="text/javascript" language="JavaScript">
+            document.write('<select class="form-control" name="floor" id="floor" onchange="javascript: bldgFlrRoomDropdown(this.options[this.selectedIndex].value);"><option value=""></option></select>')
+          </script>
+          <noscript>
+            <select class="form-control" id="floor" name="floor">
+            <option value="">Floor</option>
+          </select>
+          </noscript>
+        </div> <!-- /Floor -->
+
+        <!-- Room -->
+        <div class="col-sm-2"> 
+          <label for="room">Room: </label>
+          <script type="text/javascript" language="JavaScript">
+            document.write('<select class="form-control" name="room" id="room"><option value=""></option></select>')
+          </script>
+          <noscript>
+            <select class="form-control" id="room" name="room">
+            <option value="">Room</option>
+          </select>
+          </noscript>
+        </div> <!-- /Room -->
+        
+        
+      </div> <!-- /Location Field -->
+
+      <!-- Sensitive Area -->
+      <div class="form-group row">
+        <div class="col-sm-4">
+          <label for="floor"><span class="glyphicon glyphicon-asterisk requiredField" aria-hidden="true"></span>Is this a sensitive area or special occupancy?</label>
+        </div>
+        <div class="col-sm-2">
+          <label class="radio-inline">
+            <input type="radio" name="opSensitive" id="opSensitiveNo" value="N" checked> No
+          </label>
+          <label class="radio-inline">
+            <input type="radio" name="opSensitive" id="opSensitiveYes" value="Y"> Yes
+          </label>
+        </div>
+      </div> <!-- /Sensitive Area -->
+
+      <!-- Hidden Sensitive Area -->
+      <div id="idSensArea">
+        <div class="form-group row">
+          <div class="col-sm-3">
+            <label for="room"><span class="glyphicon glyphicon-asterisk requiredField" aria-hidden="true"></span> Type: </label>
+            <select class="form-control" id="ctlSensType" name="room">
+            <option value=""></option>
+            <option value="BSL3">BSL3</option>
+            <option value="Clean Room">Clean Room</option>
+            <option value="Animal Care">Animal Care</option>
+            <option value="Other">Other (Specify to Right)</option>
+          </select>
+          </div>
+          <div class="col-sm-6">
+            <label for="ctlSensTypeText"> Other</label>
+            <input type="text" class="form-control" id="ctlSensTypeText" maxlength="32">
+          </div>
+        </div>
+        <div class="form-group row">
+          <div class="col-sm-12">
+            <label for="workDesc">Instructions to enter space:</label>
+            <textarea class="form-control" rows="5" id="workDesc" name="workDesc" placeholder="Provide details of sensitive instructions prior to work..."></textarea>
+          </div>
+        </div>
+      </div>
+       <!-- /Hidden Sensitive Area -->
+      
+      
+
+      <hr class="hr-hidden">
+
+      <!-- Work Description -->
+      <legend><span class="number">2</span> Description of Work:</legend>
+      
+      <div class="form-group row">
+        <div class="col-sm-12">
+          <label for="workDesc"><span class="glyphicon glyphicon-asterisk requiredField" aria-hidden="true"></span> Description of Work:</label> 
+          <textarea class="form-control" rows="5" id="workDesc" name="workDesc" placeholder="Please describe deails of work..."></textarea>
+        </div>
+      </div>  <!-- /Work Description -->
+
+      <hr class="hr-hidden">
+
+      <!-- Approval Section -->
+      <legend>
+        <span class="number">3</span> Approvals:
+      </legend>
+
+      <div class="form-group row">
+        <div class="col-sm-4">
+          <label for=""> Approver Name:</label>
+          <input type="text" class="form-control" id="" maxlength="40" required="required">
+        </div>
+        <div class="col-sm-4">
+          <label for=""> Approver Email:</label>
+          <input type="email" class="form-control" id="" maxlength="64" required="required">
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <div class="col-sm-4">
+          <label for=""> Assignee Name:</label>
+          <input type="text" class="form-control" id="" maxlength="40" required="required">
+        </div>
+        <div class="col-sm-4">
+          <label for=""> Assignee Email:</label>
+          <input type="email" class="form-control" id="" maxlength="64" required="required">
+        </div>
+      </div>
+      <!-- /Approval Section -->
+
+
+      <hr class="hr-hidden">
+
+      <!-- Keys Section -->
+      <legend>
+        <span class="number">4</span> Keys: <span style="color:#afafaf">(Ref existing key)</span>
+      </legend>
+      
+      <!-- Key 1 -->
+      <div class="form-group row">
+        <div class="col-sm-4">
+          <label for=""> Key 1: Front</label>
+          <input type="text" class="form-control" id="key1front" maxlength="40" required="required" placeholder=" Number">
+        </div>
+        <div class="col-sm-4">
+          <label for=""> Key 1: Back</label>
+          <input type="text" class="form-control" id="key1back" maxlength="40" required="required" placeholder=" Number">
+        </div>
+        <div class="col-sm-4">
+          <label>Addtional Keys</label>
+        </div>
+        <div class="col-sm-2">
+          <label class="radio-inline">
+            <input type="radio" name="addKey2" id="addKey2No" value="N" checked> No
+          </label>
+          <label class="radio-inline">
+            <input type="radio" name="addKey2" id="addKey2Yes" value="Y"> Yes
+          </label>
+        </div>
+      </div> 
+      <!-- /Key 1 -->
+
+      <!-- Key 2 Hiden -->
+      <div id="key2area">
+        <div class="form-group row">
+          <div class="col-sm-4">
+            <label for=""> Key 2: Front</label>
+            <input type="text" class="form-control" id="key2front" maxlength="40" placeholder="Number">
+          </div>
+          <div class="col-sm-4">
+            <label for=""> Key 2: Back</label>
+            <input type="text" class="form-control" id="key2back" maxlength="40" placeholder="Number">
+          </div>
+          <div class="col-sm-4">
+            <label>Addtional Keys</label>
+          </div>
+          <div class="col-sm-2">
+            <label class="radio-inline">
+              <input type="radio" name="addKey3" id="addKey3No" value="N" checked> No
+            </label>
+            <label class="radio-inline">
+              <input type="radio" name="addKey3" id="addKey3Yes" value="Y"> Yes
+            </label>
+          </div>
+        </div>
+      </div>
+      <!-- /Key 2 Hidden -->
+
+      <!-- Key 3 Hiden -->
+      <div id="key3area">
+        <div class="form-group row">
+          <div class="col-sm-4">
+            <label for=""> Key 3: Front</label>
+            <input type="text" class="form-control" id="key3front" maxlength="40" placeholder="Number">
+          </div>
+          <div class="col-sm-4">
+            <label for=""> Key 3: Back</label>
+            <input type="text" class="form-control" id="key3back" maxlength="40" placeholder="Number">
+          </div>
+          <div class="col-sm-4">
+            <label>Addtional Keys</label>
+          </div>
+          <div class="col-sm-2">
+            <label class="radio-inline">
+              <input type="radio" name="addKey4" id="addKey4No" value="N" checked> No
+            </label>
+            <label class="radio-inline">
+              <input type="radio" name="addKey4" id="addKey4Yes" value="Y"> Yes
+            </label>
+          </div>
+        </div>
+      </div>
+      <!-- /Key 3 Hidden -->
+
+      <!-- Key 4 Hiden -->
+      <div id="key4area">
+        <div class="form-group row">
+          <div class="col-sm-4">
+            <label for=""> Key 4: Front</label>
+            <input type="text" class="form-control" id="key4front" maxlength="40" placeholder="Number">
+          </div>
+          <div class="col-sm-4">
+            <label for=""> Key 4: Back</label>
+            <input type="text" class="form-control" id="key4back" maxlength="40" placeholder="Number">
+          </div>
+          <div class="col-sm-4">
+            <label>Addtional Keys</label>
+          </div>
+          <div class="col-sm-2">
+            <label class="radio-inline">
+              <input type="radio" name="addKey5" id="addKey5No" value="N" checked> No
+            </label>
+            <label class="radio-inline">
+              <input type="radio" name="addKey5" id="addKey5Yes" value="Y"> Yes
+            </label>
+          </div>
+        </div>
+      </div>
+      <!-- /Key 4 Hidden -->
+
+      <!-- Key 5 Hiden -->
+      <div id="key5area">
+        <div class="form-group row">
+          <div class="col-sm-4">
+            <label for=""> Key 5: Front</label>
+            <input type="text" class="form-control" id="key5front" maxlength="40" placeholder="1234-5678">
+          </div>
+          <div class="col-sm-4">
+            <label for=""> Key 5: Back</label>
+            <input type="text" class="form-control" id="key5back" maxlength="40" placeholder="1234-5678">
+          </div>
+        </div>
+      </div>
+      <!-- /Key 4 Hidden -->
+
+      <!-- /Key Section -->
+
+      <hr class="hr-hidden">
+
+      <!-- Attachments -->
+      <legend>
+        <span class="number">5</span> Attachments:
+      </legend>
+      <div class="form-group row">
+        <div class="col-sm-12">
+          <p>Please attach any supporting documents, pictures, or web pages that will support Facilities Management with your request.</p>
+        </div>
+      </div>
+      <div class="form-group row">
+        <div class="col-sm-3">
+          <button class="btn btn-default">Select File</button>
+        </div>
+      </div>
+      <!-- /Attachments -->
+
+      <hr class="hr-hidden">
+
+      <!-- Funding -->
+      <legend>
+        <span class="number">6</span> Funding:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <a href="#" data-toggle="modal" data-target="#key-funding-Modal">
+          <i class="fa fa-info-circle" aria-hidden="true"></i> Info</a>
+      </legend>
+      <div class="form-group row">
+        <div class="col-sm-3">
+          <label for="">Speed Type:</label>
+          <input type="text" class="form-control" id="" maxlength="40" required="required" placeholder="Will populate required field...">
+        </div>
+      </div>
+      <div class="form-group row">
+        <div class="col-sm-2">
+          <span class="glyphicon glyphicon-asterisk requiredField" aria-hidden="true"></span>
+          <label for="">Business Unit:</label>
+          <input type="text" class="form-control" id="" maxlength="40" required="required" placeholder="">
+        </div>
+        <div class="col-sm-2">
+          <span class="glyphicon glyphicon-asterisk requiredField" aria-hidden="true"></span>
+          <label for="">Fund:</label>
+          <input type="text" class="form-control" id="" maxlength="40" required="required" placeholder="">
+        </div>
+        <div class="col-sm-2">
+          <span class="glyphicon glyphicon-asterisk requiredField" aria-hidden="true"></span>
+          <label for="">Dept ID:</label>
+          <input type="text" class="form-control" id="" maxlength="40" required="required" placeholder="">
+        </div>
+        <div class="col-sm-2">
+          <span class="glyphicon glyphicon-asterisk requiredField" aria-hidden="true"></span>
+          <label for="">Project ID:</label>
+          <input type="text" class="form-control" id="" maxlength="40" required="required" placeholder="">
+        </div>
+        <div class="col-sm-2">
+          <span class="glyphicon glyphicon-asterisk requiredField" aria-hidden="true"></span>
+          <label for="">Function:</label>
+          <input type="text" class="form-control" id="" maxlength="40" required="required" placeholder="">
+        </div>
+        <div class="col-sm-2">
+          <span class="glyphicon glyphicon-asterisk requiredField" aria-hidden="true"></span>
+          <label for="">Percentage:</label>
+          <input type="text" class="form-control" id="" maxlength="40" required="required" value="100.00">
+        </div>
+      </div>
+      <div class="form-group row">
+        <div class="col-sm-2">
+          <label for="">Flex Field:</label>
+          <input type="text" class="form-control" id="" maxlength="40">
+        </div>
+        <div class="col-sm-2">
+          <label for="">MC Account</label>
+          <input type="text" class="form-control" id="" maxlength="40">
+        </div>
+      </div>
+      <!-- /Funding -->
+      
+      <hr class="hr-hidden">
+
+
+      <legend><span class="number">7</span> Contact Information  <a href="https://directory.ucsf.edu/" target="_blank"><i class="fa fa-search" aria-hidden="true"></i></a><span style="color:#afafaf"> (Look Up)</span></legend>
+      <div class="checkbox">
+        <label>
+          <input type="checkbox" value=""> Check here if same as Primary Contact, or fill out fields below.
+        </label>
+      </div>
+      <!-- Contact Info-->
+      <div class="form-group row">
+        <div class="col-sm-4">
+          <label for="ContactName"><span class="glyphicon glyphicon-asterisk requiredField" aria-hidden="true"></span> Name:</label>
+          <input type="text" class="form-control" id="ContactName" maxlength="40" required="required">
+        </div>
+        <div class="col-sm-4">
+          <label for="ContactEmail"><span class="glyphicon glyphicon-asterisk requiredField" aria-hidden="true"></span> Email:</label>
+          <input type="email" class="form-control" id="ContactEmail" maxlength="64" required="required">
+        </div>
+        <div class="col-sm-4">
+          <label for="ContactTitle">Title</label>
+          <input type="email" class="form-control" id="ContactTitle" maxlength="80" required="required">
+        </div>
+      </div>
+      <div class="form-group row">
+        <div class="col-sm-4">
+          <label for="ContactPhone"><span class="glyphicon glyphicon-asterisk requiredField" aria-hidden="true"></span> Phone:</label>
+          <input type="text" class="form-control" id="ontactPhone" maxlength="40" required="required">
+        </div>
+        <div class="col-sm-1">
+          <label for="ContactBox">Box:</label>
+          <input type="text" class="form-control" id="ContactBox" maxlength="4" required="required">
+        </div>
+        <div class="col-sm-3">
+          <label for="ContactFax">Fax:</label>
+          <input type="text" class="form-control" id="ContactFax" maxlength="14" required="required">
+        </div>
+        
+        <div class="col-sm-4">
+          <label for="DeptName"></span> Department Name:</label>
+          <input type="text" class="form-control" id="DeptName" maxlength="40" required="required">
+        </div>
+      </div>
+      <!-- /Contact Info-->
+
+      <hr class="hr-hidden">
+
+      <legend><span class="number">8</span> Site Contact</legend>
+      <!-- Site Contact Info-->
+      <div class="form-group row">
+        <div class="col-sm-12">
+          <div class="checkbox">
+            <label>
+              <input type="checkbox" value="">
+              Check here if Site Contact is the same as above requestor, or fill out fields below.
+            </label>
+          </div>
+        </div>
+
+      </div>
+      <div class="form-group row">
+        <div class="col-sm-4">
+          <label for="ContactName">Name:</label>
+          <input type="text" class="form-control" id="ContactName" maxlength="30" required="true">
+        </div>
+        <div class="col-sm-4">
+          <label for="exampleInputEmail1">Email:</label>
+          <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Email">
+        </div>
+        <div class="col-sm-4">
+          <label for="ContactPhone">Phone:</label>
+          <input type="text" class="form-control" id="ContactPhone" maxlength="14">
+        </div>
+        
+      </div> <!-- /Contact Info-->
+      
+      <hr class="hr-hidden">
+
+      <div class="form-group row">
+        <div class="col-sm-2">
+          <button type="submit" name="Submit" value="Submit" class="btn btn-primary">Submit</button>
+        </div>
+      </div>
+
+      
+
+    </form> <!-- Form -->
+  </div> <!-- Form Container -->
+ 
+
+  <hr>
+
+    <!-- =================================
+        MODAL
+  ======================================= -->
+
+    <!-- Funding Info -->
+    <div class="modal fade" id="key-funding-Modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="key-funding-Label">Key Request Funding</h4>
+          </div>
+          <div class="modal-body">
+            <p>New Keys or Event Setups, please enter your GL COA(s) or select a Speed Type(s). If more than one GL/COA is used, the allocated
+            percentage splits must add to 100%</p>
+            <br>
+            <h4>Questions?</h4>
+            <p>Regarding billable vs. non-billable? 
+            <br>Please see pages <strong>29-36</strong> of our
+            <a href="http://campuslifeservices.ucsf.edu/upload/facilities/files/Guide_to_Services_2017-2018.pdf"
+              target="_blank"><strong>Guide To Services</strong></a></p>
+            <p>Or contact the <strong>Customer Service Center</strong> at , or email us at <a href="mailto:fmcustservice@fm.ucsf.edu">fmcustservice@fm.ucsf.edu</a>.</p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- /Housing Info -->
+
+    
+
+
+
+
+  <!-- jQuery 2.1.4 -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+  <!-- Bootsrap 3.3.7 -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+    crossorigin="anonymous"></script>
+  <!-- Form Scripting -->
+  <script src="script/form-all-bldg.js"></script>
+
+
+</body>
+</html>
