@@ -11,7 +11,7 @@
   <!-- Bootstrap Date-Picker Plugin Stylesheet -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css">
   <!-- Font Awesome -->
-  <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <!-- <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"> -->
   <!-- Custom CSS -->
   <link rel="stylesheet" href="css/custom.css">
 </head>
@@ -67,83 +67,134 @@
 
   <!-- Heading -->
   <div class="container">
-    <h4><a href="main.html">Return to My Work Orders</a></h4>
+    <h4><a href="main.html">Home</a></h4>
 
     <p>Please be aware that work orders submitted via the web are only handled during normal business hours.</p>
-    <p>For emergencies always call the Customer Service Center directly at <a href="tel:+1-476-2021">476-2021</a>.</p>
+    <p>For <span style="color: red;">emergencies</span> always call the Customer Service Center directly at <a href="tel:+1-415-476-2021">415-476-2021</a>.</p>
   </div>
+  <br>
   <!-- /Heading-->
 
-  <hr>
+  <div class="container">
+    <h4>Please select a service request type</h4>
+    <hr>
+  </div>
+  
 
   <!-- Content -->
+  <!-- 1st Row of Service Icon -->
   <div class="container">
     <div class="row">
       <div class="col-sm-6 col-md-2">
-        <div class="thumbnail">
-          <div class="caption">
-            <center>
-              <h1><i class="fa fa-home" aria-hidden="true"></i></h1>
-              <p>Housing</p>
-              <p><a href="#" class="btn btn-default" role="button" data-toggle="modal" data-target="#housingModal">Info</a></p>
-            </center>
-          </div>
+        <div class="thumbnail sr-icon">
+          <a href="#">
+            <div class="caption">
+              <center>
+                <h1><i class="fa fa-home" aria-hidden="true"></i></h1>
+                <p>Housing</p>
+              </center>
+            </div>
+          </a>
+        </div>
+        <div class="info-button">
+          <p><a href="#" class="btn btn-default" role="button" data-toggle="modal" data-target="#housingModal">Info</a></p>
         </div>
       </div>
       <div class="col-sm-6 col-md-2">
-        <div class="thumbnail">
+        <div class="thumbnail sr-icon">
           <div class="caption">
             <center>
-              <h1><i class="fa fa-ticket" aria-hidden="true"></i></h1>
+              <h1><i class="fas fa-ticket-alt" aria-hidden="true"></i></h1>
               <p>Event Set-Ups</p>
-              <p><a href="#" class="btn btn-default" role="button" data-toggle="modal" data-target="#eventSetupModal">Info</a></p>
             </center>
           </div>
         </div>
+        <div class="info-button">
+            <p><a href="#" class="btn btn-default" role="button" data-toggle="modal" data-target="#eventSetupModal">Info</a></p>
+        </div>
       </div>
       <div class="col-sm-6 col-md-2">
-        <div class="thumbnail">
+        <div class="thumbnail sr-icon">
           <div class="caption">
             <center>
               <h1><i class="fa fa-key" aria-hidden="true"></i></h1>
               <p>Key Requests</p>
-              <p><a href="#" class="btn btn-default" role="button" data-toggle="modal" data-target="#keyRequestModal">Info</a></p>
             </center>
           </div>
         </div>
+        <div class="info-button">
+          <p><a href="#" class="btn btn-default" role="button" data-toggle="modal" data-target="#keyRequestModal">Info</a></p>
+        </div>
       </div>
       <div class="col-sm-6 col-md-2">
-        <div class="thumbnail">
+        <div class="thumbnail sr-icon">
           <div class="caption">
             <center>
               <h1><i class="fa fa-wrench" aria-hidden="true"></i></h1>
               <p>Facilities Request</p>
-              <p><a href="" class="btn btn-default" role="button" data-toggle="modal" data-target="#facilitiesFundedModal">Info</a></p>
-            </center>
-          </div>
-        </div>
-      </div>
-      <div class="col-sm-6 col-md-2">
-        <div class="thumbnail">
-          <div class="caption">
-            <center>
-              <h1><i class="fa fa-calendar" aria-hidden="true"></i></h1>
-              <p>Projects</p>
-              <p><a href="#" class="btn btn-default" role="button" data-toggle="modal" data-target="#fsProjectsModal">Info</a></p>
-            </center>
-          </div>
-        </div>
-      </div>
-      <div class="col-sm-6 col-md-2">
-        <div class="thumbnail">
-          <div class="caption">
-            <center>
-              <h1><i class="fa fa-volume-control-phone" aria-hidden="true"></i></h1>
-              <p>Quick Response<br>1 (415) 476-2021</p>
-              <p><a href="tel:+1-415-476-2021" class="btn btn-default" role="button">Call </a></p>
               
             </center>
           </div>
+        </div>
+        <div class="info-button">
+          <p>
+            <a href="" class="btn btn-default" role="button" data-toggle="modal" data-target="#facilitiesFundedModal">Info</a>
+          </p>
+        </div>
+      </div>
+      <div class="col-sm-6 col-md-2">
+        <div class="thumbnail sr-icon">
+          <div class="caption">
+            <center>
+              <h1><i class="fas fa-calendar-alt" aria-hidden="true"></i></h1>
+              <p>Projects</p>
+            </center>
+          </div>
+        </div>
+        <div class="info-button">
+          <p>
+            <a href="#" class="btn btn-default" role="button" data-toggle="modal" data-target="#fsProjectsModal">Info</a>
+          </p>
+        </div>
+      </div>
+      <div class="col-sm-6 col-md-2">
+        <div class="thumbnail sr-icon">
+          <div  id="quick-response" class="caption">
+            <center>
+              <h1><i class="fas fa-phone-volume" aria-hidden="true"></i></h1>
+              <p style="margin-bottom: 0;">Quick Response<br>1 (415) 476-2021</p>
+            </center>
+          </div>
+        </div>
+        <div class="info-button">
+          <p>
+            <a href="tel:+1-415-476-2021" class="btn btn-default" role="button">Call </a>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 2nd Row of Servicre Icon -->
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-6 col-md-2">
+        <div class="thumbnail sr-icon">
+          <a href="#">
+            <div class="caption">
+              <center>
+                <h1>
+                  <i class="fas fa-address-card"></i>
+                </h1>
+                <p>Sign Orders</p>
+              </center>
+            </div>
+          </a>
+        </div>
+        <div class="info-button">
+          <p>
+            <a href="#" class="btn btn-default" role="button" data-toggle="modal" data-target="#signs-order-Modal">Info</a>
+          </p>
         </div>
       </div>
     </div>
@@ -165,8 +216,7 @@
         <div class="modal-body">
           <h4>Housing Request</h4>
           <br>
-          <p>Please use this request for all housing related maintenance issues.</p>
-          <p>Use this type for all Housing related maintenance issues.</p>
+          <p>Please use this request for all Housing-related maintenance issues.</p>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -186,30 +236,21 @@
           <h4 class="modal-title" id="eventSetupModalLabel">Event Set-Ups</h4>
         </div> -->
         <div class="modal-body">
-          <h4>Event Set-Up Work Orders</h4>
+          <h4>Event Set-Up Service Requests</h4>
           <br>
           <p>Use this request for custodial set-ups to support events and functions.</p>
           <p>Set-ups for events and functions are funded by the customer, with the exception of RCO sponsored events.</p>
-          <br>
-          <h4>Setups for Parnassus Campus:</h4>
           <p>Please book <strong>5 days</strong> in advance to ensure setup can be scheduled.</p>
-          <p>Include the following information in the work description:</p>
+          <p>Facilities does not provide event set ups for the following areas:</p>
           <ul>
-            <li><strong>Event Date(s)</strong></li>
-            <li><strong>Event Time</strong> (period during which booking is actually taking place)</li>
-            <li><strong>Reserved Time</strong> (total time for which the room is reserved; generally event time plus setup/teardown hours)</li>
-            <li><strong>Required Features:</strong>
-              <ul>
-                <li>easels</li>
-                <li>recycling bins</li>
-                <li>extra trash cans</li>
-                <li>extra chairs and tables</li>
-              </ul>
-            <li><strong>Include</strong> setup style and for special setups include diagram.</li>
+            <li>Housing</li>
+            <li>Mission Bay Hospital</li>
+            <li>Mt. Zion Cancer Research Center</li>
+            <li>Leased buildings or outlying areas</li>
           </ul>
           <br>
           <h4>Questions?</h4>
-            <p>Please contact the <strong>Customer Service Center</strong> at <a href="tel:+1-476-2021"><strong>476-2021</strong></a>, or email us at <a href="mailto:fmcustservice@fm.ucsf.edu">fmcustservice@fm.ucsf.edu</a>.</p>
+            <p>Please contact the <strong>Customer Service Center</strong> at <a href="tel:+1-415-476-2021"><strong>415-476-2021</strong></a>, or email us at <a href="mailto:facilities@ucsf.edu">facilities@ucsf.edu</a>.</p>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -225,14 +266,14 @@
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-body">
-          <h4> Key Request Work Orders</h4>
+          <h4> Key Requests</h4>
           <br>
           <p>Use this request for ordering keys only.</p>
           <p>Key requests are funded by the customer.</p>
           <br>
           <h4>Questions?</h4>
           <p>Please contact the <strong>Customer Service Center</strong> at ,
-            or email us at <a href="mailto:fmcustservice@fm.ucsf.edu">fmcustservice@fm.ucsf.edu</a>.</p>
+            or email us at <a href="mailto:facilities@ucsf.edu">facilities@ucsf.edu</a>.</p>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -248,21 +289,11 @@
     <div class="modal-dialog modal-lg" role="document">
       <div class="modal-content">
         <div class="modal-body">
-          <h4>Facilities Funded Work</h4>
-          <p>Use this request for regular building maintenance and repair work such as restroom maintenance and burned out light bulbs.</p>
-          <p>Facilities funded work is generally for maintenance of... 
-            <ul>
-              <li>building corridors</li>
-              <li>building systems such as ventilation</li>
-              <li>lobbies</li>
-              <li>restrooms</li>
-              <li>classrooms</li>
-              <li>and other public spaces</li>
-            </ul>
-            While there are exceptions, generally work needed within an office,or lab, or suite will be <strong>CUSTOMER FUNDED WORK</strong> and will need a <strong>DPA/Fund</strong> for recharge.</p>
-            <hr>
-            <p>Following is a partial list of both maintenance services funded by the state and maintenance services that are not state funded and therefore chargeable to the customer. These are examples and this list is not comprehensive.</p>
-          <p>Call the <strong>Customer Service Center</strong> at <a href="tel:+1-476-2021"><strong>476-2021</strong></a> for help in confirming funding source.</p>
+          <h4>Facilities Service Request</h4>
+          <p>Generally work needed within an office,or lab, or suite will be customer funded work and will require a chart of accounts string or speedtype for recharge.</p>
+          <hr>
+          <p>Following is a partial list of maintenance services funded by the state and services that are not state funded and therefore chargeable to the customer. These are examples and this list is not comprehensive.</p>
+          <p>If you need assistance to determine if your request is billable, please call <strong>Customer Service Center</strong> at <a href="tel:+1-415-476-2021"><strong>415-476-2021</strong></a>.</p>
           <br>
           <!-- ACCORDIAN Area of Service-->
           <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
@@ -890,7 +921,7 @@
               <div class="panel-heading" role="tab" id="headingForteen">
                 <h4 class="panel-title">
                   <a id="modalLink" class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseForteen"
-                    aria-expanded="false" aria-controls="collapseForteen"><i class="fa fa-id-card-o" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;Signage</a>
+                    aria-expanded="false" aria-controls="collapseForteen"><i class="fas fa-address-card" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;Signage</a>
                 </h4>
               </div>
               <div id="collapseForteen" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingForteen">
@@ -919,7 +950,7 @@
               <div class="panel-heading" role="tab" id="headingFifteen">
                 <h4 class="panel-title">
                   <a id="modalLink" class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseFifteen"
-                    aria-expanded="false" aria-controls="collapseFifteen"><i class="fa fa-building-o" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;&nbsp;Structural Maintenance</a>
+                    aria-expanded="false" aria-controls="collapseFifteen"><i class="fas fa-building" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;&nbsp;Structural Maintenance</a>
                 </h4>
               </div>
               <div id="collapseFifteen" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFifteen">
@@ -946,10 +977,6 @@
 
           
           <!-- /ACCRODIAN Area of Service -->
-
-            <h4>Questions?</h4>
-            <p>Please contact the <strong>Customer Service Center</strong> at <a href="tel:+1-476-2021"><strong>476-2021</strong></a>,
-              or email us at <a href="mailto:fmcustservice@fm.ucsf.edu">fmcustservice@fm.ucsf.edu</a>.</p>
           </div>
 
           <div class="modal-footer">
@@ -1006,6 +1033,45 @@
     </div>
   </div>  <!-- /Projects-->
 
+  <!-- Signs Order -->
+  <div class="modal fade" id="signs-order-Modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+          <h4 class="modal-title" id="signs-order-Modal">Signs Order</h4>
+        </div>
+        <div class="modal-body">
+          <p><strong>You are here.</strong> Having the proper signage on all UCSF property is essential for clarity of communication. Whether you need to update an old sign or create a new one, we can help with the entire process.</p>
+          <p>These services are provided on customer recharge basis. UCSF has <a href="https://policies.ucsf.edu/policy/600-20" target="_blank">signage standards</a> to ensure consistency and compliance with ADA Guidelines.</p>
+          <br>
+          <h4>How to order a signage or nameplate?</h4>
+          <ol>
+            <li>Submit a work order online and reference the facilities work order number (E.g. C12345)</li>
+            <li>Fill out the form below with the details of the sign(s) and/or nameplate(s) you are requesting, and a coordinator will contact you shortly to confirm.</li>
+          </ol>
+          <br>
+          <h4>Questions?</h4>
+          <p>Please contact the
+            <strong>Customer Service Center</strong> at
+            <a href="tel:+1-415-476-2021">
+              <strong>415-476-2021</strong>
+            </a>, or email us at
+            <a href="mailto:facilities@ucsf.edu">facilities@ucsf.edu</a>.</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          <a href="new-sign-order.html">
+            <button type="button" class="btn btn-primary">Create Request</button>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- /Sign Orders-->
+
 
 
 
@@ -1015,6 +1081,12 @@
   <!-- Bootsrap 3.3.7 -->
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
     crossorigin="anonymous"></script>
+  <!-- Font Awesome CDN -->
+  <script defer src="https://use.fontawesome.com/releases/v5.0.8/js/solid.js" integrity="sha384-+Ga2s7YBbhOD6nie0DzrZpJes+b2K1xkpKxTFFcx59QmVPaSA8c7pycsNaFwUK6l"
+    crossorigin="anonymous"></script>
+  <script defer src="https://use.fontawesome.com/releases/v5.0.8/js/fontawesome.js" integrity="sha384-7ox8Q2yzO/uWircfojVuCQOZl+ZZBg2D2J5nkpLqzH1HY0C1dHlTKIbpRz/LG23c"
+    crossorigin="anonymous"></script>
+
 
 </body>
 </html>
