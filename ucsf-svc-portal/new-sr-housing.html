@@ -10,8 +10,6 @@
     crossorigin="anonymous">
   <!-- Bootstrap Date-Picker Plugin Stylesheet -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css">
-  <!-- Font Awesome -->
-  <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
   <!-- Custom CSS -->
   <link rel="stylesheet" href="css/custom.css">
 </head>
@@ -34,19 +32,24 @@
       <div class="collapse navbar-collapse" id="bs-nav-demo">
         <ul class="nav navbar-nav navbar-right">
           <li>
-            <a href=""><span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span> Hidden Item</a>
+            <a href="main.html">
+              <span class="fas fa-home" aria-hidden="true"></span> Home</a>
           </li>
           <li>
-            <a href="new-sr.html"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> New Service</a>
+            <a href="new-sr.html">
+              <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> New Service</a>
           </li>
           <li>
-            <a href="https://www.ucsfhealth.org/"><span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span> FAQ</a>
+            <a href="https://www.ucsfhealth.org/">
+              <span class="glyphicon glyphicon-usd" aria-hidden="true"></span> Bills</a>
           </li>
           <li>
-            <a href="https://www.ucsfhealth.org/"><span class="glyphicon glyphicon-usd" aria-hidden="true"></span> Bills</a>
+            <a href="edit-profile.html">
+              <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span> Edit Profile</a>
           </li>
           <li>
-            <a href="edit-profile.html"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span> Edit Profile</a>
+            <a href="index.html">
+              <span class="fas fa-sign-out-alt" aria-hidden="true"></span> Sign Out</a>
           </li>
         </ul>
       </div>
@@ -57,21 +60,20 @@
   <!-- Jumbotron -->
   <div class="jumbotron">
     <div class="container">
-        <h2>Xayaseth Boudsady</h2>
-        <p>xayaseth.boudsady@ucsf.edu</p>
-        <p class="text-center"><a href="index.html" class="btn btn-primary btn-md" role="button">Sign Out</a></p>
+      <div class="row">
+        <div class="col-sm-6 col-md-6">
+          <h2>Facilities Service Request Portal</h2>
+          <p>Houseing Service Request</p>
+        </div>
+        <div class="col-sm-6 col-md-6">
+          <h4>xayaseth.boudsady@ucsf.edu</h4>
+        </div>
+      </div>
     </div>
   </div>
   <!-- /Jumbotron-->
 
 
-  <!-- Heading -->
-  <div class="container">
-    <h4><a href="main.html">Return to My Work Orders</a></h4>
-  </div>
-  <!-- /Heading-->
-
-  <hr class="hr-hidden">
 
   <!-- Form Container -->
   <div class="container">
@@ -82,7 +84,7 @@
       <div class="form-group row">
         <!-- Building -->
         <div class="col-sm-5">
-          <label for="building"><span class="glyphicon glyphicon-asterisk requiredField" aria-hidden="true"></span> Building: </label>
+          <label for="building">Building: </label>
           <select class="form-control" id="building-housing" name="bldg" onchange="javascript: bldgFlrDropdown(this.options[this.selectedIndex].value);">
           <optgroup label="Mission Bay">
             <option value="">Select Building</option>
@@ -141,7 +143,7 @@
         
         <!-- Floor -->
         <div class="col-sm-2">
-          <label for="floor"><span class="glyphicon glyphicon-asterisk requiredField" aria-hidden="true"></span> Floor: </label>
+          <label for="floor">Floor: </label>
           <script type="text/javascript" language="JavaScript">
             document.write('<select class="form-control" name="floor" id="floor" onchange="javascript: bldgFlrRoomDropdown(this.options[this.selectedIndex].value);"><option value=""></option></select>')
           </script>
@@ -192,7 +194,6 @@
       <!-- Work Description -->
       <div class="form-group row">
         <div class="col-sm-12">
-          <label for="workDesc"><span class="glyphicon glyphicon-asterisk requiredField" aria-hidden="true"></span> Description of Work</label>
           <textarea class="form-control" rows="5" id="workDesc" name="workDesc" placeholder="Please describe deails of work..."></textarea>
         </div>
       </div>  <!-- /Work Description -->
@@ -203,19 +204,32 @@
       <!-- Contact Info-->
       <div class="form-group row">
         <div class="col-sm-4">
-          <label for="ContactName"><span class="glyphicon glyphicon-asterisk requiredField" aria-hidden="true"></span> Name</label>
+          <label for="ContactName">Name</label>
           <input type="text" class="form-control" id="ContactName" maxlength="30" required="required" placeholder="John Smith">
         </div>
         <div class="col-sm-4">
-          <label for="ContactPhone"><span class="glyphicon glyphicon-asterisk requiredField" aria-hidden="true"></span> Contact Phone</label>
+          <label for="ContactPhone">Contact Phone</label>
           <input type="text" class="form-control" id="ContactPhone" maxlength="14" required="required" placeholder="123-457-7890">
         </div>
         <div class="col-sm-4">
-          <label for="ContactEmail"><span class="glyphicon glyphicon-asterisk requiredField" aria-hidden="true"></span> Email address</label>
+          <label for="ContactEmail">Email address</label>
           <input type="email" class="form-control" id="ContactEmail" placeholder="john.smith@ucsf.edu" maxlength="64" required="required">
         </div>
       </div> <!-- /Contact Info-->
-      
+      <div class="form-group">
+        <div class="radio">
+          <label>
+            <input type="radio" name="optionsRadios" id="no" value="no" checked> <strong>Yes</strong> - I give permission to facilities to enter residence to perform this work.
+          </label>
+        </div>
+        <div class="radio">
+          <label>
+            <input type="radio" name="optionsRadios" id="yes" value="yes"> <strong>No</strong> - Facilities will post a notice at the residence or 24 hours priort to entry.
+          </label>
+        </div>
+      </div>
+
+
       <hr class="hr-hidden">
 
       <div class="form-group row">
@@ -240,6 +254,11 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
   <!-- Bootsrap 3.3.7 -->
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+    crossorigin="anonymous"></script>
+  <!-- Font Awesome CDN -->
+  <script defer src="https://use.fontawesome.com/releases/v5.0.8/js/solid.js" integrity="sha384-+Ga2s7YBbhOD6nie0DzrZpJes+b2K1xkpKxTFFcx59QmVPaSA8c7pycsNaFwUK6l"
+    crossorigin="anonymous"></script>
+  <script defer src="https://use.fontawesome.com/releases/v5.0.8/js/fontawesome.js" integrity="sha384-7ox8Q2yzO/uWircfojVuCQOZl+ZZBg2D2J5nkpLqzH1HY0C1dHlTKIbpRz/LG23c"
     crossorigin="anonymous"></script>
   <!-- Form Scripting -->
   <script src="script/form-housing-bldg.js"></script>

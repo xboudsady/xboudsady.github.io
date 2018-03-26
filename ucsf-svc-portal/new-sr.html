@@ -34,19 +34,21 @@
       <div class="collapse navbar-collapse" id="bs-nav-demo">
         <ul class="nav navbar-nav navbar-right">
           <li>
-            <a href=""><span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span> Hidden Item</a>
+            <a href="main.html">
+              <span class="fas fa-home" aria-hidden="true"></span> Home</a>
           </li>
           <li>
             <a href="new-sr.html"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> New Service</a>
           </li>
           <li>
-            <a href="https://www.ucsfhealth.org/"><span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span> FAQ</a>
-          </li>
-          <li>
-            <a href="https://www.ucsfhealth.org/"><span class="glyphicon glyphicon-usd" aria-hidden="true"></span> Bills</a>
+            <a href="https://www.ucsfhealth.org/"><span class="glyphicon glyphicon-usd" aria-hidden="true"></span> Billing</a>
           </li>
           <li>
             <a href="edit-profile.html"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span> Edit Profile</a>
+          </li>
+          <li>
+            <a href="index.html">
+              <span class="fas fa-sign-out-alt" aria-hidden="true"></span> Sign Out</a>
           </li>
         </ul>
       </div>
@@ -57,9 +59,15 @@
   <!-- Jumbotron -->
   <div class="jumbotron">
     <div class="container">
-        <h2>Xayaseth Boudsady</h2>
-        <p>xayaseth.boudsady@ucsf.edu</p>
-        <p class="text-center"><a href="index.html" class="btn btn-primary btn-md" role="button">Sign Out</a></p>
+      <div class="row">
+        <div class="col-sm-6 col-md-6">
+          <h2>Facilities Service</h2>
+          <p>New Request</p>
+        </div>
+        <div class="col-sm-6 col-md-6">
+          <h4>xayaseth.boudsady@ucsf.edu</h4>
+        </div>
+      </div>
     </div>
   </div>
   <!-- /Jumbotron-->
@@ -67,17 +75,17 @@
 
   <!-- Heading -->
   <div class="container">
-    <h4><a href="main.html">Home</a></h4>
 
-    <p>Please be aware that work orders submitted via the web are only handled during normal business hours.</p>
+    <p>Please be aware that service requests submitted via the web are only handled during normal business hours.</p>
     <p>For <span style="color: red;">emergencies</span> always call the Customer Service Center directly at <a href="tel:+1-415-476-2021">415-476-2021</a>.</p>
+    <p>For Capital Projects visit <a href="https://www.cpfm.ucsf.edu/fmtrack2/login.cfm" target="_blank">here</a>.</p>
   </div>
   <br>
   <!-- /Heading-->
 
   <div class="container">
-    <h4>Please select a service request type</h4>
-    <hr>
+    <h4>Please select a service request type.</h4>
+    <br>
   </div>
   
 
@@ -87,7 +95,64 @@
     <div class="row">
       <div class="col-sm-6 col-md-2">
         <div class="thumbnail sr-icon">
-          <a href="#">
+          <a href="new-sr-facilities.html">
+            <div class="caption">
+              <center>
+                <h1>
+                  <i class="fa fa-wrench" aria-hidden="true"></i>
+                </h1>
+                <p>Facilities Request</p>
+              </center>
+            </div>
+          </a>
+        </div>
+        <div class="info-button">
+          <p>
+            <a href="" class="btn btn-default" role="button" data-toggle="modal" data-target="#facilitiesFundedModal">Info</a>
+          </p>
+        </div>
+      </div>
+      <div class="col-sm-6 col-md-2">
+        <div class="thumbnail sr-icon">
+          <a href="new-sr-event.html">
+            <div class="caption">
+              <center>
+                <h1>
+                  <i class="fas fa-ticket-alt" aria-hidden="true"></i>
+                </h1>
+                <p>Event Set-Ups</p>
+              </center>
+            </div>
+          </a>
+        </div>
+        <div class="info-button">
+          <p>
+            <a href="#" class="btn btn-default" role="button" data-toggle="modal" data-target="#eventSetupModal">Info</a>
+          </p>
+        </div>
+      </div>
+      <div class="col-sm-6 col-md-2">
+        <div class="thumbnail sr-icon">
+          <a href="new-key-request.html">
+            <div class="caption">
+              <center>
+                <h1>
+                  <i class="fa fa-key" aria-hidden="true"></i>
+                </h1>
+                <p>Key Requests</p>
+              </center>
+            </div>
+          </a>
+        </div>
+        <div class="info-button">
+          <p>
+            <a href="#" class="btn btn-default" role="button" data-toggle="modal" data-target="#keyRequestModal">Info</a>
+          </p>
+        </div>
+      </div>
+      <div class="col-sm-6 col-md-2">
+        <div class="thumbnail sr-icon">
+          <a href="new-sr-housing.html">
             <div class="caption">
               <center>
                 <h1><i class="fa fa-home" aria-hidden="true"></i></h1>
@@ -102,58 +167,20 @@
       </div>
       <div class="col-sm-6 col-md-2">
         <div class="thumbnail sr-icon">
-          <div class="caption">
-            <center>
-              <h1><i class="fas fa-ticket-alt" aria-hidden="true"></i></h1>
-              <p>Event Set-Ups</p>
-            </center>
-          </div>
-        </div>
-        <div class="info-button">
-            <p><a href="#" class="btn btn-default" role="button" data-toggle="modal" data-target="#eventSetupModal">Info</a></p>
-        </div>
-      </div>
-      <div class="col-sm-6 col-md-2">
-        <div class="thumbnail sr-icon">
-          <div class="caption">
-            <center>
-              <h1><i class="fa fa-key" aria-hidden="true"></i></h1>
-              <p>Key Requests</p>
-            </center>
-          </div>
-        </div>
-        <div class="info-button">
-          <p><a href="#" class="btn btn-default" role="button" data-toggle="modal" data-target="#keyRequestModal">Info</a></p>
-        </div>
-      </div>
-      <div class="col-sm-6 col-md-2">
-        <div class="thumbnail sr-icon">
-          <div class="caption">
-            <center>
-              <h1><i class="fa fa-wrench" aria-hidden="true"></i></h1>
-              <p>Facilities Request</p>
-              
-            </center>
-          </div>
+          <a href="#">
+            <div class="caption">
+              <center>
+                <h1>
+                  <i class="fas fa-address-card"></i>
+                </h1>
+                <p>Sign Orders</p>
+              </center>
+            </div>
+          </a>
         </div>
         <div class="info-button">
           <p>
-            <a href="" class="btn btn-default" role="button" data-toggle="modal" data-target="#facilitiesFundedModal">Info</a>
-          </p>
-        </div>
-      </div>
-      <div class="col-sm-6 col-md-2">
-        <div class="thumbnail sr-icon">
-          <div class="caption">
-            <center>
-              <h1><i class="fas fa-calendar-alt" aria-hidden="true"></i></h1>
-              <p>Projects</p>
-            </center>
-          </div>
-        </div>
-        <div class="info-button">
-          <p>
-            <a href="#" class="btn btn-default" role="button" data-toggle="modal" data-target="#fsProjectsModal">Info</a>
+            <a href="#" class="btn btn-default" role="button" data-toggle="modal" data-target="#signs-order-Modal">Info</a>
           </p>
         </div>
       </div>
@@ -176,33 +203,10 @@
   </div>
 
   <!-- 2nd Row of Servicre Icon -->
-  <div class="container">
-    <div class="row">
-      <div class="col-sm-6 col-md-2">
-        <div class="thumbnail sr-icon">
-          <a href="#">
-            <div class="caption">
-              <center>
-                <h1>
-                  <i class="fas fa-address-card"></i>
-                </h1>
-                <p>Sign Orders</p>
-              </center>
-            </div>
-          </a>
-        </div>
-        <div class="info-button">
-          <p>
-            <a href="#" class="btn btn-default" role="button" data-toggle="modal" data-target="#signs-order-Modal">Info</a>
-          </p>
-        </div>
-      </div>
-    </div>
-  </div>
   
+   
   <!-- /Content -->
 
-  <hr>
 
 
   <!-- =================================
@@ -295,6 +299,8 @@
           <p>Following is a partial list of maintenance services funded by the state and services that are not state funded and therefore chargeable to the customer. These are examples and this list is not comprehensive.</p>
           <p>If you need assistance to determine if your request is billable, please call <strong>Customer Service Center</strong> at <a href="tel:+1-415-476-2021"><strong>415-476-2021</strong></a>.</p>
           <br>
+          <p><strong>*</strong> Only applies to state-supported spaces. Does not apply to leased buildings.</p>
+          <br>
           <!-- ACCORDIAN Area of Service-->
           <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
             <!-- Custodial Services -->
@@ -309,56 +315,34 @@
                   <div class="container">
                     <div class="row">
                       <div class="col-lg-4">
-                        <h4>Facilities Funded</h4>
-                        <ul>
-                          <li><strong>Graffiti</strong> removal</li>
-                          <li><strong>Spill</strong> cleanup in public areas</li>
-                          <li><strong>Routine</strong> cleaning services performed daily in <em>"general use"</em> space such as 
-                            <ul>
-                              <li>lobbies</li>
-                              <li>corridors</li>
-                              <li>restrooms</li>
-                              <li>and other public areas</li>
-                            </ul>
-                        <li><strong>Routine</strong>  cleaning services in...
+                        <h4>Facilities Funded Services</h4>
                           <ul>
-                            <li>labs</li>
-                            <li>offices</li>
-                            <li>classrooms</li>
-                            <li>and other supported areas</li>
+                            <li><strong>Carpet</strong>cleaning, floor strip and wax done every 24 months in public spaces</li>
+                            <li><strong>Graffiti</strong> removal in public spaces</li>
+                            <li><strong>Routine*</strong> cleaning services performed daily in general use spaces such as lobbies, corridors, restrooms, and other public
+                            areas</li>
+                            <li><strong>Routine* cleaning services</strong>  in labs, offices, classrooms, and other supported areas</li>
+                            <li><strong>Spill</strong> cleanup in public areas</li>
+                            <li>Trash removal (regular trash in standard containers)</li>
+                            <li>Recycling and compost removal</li>
+                            <li>Routine scheduled pest control</li>
+                            <li>Exterior window washing provided every 5 years, as budget allows</li>
+                            <li><strong>* Routine</strong> services include emptying trash, sweeping and/ or mopping, and vacuuming. See the Custodial Frequency Chart (page
+                            20) for further details.</li>
                           </ul>
-                            <em>(See Custodial Frequency Schedule)</em>
-                        </li>
-                        <li><strong>Trash Removal</strong> – regular trash in standard containers</li>
-                        <li><strong>Routine</strong> scheduled pest control</li>
-                        <li><strong>Window washing</strong>
-                          <ul>
-                            <li>Exterior every 2 years</li>
-                            <li>Interior every 3 years (As budget allows)</li>
-                          </ul>
-                        </li>
-                        <li><strong>Routine</strong> services includes...
-                          <ul>
-                            <li>emptying trash</li>
-                            <li>sweeping and/or mopping</li>
-                            <li>vacuuming</li>
-                            <li>polishing floors</li>
-                          </ul>
-                          <em>See the Custodial Frequency Chart (pg 21) for further detail.</em>
-                        </li>
-                        </ul>
                       </div>
                       <div class="col-lg-4">
-                        <h4>Customer Funded</h4>
+                        <h4>Rechargeable Services</h4>
                         <ul>
-                          <li><strong>Carpet</strong> cleaning beyond established schedule</li>
-                          <li><strong>Event</strong> set ups, table and chair rental</li>
+                          <li><strong>Carpet</strong> cleaning, floor strip and wax in all department-occupied, non-public spaces</li>
+                          <li><strong>Event</strong> setups</li>
                           <li><strong>High-clean</strong> requests</li>
                           <li><strong>Spill</strong> clean-up in department spaces</li>
-                          <li><strong>Project clean-up</strong> over and above routine cleaning</li>
-                          <li>Trash removal of irregular items or excessive accumulations above and beyond everyday norms</li>
-                          <li><strong>Window washing</strong> (more than minimum)</li>
-                          <li><strong>Extraordinary</strong> pest control outside of scheduled frequencies</li>
+                          <li><strong>Project</strong> clean-up over and above routine cleaning</li>
+                          <li><strong>Special</strong> requests such as additional trash cans, walk-off mats, special cleanup above and beyond established routine cleaning</li>
+                          <li><strong>Trash removal</strong>  of irregular items or excessive accumulations above and beyond everyday norms</li>
+                          <li><strong>Interior window</strong> washing</li>
+                          <li><strong>Exterior window</strong> washing beyond the building’s established scheduled maintenance</li>
                         </ul>
                       </div>
                     </div>
@@ -380,87 +364,36 @@
                   <div class="container">
                     <div class="row">
                       <div class="col-lg-4">
-                        <h4>Facilities Funded</h4>
+                        <h4>Facilities-Funded Services*</h4>
                         <ul>
+                          <li><strong>Baseboard</strong> repairs</li>
                           <li><strong>Ceiling tile</strong> replacement and repair</li>
-                          <li><strong>Door</strong></li>
-                            <ul>
-                              <li>Repairs</li>
-                              <li>Closures</li>
-                              <li>Doorstop Installation</li>
-                            </ul>
+                          <li><strong>Door</strong> repairs</li>
                           <li><strong>Drywall</strong> and plaster repairs</li>
-                          <li><strong>Restroom</strong></li>
-                            <ul>
-                              <li>Partitions</li>
-                              <li>Mirror replacements</li>
-                            </ul>
-                          <li><strong>Floors</strong></li>
-                            <ul>
-                              <li><strong>Tile</strong> Repairs and replacement in public spaces</li>
-                              <li><strong>Baseboard</strong> repairs</li>
-                              <li>Replacement and/or repair of...</li>
-                                <ul>
-                                  <li>Carpets</li>
-                                  <li>Linoleum</li>
-                                  <li>Vinyl Floor</li>
-                                  <li>Wooden Floor</li>
-                                  <li>Other floor surfaces in public spaces</li>
-                                </ul>
-                            </ul>
+                          <li><strong>Door</strong> closers</li>
+                          <li><strong>Doorstop</strong> installation</li>
+                          <li><strong>Restroom</strong> partitions</li>
+                          <li><strong>Floor tile</strong> repair and replacement in public spaces</li>
+                          <li><strong>Replacement or repair</strong> of carpets, linoleum, vinyl floors, wooden floors, and other floor surfaces in public spaces</li>
                           <li><strong>Furniture</strong> repair in public spaces</li>
+                          <li><strong>Mirror</strong> replacements in restrooms and public spaces</li>
                           <li><strong>Wooden railings</strong> and steps repair and replacement</li>
-                          <li><strong>Stairs</strong>
-                            <ul>
-                              <li>tread</li>
-                              <li>guard replacements</li>
-                              <li>safety strips</li>
-                            </ul>
-                          </li>
-                          <li><strong>Window</strong> and glass repairs on building exteriors</li>
+                          <li><strong>Stair tread</strong>, guard replacements, safety strips</li>
+                          <li><strong>Window and glass</strong> repairs on building exteriors</li>
                         </ul>
                       </div>
                       <div class="col-lg-4">
-                        <h4>Customer Funded</h4>
+                        <h4>Rechargeable Services</h4>
                         <ul>
-                          <li><strong>Construction</strong> and/or installation of..
-                            <ul>
-                              <li>cabinets</li>
-                              <li>bookshelves</li>
-                              <li>miscellaneous casework</li>
-                            </ul>
-                          </li>
-                          <li><strong>Door replacements</strong> and/or conversions within controlled space</li>
-                          <li><strong>Earthquake restraints:</strong>
-                            <ul>
-                              <li>shelves</li>
-                              <li>cabinets</li>
-                              <li>gas cylinders</li>
-                              <li>bookshelves</li>
-                              <li>file cabinets</li>
-                              <li>freezers</li>
-                              <li>other furniture or equipment</li>
-                            </ul>
-                          </li>
-                          <li><strong>Picture framing</strong>, picture hanging, whiteboard / chalk board installations or moving</li>
-                          <li><strong>Office furniture</strong> repair</li>
-                          <li><strong>Hanging of</strong> screens or special projection equipment</li>
-                          <li><strong>Mirror</strong> installation or moving</li>
-                          <li><strong>Replacement</strong> and/or repair of...
-                            <ul>
-                              <li>carpets</li>
-                              <li>linoleum</li>
-                              <li>vinyl floors</li>
-                              <li>wooden floors</li>
-                              <li>other floor surfaces in departmental spaces</li>
-                            </ul> 
-                          </li>
-                          <li><strong>Venetian blinds</strong> or draperies
-                            <ul>
-                              <li>Purchase and/or installation</li>
-                              <li>maintenance and repairs</li>
-                            </ul>
-                          </li>
+                          <li><strong>Construction</strong>, repair, or installation of cabinets, bookshelves, and miscellaneous casework</li>
+                          <li><strong>Door replacements</strong> or conversions within controlled space</li>
+                          <li><strong>Seismic bracing</strong>: shelves, cabinets, gas cylinders, bookshelves, file cabinets, freezers, or other such furniture or equipment</li>
+                          <li><strong>Picture framing</strong>, picture hanging, whiteboard or chalkboard installations or moving</li>
+                          <li><strong>Office</strong> furniture repair</li>
+                          <li><strong>Hanging</strong> of screens or special projection equipment</li>
+                          <li><strong>Mirror installation</strong> or moving</li>
+                          <li><strong>Replacement or repair</strong> of carpets, linoleum, vinyl floors, wooden floors, and other floor surfaces in department-occupied spaces</li>
+                          <li><strong>Purchase</strong>, installation, maintenance, or repairs of venetian blinds or draperies</li>
                         </ul>
                       </div>
                     </div>
@@ -482,31 +415,33 @@
                   <div class="container">
                     <div class="row">
                       <div class="col-lg-4">
-                        <h4>Facilities Funded</h4>
+                        <h4>Facilities-Funded Services*</h4>
                         <ul>
-                          <li><strong>Ballast</strong> replacement (facility lighting)</li>
-                          <li><strong>Circuit breaker</strong> resets, repair / replacement</li>
+                          <li><strong>Ballast replacement</strong> (facility lighting)</li>
+                          <li><strong>Circuit breaker</strong> resets, repair or replacement</li>
                           <li><strong>Electrical distribution</strong> repair</li>
                           <li><strong>Emergency generator</strong> and circuit service serving state supportable spaces</li>
                           <li><strong>Emergency lighting</strong></li>
-                          <li><strong>Fixture</strong> cleaning and relamping: fluorescent and incandescent</li>
-                          <li><strong>Building</strong> facility lighting control systems</li>
-                          <li><strong>Routine</strong> circuit resetting</li>
-                          <li><strong>Handicap</strong> door access controls</li>
+                          <li><strong>Facility fixture</strong> cleaning and relamping</li>
+                          <li>Building facility lighting control systems</li>
+                          <li>Fume hood lighting</li>
                         </ul>
                       </div>
                       <div class="col-lg-4">
-                        <h4>Customer Funded</h4>
+                        <h4>Rechargeable Services</h4>
                         <ul>
-                          <li><strong>Lighting requests</strong> for services above baseline</li>
-                          <li><strong>Additional outlets</strong> and circuit requests</li>
-                          <li><strong>Cord replacement</strong> and/or repair</li>
+                          <li><strong>Lighting</strong> requests for services above baseline</li>
+                          <li><strong>Additional</strong> outlets and circuit requests</li>
+                          <li><strong>Cord replacement</strong> or repair</li>
                           <li><strong>Desk lamps</strong> and relamping</li>
-                          <li><strong>Departmental display</strong> case lighting installation, repair, and relamping</li>
+                          <li><strong>Department display</strong> case lighting installation, repair, or relamping</li>
                           <li><strong>Intercom</strong> repairs and installation</li>
-                          <li><strong>Equipment</strong> installation and hook-up</li>
-                          <li><strong>Temporary power</strong> installations</li>
-                          <li><strong>Special lighting</strong> requests such as UV lamps, Fume Hood lighting</li>
+                          <li><strong>Department-owned equipment</strong> installation and hook-up</li>
+                          <li><strong>Temporary</strong> power installations</li>
+                          <li><strong>Special lighting</strong>requests such as UV lamps, dark room lamps</li>
+                          <li>Maintenance and repair of <strong>departmental power conditioners</strong> and emergency power systems</li>
+                          <li>Maintenance and repair of <strong>dedicated departmental equipment</strong> and appliances</li>
+                          <li>More than two <strong>circuit breaker resets</strong> due to department-owned equipment overloading circuits</li>
                         </ul>
                       </div>
                     </div>
@@ -528,31 +463,25 @@
                   <div class="container">
                     <div class="row">
                       <div class="col-lg-4">
-                        <h4>Facilities Funded</h4>
+                        <h4>Facilities-Funded Services*</h4>
                         <ul>
-                          <li><strong>Ballast</strong> replacement (facility lighting)</li>
-                          <li><strong>Circuit breaker</strong> resets, repair / replacement</li>
-                          <li><strong>Electrical distribution</strong> repair</li>
-                          <li><strong>Emergency generator</strong> and circuit service serving state supportable spaces</li>
-                          <li><strong>Emergency lighting</strong></li>
-                          <li><strong>Fixture</strong> cleaning and relamping: fluorescent and incandescent</li>
-                          <li><strong>Building</strong> facility lighting control systems</li>
-                          <li><strong>Routine</strong> circuit resetting</li>
-                          <li><strong>Handicap</strong> door access controls</li>
+                          <li><strong>All general</strong> elevator maintenance and repair</li>
+                          <li><strong>Retrieval</strong> of items dropped down the elevator shaft (keys, ID cards, phones) during the following time periods (business days
+                          only):
+                            <ul>
+                              <li><strong>Mission Bay, Laurel Heights, Mission Center, Buchanan Dental Clinics</strong>: 8:00 am – 2:30 pm</li>
+                              <li><strong>Parnassus</strong>: 6:00 am – 4:00 pm</li>
+                            </ul>
+                          </li>
                         </ul>
                       </div>
                       <div class="col-lg-4">
-                        <h4>Customer Funded</h4>
+                        <h4>Rechargeable Services</h4>
                         <ul>
-                          <li><strong>Lighting requests</strong> for services above baseline</li>
-                          <li><strong>Additional outlets</strong> and circuit requests</li>
-                          <li><strong>Cord replacement</strong> and/or repair</li>
-                          <li><strong>Desk lamps</strong> and relamping</li>
-                          <li><strong>Departmental display</strong> case lighting installation, repair, and relamping</li>
-                          <li><strong>Intercom</strong> repairs and installation</li>
-                          <li><strong>Equipment</strong> installation and hook-up</li>
-                          <li><strong>Temporary power</strong> installations</li>
-                          <li><strong>Special lighting</strong> requests such as UV lamps, Fume Hood lighting</li>
+                          <li><strong>Special use lifts</strong> within specific departments</li>
+                          <li><strong>Special requests</strong> such as opening cab ceiling to allow transportation of large furniture or equipment</li>
+                          <li><strong>Retrieval</strong> of items dropped down the elevator shaft (keys, ID cards, phones) after hours.</li>
+                          <li><strong>Elevator malfunction</strong> due to misuse by a user (hitting the doors with a cart or device, propping the elevator doors open, etc.)</li>
                         </ul>
                       </div>
                     </div>
@@ -574,16 +503,16 @@
                   <div class="container">
                     <div class="row">
                       <div class="col-lg-4">
-                        <h4>Facilities Funded</h4>
+                        <h4>Facilities-Funded Services*</h4>
                         <ul>
                           <li><strong>Fire extinguishers</strong>, hoses, cabinets, sprinklers</li>
-                          <li><strong>Fire alarms</strong> / smoke detectors and system monitoring</li>
+                          <li><strong>Fire alarms / smoke detectors</strong> and system monitoring</li>
                         </ul>
                       </div>
                       <div class="col-lg-4">
-                        <h4>Customer Funded</h4>
+                        <h4>Rechargeable Services</h4>
                         <ul>
-                          <li><strong>Additional</strong> protective devices beyond code requirements</li>
+                          <li><strong>Additional protective devices</strong> beyond code requirements</li>
                         </ul>
                       </div>
                     </div>
@@ -605,17 +534,17 @@
                   <div class="container">
                     <div class="row">
                       <div class="col-lg-4">
-                        <h4>Facilities Funded</h4>
+                        <h4>Facilities-Funded Services*</h4>
                         <ul>
-                          <li>Brick, mortar, cement inspection</li>
-                          <li>Public space inspection</li>
-                          <li>Graffiti removal</li>
+                          <li><strong>Brick</strong>, mortar, cement inspection</li>
+                          <li><strong>Public space</strong> inspection</li>
+                          <li><strong>Graffiti</strong> removal</li>
                         </ul>
                       </div>
                       <div class="col-lg-4">
-                        <h4>Customer Funded</h4>
+                        <h4>Rechargeable Services</h4>
                         <ul>
-                          <li>Minor moving services of equipment, furniture, etc.</li>
+                          <li><strong>Minor moving</strong> services of equipment, furniture, etc.</li>
                         </ul>
                       </div>
                     </div>
@@ -650,7 +579,7 @@
                         </ul>
                       </div>
                       <div class="col-lg-4">
-                        <h4>Customer Funded</h4>
+                        <h4>Rechargeable Services</h4>
                         <ul>
                           <li><strong>Project</strong> related landscape needs or repair of damage caused by project work</li>
                           <li><strong>Special requests</strong> for plantings or color changes</li>
@@ -678,7 +607,7 @@
                   <div class="container">
                     <div class="row">
                       <div class="col-lg-4">
-                        <h4>Facilities Funded</h4>
+                        <h4>Facilities-Funded Services*</h4>
                         <ul>
                           <li><strong>Repair and replacement</strong> of architectural door hardware:
                             <ul>
@@ -686,38 +615,49 @@
                               <li>key cylinders</li>
                               <li>closers</li>
                               <li>door operators</li>
-                              <li>panic devices</li>
+                              <li>panic devices located in public spaces</li>
                             </ul>
                           </li>
                           <li><strong>Installation and maintenance</strong> of Electronic Access Control systems for non dedicated exterior and public spaces</li>
-                          <li><strong>Door alarm</strong> installation and maintenance in public spaces</li>
-                          <li><strong>Omni Locks</strong> in Public Spaces</li>
+                          <li><strong>Proximity locks</strong> in public spaces</li>
+                          <li><strong>Door</strong> maintenance</li>
+                          <li><strong>Key lock</strong> installation in department-occupied spaces to replace unwanted Omnilocks or proximity card readers</li>
+                          <li><strong>ADA door</strong> access controls for public spaces</li>
                         </ul>
                       </div>
                       <div class="col-lg-4">
-                        <h4>Customer Funded</h4>
+                        <h4>Rechargeable Services</h4>
                         <ul>
-                          <li><strong>Combination lock / Omnilock installation</strong>
-                            <ul>
-                              <li>maintenance</li>
-                              <li>repair</li>
-                            </ul>
-                          </li>
-                          <li><strong>Deadbolt</strong> installation</li>
-                          <li><strong>Electronic access control</strong> installation, maintenance and repair dedicated to departmental space or program</li>
-                          <li><strong>Dedicated intrusion/freezer alarm</strong>
-                            <ul>
-                              <li>installation</li>
-                              <li>maintenance</li>
-                              <li>repairs</li>
-                            </ul>
-                          </li>
+                          <li><strong>Lock</strong> installation, maintenance, and repair, including combination locks, dead bolts, and rekeying <strong>(1, 2, 4)</strong></li>
+                          <li><strong>Electronic access control</strong> installation, maintenance and repair dedicated to departmental space or program <strong>(1, 2, 3, 4)</strong></li>
+                          <li><strong>Dedicated intrusion</strong> or freezer alarm installation, maintenance, repairs, and database and user code updates <strong>(1, 2, 3, 4)</strong></li>
                           <li><strong>Key fabrication</strong> (24-hour turnaround)</li>
-                          <li><strong>Lock</strong> re-keying, installation</li>
-                          <li><strong>Window locks</strong>, cabinet, file, and desk locks</li>
+                          <li><strong>Window</strong>, cabinet, file, and desk locks</li>
                           <li><strong>Unlocking cabinets</strong>, desks, and other case goods</li>
-                          <li><strong>Lockouts</strong> (after hours contact UCPD)</li>
+                          <li><strong>Lockouts:</strong>  For after-hours lockouts (5 p.m. to 6 a.m.), please contact UCPD at <a href="tel:+1-415-476-1414">415-476-1414</a> <strong>(2, 4)</strong></li>
+                          <li><strong>Repair or replacement</strong> of locks on interior office doors <strong>(4)</strong></li>
+                          <li>Security alarm reports</li>
+                          <li>Security panel maintenance for security systems serving departmental spaces <strong>(3, 4)</strong></li>
                         </ul>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-sm-9">
+                         Notes:
+                        <ol>
+                          <li>
+                            <em>Locks and security systems are installed only after a UCPD security survey and approval is acquired by customer</em>
+                          </li>
+                          <li>
+                            <em>For security purposes, FS must verify customer’s right to access an area during regular business hours.</em>
+                          </li>
+                          <li>
+                            <em>Installation of electronic access control equipment, security panels, or intrusion and freezer alarms may require semiannual or annual preventive maintenance to ensure customer safety, and will be rechargeable to the department occupying the space or owners of the equipment</em>
+                          </li>
+                          <li>
+                            <em> A travel time fee will be charged for cancelled priority 1 requests</em>
+                          </li>
+                        </ol>
                       </div>
                     </div>
                   </div>
@@ -738,16 +678,18 @@
                   <div class="container">
                     <div class="row">
                       <div class="col-lg-4">
-                        <h4>Facilities Funded</h4>
+                        <h4>Facilities-Funded Services*</h4>
                         <ul>
-                          <li>Building Fan maintenance and repair</li>
+                          <li>Building <strong>fans</strong></li>
+                          <li><strong>Fume hood</strong> maintenance</li>
                         </ul>
                       </div>
                       <div class="col-lg-4">
-                        <h4>Customer Funded</h4>
+                        <h4>Rechargeable Services</h4>
                         <ul>
-                          <li>Dedicated fan maintenance and repair</li>
-                          <li>Fumehood maintenance and repair</li>
+                          <li><strong>Dedicated</strong> fans</li>
+                          <li><strong>Animal bedding</strong> systems</li>
+                          <li>Dedicated <strong>humidifiers</strong></li>
                         </ul>
                       </div>
                     </div>
@@ -769,16 +711,17 @@
                   <div class="container">
                     <div class="row">
                       <div class="col-lg-4">
-                        <h4>Facilities Funded</h4>
+                        <h4>Facilties-Funded Services*</h4>
                         <ul>
-                          <li>Painting is done in public spaces, as needed</li>
+                          <li><strong>Painting</strong> is done in public spaces, as needed</li>
                         </ul>
                       </div>
                       <div class="col-lg-4">
-                        <h4>Customer Funded</h4>
+                        <h4>Rechargeable Services</h4>
                         <ul>
-                          <li>Routine painting and refinishing of all non-state space</li>
-                          <li>Vinyl and/or wallpaper installation or repair</li>
+                          <li><strong>Routine painting</strong> and refinishing of all non-state space</li>
+                          <li><strong>Parking lot</strong>  painting and restriping</li>
+                          <li><strong>Vinyl and/or wallpaper</strong> installation or repair</li>
                         </ul>
                       </div>
                     </div>
@@ -800,44 +743,38 @@
                   <div class="container">
                     <div class="row">
                       <div class="col-lg-4">
-                        <h4>Facilities Funded</h4>
+                        <h4>Facilties-Funded Services*</h4>
                         <ul>
-                          <li><strong>Restroom equipment</strong>
-                            <ul>
-                              <li>maintenance</li>
-                              <li>repair</li>
-                              <li>replacement</li>
-                            </ul>
-                          </li>
+                          <li><strong>Restroom equipment</strong> maintenance, repair, or replacement</li>
                           <li><strong>Drinking fountains</strong> in public spaces</li>
-                          <li><strong>Emergency</strong> eyewash/showers</li>
-                          <li><strong>Facility wide systems</strong>:
+                          <li><strong>Emergency eyewash</strong> and emergency shower maintenance</li>
+                          <li>Building-wide systems: 
                             <ul>
-                              <li>cooling water</li>
-                              <li>DI Water</li>
-                              <li>gas</li>
-                              <li>vacuum</li>
-                              <li>oxygen etc.</li>
+                              <li>chilled water</li>
+                              <li>DI water</li>
                             </ul>
                           </li>
+                          <li><strong>Water</strong>, gasses, vacuum, etc.</li>
                           <li><strong>Leaks</strong>, facility drain stoppages, and flooding</li>
                         </ul>
                       </div>
                       <div class="col-lg-4">
-                        <h4>Customer Funded</h4>
+                        <h4>Rechargeable Services</h4>
                         <ul>
-                          <li><strong>Laboratory equipment</strong> hook-up and/or installation</li>
-                          <li><strong>Installation</strong> / maintenance of additional eyewash/showers above code requirements</li>
-                          <li><strong>Installation and/or maintenance</strong> of dedicated laboratory systems:
+                          <li><strong>Laboratory equipment</strong> hook-up or installation</li>
+                          <li><strong>Installation or maintenance</strong> of dedicated laboratory systems: 
                             <ul>
                               <li>DI Water</li>
                               <li>waste systems</li>
                               <li>cooling systems</li>
                               <li>vacuum systems</li>
-                              <li>gases, etc.</li>
+                              <li>gasses</li>
                             </ul>
                           </li>
-                          <li><strong>Installation</strong> of experimental laboratory equipment</li>
+                          <li><strong>Installation</strong> of dedicated laboratory equipment</li>
+                          <li><strong>Clogged sinks</strong> or drains due to customer operations</li>
+                          <li><strong>Water filter</strong> installation or maintenance</li>
+                          <li><strong>Localized hot water</strong> heater installation</li>
                         </ul>
                       </div>
                     </div>
@@ -859,22 +796,24 @@
                   <div class="container">
                     <div class="row">
                       <div class="col-lg-4">
-                        <h4>Facilities Funded</h4>
+                        <h4>Facilities-Funded Services*</h4>
                         <ul>
-                          <li>Building Chillers</li>
-                          <li>Building Air Conditioning Units</li>
+                          <li><strong>Building chiller</strong> repairs and maintenance</li>
+                          <li><strong>Building air conditioning unit</strong> repairs and maintenance</li>
+                          <li><strong>Walk-in boxes</strong> (cold and warm) preventive maintenance and minor repairs</li>
                         </ul>
                       </div>
                       <div class="col-lg-4">
-                        <h4>Customer Funded</h4>
+                        <h4>Rechargeable Services</h4>
                         <ul>
-                          <li>Dedicated Air Conditioning Units</li>
-                          <li>Cold Rooms</li>
-                          <li>Dedicated Chillers</li>
-                          <li>Environmental Growth Chambers</li>
-                          <li>Freezers</li>
-                          <li>Ice Machines</li>
-                          <li>Refrigerators</li>
+                          <li><strong>Dedicated air conditioning unit</strong>  repairs and maintenance</li>
+                          <li><strong>Dedicated fan coil unit</strong> repairs and maintenance</li>
+                          <li><strong>Dedicated chiller</strong> repairs and maintenance</li>
+                          <li><strong>Refrigerator</strong> repairs and maintenance</li>
+                          <li><strong>Freezer</strong> repair and maintenance</li>
+                          <li><strong>Freezer rental</strong></li>
+                          <li><strong>Ice machine</strong> repair and maintenance</li>
+                          <li><strong>Walk-in boxes</strong> (cold and warm) major repairs, such as compressor replacement</li>
                         </ul>
                       </div>
                     </div>
@@ -896,18 +835,42 @@
                   <div class="container">
                     <div class="row">
                       <div class="col-lg-4">
-                        <h4>Facilities Funded</h4>
+                        <h4>Facilities-Funded Services*</h4>
                         <ul>
-                          <li>Routine recycling material pickup (Custodial)</li>
-                          <li><strong>Bulky</strong> waste removal (periodic scheduling)</li>
+                          <li><strong>Recycling</strong> and compost containers</li>
+                          <li><strong>Routine recycling</strong> material pick-up (Custodial)</li>
+                          <li><strong>rop-off</strong>D of recycling carts (a.k.a. “toters”) for move outs, major clean-ups</li>
+                          <li><strong>Trainings</strong> and orientations for staff to learn how to toss correctly</li>
+                          <li><strong>Evaluation</strong> of work area discard procedures as part of the Green Office/Green Lab certification review</li>
+                          <li><strong>Lab</strong> and office evaluations to explain how to best discard unneeded items</li>
+                          <li><strong>Pick-up of donateable office supplies</strong> (must be neatly boxed by donor)</li>
+                          <li><strong>Pick-up of donateable lab supplies</strong> (must be pre-approved by Campus Recycling Program and e-waste will not be picked up)</li>
+                          <li><strong>Bulky Item</strong> Drop-Off
+                            <ul>
+                              <li>Parnassus 6x/year</li>
+                              <li>Mission Bay 6x/year</li>
+                              <li>Laurel Heights 1x/year</li>
+                              <li>Mission Center 1x/year</li>
+                            </ul>
+                          </li>
                         </ul>
                       </div>
                       <div class="col-lg-4">
-                        <h4>Customer Funded</h4>
+                        <h4>Rechargeable Services</h4>
                         <ul>
-                          <li><strong>Excessive</strong> or unusual recycling materials pickup</li>
-                          <li><strong>Wooden pallets</strong> and excessive or non flattened cardboard or packing materials</li>
-                          <li><strong>Furniture</strong> and special item pickup (outside of scheduled bulky waste pickup)</li>
+                          <li><strong>Additional garbage</strong> containers.</li>
+                          <li><strong>Excess</strong> garbage removal.</li>
+                          <li><strong>Pick-up</strong> of:
+                            <ul>
+                              <li>Excessive or unusual materials</li>
+                              <li>Wood or plastic pallets</li>
+                              <li>Crates</li>
+                              <li>Non-flattened cardboard</li>
+                              <li>Furniture and furniture parts</li>
+                              <li>Pick-up of furniture and other bulky items for drop off at otherwise free bulky item drop-off days</li>
+                              <li> Large e-waste (i.e. large printers on wheels) that are brought to the otherwise free e-waste drop off days</li>
+                            </ul>
+                          </li>
                         </ul>
                       </div>
                     </div>
@@ -915,37 +878,8 @@
                 </div>
               </div>
             </div> <!-- /Refuse & Recycling -->
-
-            <!-- Signage -->
-            <div class="panel panel-default">
-              <div class="panel-heading" role="tab" id="headingForteen">
-                <h4 class="panel-title">
-                  <a id="modalLink" class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseForteen"
-                    aria-expanded="false" aria-controls="collapseForteen"><i class="fas fa-address-card" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;Signage</a>
-                </h4>
-              </div>
-              <div id="collapseForteen" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingForteen">
-                <div class="panel-body">
-                  <div class="container">
-                    <div class="row">
-                      <div class="col-lg-4">
-                        <h4>Facilities Funded</h4>
-                      </div>
-                      <div class="col-lg-4">
-                        <h4>Customer Funded</h4>
-                        <ul>
-                          <li>Signage</li>
-                          <li>Name Plates</li>
-                          <li>Holders</li>
-                        </ul>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div> <!-- /Signage -->
             
-            <!-- Signage -->
+            <!-- Structural Maintenance -->
             <div class="panel panel-default">
               <div class="panel-heading" role="tab" id="headingFifteen">
                 <h4 class="panel-title">
