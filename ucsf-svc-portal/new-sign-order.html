@@ -10,8 +10,6 @@
     crossorigin="anonymous">
   <!-- Bootstrap Date-Picker Plugin Stylesheet -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css">
-  <!-- Font Awesome -->
-  <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
   <!-- Custom CSS -->
   <link rel="stylesheet" href="css/custom.css">
 </head>
@@ -34,19 +32,24 @@
       <div class="collapse navbar-collapse" id="bs-nav-demo">
         <ul class="nav navbar-nav navbar-right">
           <li>
-            <a href=""><span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span> Hidden Item</a>
+            <a href="main.html">
+              <span class="fas fa-home" aria-hidden="true"></span> Home</a>
           </li>
           <li>
-            <a href="new-sr.html"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> New Service</a>
+            <a href="new-sr.html">
+              <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> New Service</a>
           </li>
           <li>
-            <a href="https://www.ucsfhealth.org/"><span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span> FAQ</a>
+            <a href="https://www.ucsfhealth.org/">
+              <span class="glyphicon glyphicon-usd" aria-hidden="true"></span> Billing</a>
           </li>
           <li>
-            <a href="https://www.ucsfhealth.org/"><span class="glyphicon glyphicon-usd" aria-hidden="true"></span> Bills</a>
+            <a href="edit-profile.html">
+              <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span> Edit Profile</a>
           </li>
           <li>
-            <a href="edit-profile.html"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span> Edit Profile</a>
+            <a href="index.html">
+              <span class="fas fa-sign-out-alt" aria-hidden="true"></span> Sign Out</a>
           </li>
         </ul>
       </div>
@@ -57,329 +60,387 @@
   <!-- Jumbotron -->
   <div class="jumbotron">
     <div class="container">
-        <h2>Xayaseth Boudsady</h2>
-        <p>xayaseth.boudsady@ucsf.edu</p>
-        <p class="text-center"><a href="index.html" class="btn btn-primary btn-md" role="button">Sign Out</a></p>
+        <div class="row">
+          <div class="col-sm-6 col-md-6">
+            <h2>Facilities Service</h2>
+            <p>Sign Orders</p>
+          </div>
+          <div class="col-sm-6 col-md-6">
+            <h4>xayaseth.boudsady@ucsf.edu</h4>
+          </div>
+        </div>
     </div>
   </div>
   <!-- /Jumbotron-->
 
-
-  <!-- Heading -->
-  <div class="container">
-    <h4><a href="main.html">Return to My Work Orders</a></h4>
-    <h3>New Sign Order</h3>
-  </div>
-  <!-- /Heading-->
-
-  <hr class="hr-hidden">
+  
 
   <!-- Form Container -->
   <div class="container">
     <form class="form">
+      <!-- WO Number & Qty -->
+      <legend>
+        <span class="number">1</span> Info:
+      </legend>
+      <div class="form-group row">
+        <div class="col-sm-3">
+          <div class="col-sm-12">
+            <label for="workDesc"> Work Order No.</label>
+            <input type="text" class="form-control" rows="5" id="workDesc" name="workDesc" placeholder='Required'>
+          </div>
+        </div>
+        <div class="col-sm-2">
+          <label for="floor">Quantity</label>
+          <select class="form-control">
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+            <option>5</option>
+            <option>6</option>
+            <option>7</option>
+            <option>8</option>
+            <option>9</option>
+            <option>10</option>
+          </select>
+        </div>
+      </div>
+
+      <hr class="hr-hidden">
 
       <!-- Location Field -->
-      <legend><span class="number">1</span> Type: <span style="color:#afafaf"> (Sign 1)</span></legend> 
+      <legend>
+        <span class="number">2</span> Delivery Location:
+        <span style="color:#afafaf"> (For Signs)</span>
+      </legend>
       
       <div class="form-group row">
         <!-- Building -->
         <div class="col-sm-5">
-          <label for="building"><span class="glyphicon glyphicon-asterisk requiredField" aria-hidden="true"></span> Building: </label>
+          <label for="building">Building: </label>
           <select class="form-control" id="building-housing" name="bldg" onchange="javascript: bldgFlrDropdown(this.options[this.selectedIndex].value);">
-          <optgroup label="Laurel Heights">
-            <option value="">Select Building</option>
-            <option value="2450">Laurel Heights - 3333 California St</option>
-            <option value="2451">Laurel Heights Annex - 3333 California St</option>
-          </optgroup>
-          <optgroup label="Mission Bay">
-            <option value="3066">566 Minnesota St</option>
-            <option value="3067">580 Minnesota St</option>
-            <option value="3065">590 Minnesota St</option>
-            <option value="3064">600 Minnesota St</option>
-            <option value="3043">654 Minnesota St</option>
-            <option value="3049">Child Care Ctr - 1555 6th St</option>
-            <option value="3011">Hunters Pt - 831 Palou St</option>
-            <option value="MB24T">MB 24 Trailer</option>
-            <option value="3034">Byers Hall (QB3) (24C) - 1700 4th St</option>
-            <option value="3046">Central Power Plant</option>
-            <option value="3003">Community Ctr (Rutter/21B) - 1675 Owens St</option>
-            <option value="3045">CVRB 17A/B (Smith) - 555 Mission Bay Blvd S</option>
-            <option value="3080">East Campus Block 33</option>
-            <option value="3055">Energy Center - 1830 3rd St</option>
-            <option value="3002">Genentech Hall (24 A/B) - 600 16th St</option>
-            <option value="2605">General Improvements</option>
-            <option value="MBGRND">Grounds</option>
-            <option value="2316">Helen Diller Family Cancer - 1450 Third St</option>
-            <option value="3052">Hospital - 1855 &amp; 1875 4th St</option>
-          </optgroup>
-        </select>
-        </div> <!-- /Building -->
+            <optgroup label="Laurel Heights">
+              <option value="">Select Building</option>
+              <option value="2450">Laurel Heights - 3333 California St</option>
+              <option value="2451">Laurel Heights Annex - 3333 California St</option>
+            </optgroup>
+            <optgroup label="Mission Bay">
+              <option value="3066">566 Minnesota St</option>
+              <option value="3067">580 Minnesota St</option>
+              <option value="3065">590 Minnesota St</option>
+              <option value="3064">600 Minnesota St</option>
+              <option value="3043">654 Minnesota St</option>
+              <option value="3049">Child Care Ctr - 1555 6th St</option>
+              <option value="3011">Hunters Pt - 831 Palou St</option>
+              <option value="MB24T">MB 24 Trailer</option>
+              <option value="3034">Byers Hall (QB3) (24C) - 1700 4th St</option>
+              <option value="3046">Central Power Plant</option>
+              <option value="3003">Community Ctr (Rutter/21B) - 1675 Owens St</option>
+              <option value="3045">CVRB 17A/B (Smith) - 555 Mission Bay Blvd S</option>
+              <option value="3080">East Campus Block 33</option>
+              <option value="3055">Energy Center - 1830 3rd St</option>
+              <option value="3002">Genentech Hall (24 A/B) - 600 16th St</option>
+              <option value="2605">General Improvements</option>
+              <option value="MBGRND">Grounds</option>
+              <option value="2316">Helen Diller Family Cancer - 1450 Third St</option>
+              <option value="3052">Hospital - 1855 &amp; 1875 4th St</option>
+            </optgroup>
+          </select>
+        </div>
         
+        <!-- /Building -->
+      
         <!-- Floor -->
         <div class="col-sm-2">
-          <label for="floor"><span class="glyphicon glyphicon-asterisk requiredField" aria-hidden="true"></span> Floor: </label>
+          <label for="floor">Floor: </label>
           <script type="text/javascript" language="JavaScript">
             document.write('<select class="form-control" name="floor" id="floor" onchange="javascript: bldgFlrRoomDropdown(this.options[this.selectedIndex].value);"><option value=""></option></select>')
           </script>
           <noscript>
             <select class="form-control" id="floor" name="floor">
-            <option value="">Floor</option>
-          </select>
+              <option value="">Floor</option>
+            </select>
           </noscript>
-        </div> <!-- /Floor -->
-
+        </div>
+        <!-- /Floor -->
+      
         <!-- Room -->
-        <div class="col-sm-2"> 
+        <div class="col-sm-2">
           <label for="room">Room: </label>
           <script type="text/javascript" language="JavaScript">
             document.write('<select class="form-control" name="room" id="room"><option value=""></option></select>')
           </script>
           <noscript>
             <select class="form-control" id="room" name="room">
-            <option value="">Room</option>
-          </select>
+              <option value="">Room</option>
+            </select>
           </noscript>
-        </div> <!-- /Room -->
-        
-        
-      </div> <!-- /Location Field -->
-
-      <!-- Sensitive Area -->
-      <div class="form-group row">
-        <div class="col-sm-4">
-          <label for="floor"><span class="glyphicon glyphicon-asterisk requiredField" aria-hidden="true"></span>Is this a sensitive area or special occupancy?</label>
-        </div>
-        <div class="col-sm-2">
-          <label class="radio-inline">
-            <input type="radio" name="opSensitive" id="opSensitiveNo" value="N" checked> No
-          </label>
-          <label class="radio-inline">
-            <input type="radio" name="opSensitive" id="opSensitiveYes" value="Y"> Yes
-          </label>
-        </div>
-      </div> <!-- /Sensitive Area -->
-
-      <!-- Hidden Sensitive Area -->
-      <div id="idSensArea">
-        <div class="form-group row">
-          <div class="col-sm-3">
-            <label for="room"><span class="glyphicon glyphicon-asterisk requiredField" aria-hidden="true"></span> Type: </label>
-            <select class="form-control" id="ctlSensType" name="room">
-            <option value=""></option>
-            <option value="BSL3">BSL3</option>
-            <option value="Clean Room">Clean Room</option>
-            <option value="Animal Care">Animal Care</option>
-            <option value="Other">Other (Specify to Right)</option>
-          </select>
-          </div>
-          <div class="col-sm-6">
-            <label for="ctlSensTypeText"> Other</label>
-            <input type="text" class="form-control" id="ctlSensTypeText" maxlength="32">
-          </div>
-        </div>
-        <div class="form-group row">
-          <div class="col-sm-12">
-            <label for="workDesc">Instructions to enter space:</label>
-            <textarea class="form-control" rows="5" id="workDesc" name="workDesc" placeholder="Provide details of sensitive instructions prior to work..."></textarea>
-          </div>
         </div>
       </div>
-       <!-- /Hidden Sensitive Area -->
-      
-      
+      <!-- /Location Field -->
 
       <hr class="hr-hidden">
 
-      <!-- Work Description -->
-      <legend><span class="number">2</span> Description of Work:</legend>
+      <!-- Sign Type-->
+      <legend><span class="number">3</span> Type: <span style="color:#afafaf"> (Sign Selection)</span></legend> 
       
       <div class="form-group row">
-        <div class="col-sm-12">
-          <label for="workDesc"><span class="glyphicon glyphicon-asterisk requiredField" aria-hidden="true"></span> Description of Work:</label> 
-          <textarea class="form-control" rows="5" id="workDesc" name="workDesc" placeholder="Please describe deails of work..."></textarea>
+        <div class="col-sm-6">
+          <div class="radial">
+            <label class="radio-inline">
+              <input type="radio" name="sign-selection" id="nameplate-standard" value="nameplate-standard"> <p>Nameplate (standard) 12" x 1" (1 line of text) &nbsp;&nbsp;&nbsp;</p> 
+            </label>
+            <a href="#" data-toggle="modal" data-target="#nameplate-standard-modal">
+              <h2 class="img-inline">
+                <i class="fas fa-image"></i>
+              </h2>
+            </a>
+          </div>
         </div>
-      </div>  <!-- /Work Description -->
-
-      <hr class="hr-hidden">
-
-      <!-- Approval Section -->
-      <legend>
-        <span class="number">3</span> Approvals:
-      </legend>
-
-      <div class="form-group row">
-        <div class="col-sm-4">
-          <label for=""> Approver Name:</label>
-          <input type="text" class="form-control" id="" maxlength="40" required="required">
-        </div>
-        <div class="col-sm-4">
-          <label for=""> Approver Email:</label>
-          <input type="email" class="form-control" id="" maxlength="64" required="required">
-        </div>
-      </div>
-
-      <div class="form-group row">
-        <div class="col-sm-4">
-          <label for=""> Assignee Name:</label>
-          <input type="text" class="form-control" id="" maxlength="40" required="required">
-        </div>
-        <div class="col-sm-4">
-          <label for=""> Assignee Email:</label>
-          <input type="email" class="form-control" id="" maxlength="64" required="required">
-        </div>
-      </div>
-      <!-- /Approval Section -->
-
-
-      <hr class="hr-hidden">
-
-      <!-- Keys Section -->
-      <legend>
-        <span class="number">4</span> Keys: <span style="color:#afafaf">(Ref existing key)</span>
-      </legend>
-      
-      <!-- Key 1 -->
-      <div class="form-group row">
-        <div class="col-sm-4">
-          <label for=""> Key 1: Front</label>
-          <input type="text" class="form-control" id="key1front" maxlength="40" required="required" placeholder=" Number">
-        </div>
-        <div class="col-sm-4">
-          <label for=""> Key 1: Back</label>
-          <input type="text" class="form-control" id="key1back" maxlength="40" required="required" placeholder=" Number">
-        </div>
-        <div class="col-sm-4">
-          <label>Addtional Keys</label>
-        </div>
-        <div class="col-sm-2">
-          <label class="radio-inline">
-            <input type="radio" name="addKey2" id="addKey2No" value="N" checked> No
-          </label>
-          <label class="radio-inline">
-            <input type="radio" name="addKey2" id="addKey2Yes" value="Y"> Yes
-          </label>
+        <div class="col-sm-6">
+          <div class="radial">
+            <label class="radio-inline">
+              <input type="radio" name="sign-selection" id="nameplate-larger" value="nameplate-larger"> <p>Nameplate (larger) - 12" x 2" (Up to 2 lines of text) &nbsp;&nbsp;&nbsp;</p> 
+            </label>
+            <a href="#">
+              <h2 class="img-inline" data-toggle="modal" data-target="#nameplate-larger-modal">
+                <i class="fas fa-image"></i>
+              </h2>
+            </a>
+          </div>
         </div>
       </div> 
-      <!-- /Key 1 -->
 
-      <!-- Key 2 Hiden -->
-      <div id="key2area">
-        <div class="form-group row">
-          <div class="col-sm-4">
-            <label for=""> Key 2: Front</label>
-            <input type="text" class="form-control" id="key2front" maxlength="40" placeholder="Number">
-          </div>
-          <div class="col-sm-4">
-            <label for=""> Key 2: Back</label>
-            <input type="text" class="form-control" id="key2back" maxlength="40" placeholder="Number">
-          </div>
-          <div class="col-sm-4">
-            <label>Addtional Keys</label>
-          </div>
-          <div class="col-sm-2">
+      <div class="form-group row">
+        <div class="col-sm-6">
+          <div class="radial">
             <label class="radio-inline">
-              <input type="radio" name="addKey3" id="addKey3No" value="N" checked> No
+              <input type="radio" name="sign-selection" id="sign-dept-12-2" value="sign-dept-12-2">
+              <p>Sign (Dept) - 12" x 2" (Up to 2 lines of text) &nbsp;&nbsp;&nbsp;</p>
             </label>
+            <a href="#">
+              <h2 class="img-inline" data-toggle="modal" data-target="#sign-dept-12-2-modal">
+                <i class="fas fa-image"></i>
+              </h2>
+            </a>
+            
+          </div>
+        </div>
+        <div class="col-sm-6">
+          <div class="radial">
             <label class="radio-inline">
-              <input type="radio" name="addKey3" id="addKey3Yes" value="Y"> Yes
+              <input type="radio" name="sign-selection" id="sign-dept-12-4" value="sign-dept-12-4">
+              <p>Sign (Dept) - 12" x 4" Department ID sign, Gray Sign w/ Black Font &nbsp;&nbsp;&nbsp;</p>
+            </label>
+            <a href="#" data-toggle="modal" data-target="#sign-dept-12-4-modal">
+              <h2 class="img-inline">
+                <i class="fas fa-image"></i>
+              </h2>
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="form-group row">
+        <div class="col-sm-6">
+          <div class="radial">
+            <label class="radio-inline">
+              <input type="radio" name="sign-selection" id="ada-braille" value="ada-braille">
+              <p>ADA Sign (Braille, Aluminum, Raised Letters) - 12" x 2"</p>
+            </label>
+          </div>
+        </div>
+        <div class="col-sm-6">
+          <div class="radial">
+            <label class="radio-inline">
+              <input type="radio" name="sign-selection" id="ada-no-braille" value="ada-no-braille">
+              <p>Mock-ADA (No Braille, No Raised Lettering</p>
             </label>
           </div>
         </div>
       </div>
-      <!-- /Key 2 Hidden -->
 
-      <!-- Key 3 Hiden -->
-      <div id="key3area">
-        <div class="form-group row">
-          <div class="col-sm-4">
-            <label for=""> Key 3: Front</label>
-            <input type="text" class="form-control" id="key3front" maxlength="40" placeholder="Number">
-          </div>
-          <div class="col-sm-4">
-            <label for=""> Key 3: Back</label>
-            <input type="text" class="form-control" id="key3back" maxlength="40" placeholder="Number">
-          </div>
-          <div class="col-sm-4">
-            <label>Addtional Keys</label>
-          </div>
-          <div class="col-sm-2">
+      <div class="form-group row">
+        <div class="col-sm-6">
+          <div class="radial">
             <label class="radio-inline">
-              <input type="radio" name="addKey4" id="addKey4No" value="N" checked> No
+              <input type="radio" name="sign-selection" id="restroom-men" value="restroom-men">
+              <p>Restroom - Men's</p>
             </label>
+          </div>
+        </div>
+        <div class="col-sm-6">
+          <div class="radial">
             <label class="radio-inline">
-              <input type="radio" name="addKey4" id="addKey4Yes" value="Y"> Yes
+              <input type="radio" name="sign-selection" id="restroom-women" value="restroom-women">
+              <p>Restroom - Women's</p>
             </label>
           </div>
         </div>
       </div>
-      <!-- /Key 3 Hidden -->
-
-      <!-- Key 4 Hiden -->
-      <div id="key4area">
-        <div class="form-group row">
-          <div class="col-sm-4">
-            <label for=""> Key 4: Front</label>
-            <input type="text" class="form-control" id="key4front" maxlength="40" placeholder="Number">
-          </div>
-          <div class="col-sm-4">
-            <label for=""> Key 4: Back</label>
-            <input type="text" class="form-control" id="key4back" maxlength="40" placeholder="Number">
-          </div>
-          <div class="col-sm-4">
-            <label>Addtional Keys</label>
-          </div>
-          <div class="col-sm-2">
+      <div class="form-group row">
+        <div class="col-sm-6">
+          <div class="radial">
             <label class="radio-inline">
-              <input type="radio" name="addKey5" id="addKey5No" value="N" checked> No
-            </label>
-            <label class="radio-inline">
-              <input type="radio" name="addKey5" id="addKey5Yes" value="Y"> Yes
+              <input type="radio" name="sign-selection" id="restroom-neutral" value="restroom-neutral">
+              <p>Restroom - Gender Neutral</p>
             </label>
           </div>
         </div>
-      </div>
-      <!-- /Key 4 Hidden -->
-
-      <!-- Key 5 Hiden -->
-      <div id="key5area">
-        <div class="form-group row">
-          <div class="col-sm-4">
-            <label for=""> Key 5: Front</label>
-            <input type="text" class="form-control" id="key5front" maxlength="40" placeholder="1234-5678">
-          </div>
-          <div class="col-sm-4">
-            <label for=""> Key 5: Back</label>
-            <input type="text" class="form-control" id="key5back" maxlength="40" placeholder="1234-5678">
+        <div class="col-sm-6">
+          <div class="radial">
+            <label class="radio-inline">
+              <input type="radio" name="sign-selection" id="custom-describe" value="custom-describe">
+              <p>Custom (Describe in Notes)</p>
+            </label>
           </div>
         </div>
-      </div>
-      <!-- /Key 4 Hidden -->
+      </div> <!-- Sign Type-->
 
-      <!-- /Key Section -->
+      <hr class="hr-hidden">
+
+      <!-- Sign Text -->
+      <legend><span class="number">4</span> Text: </legend>
+      
+      <div class="form-group row">
+        <div class="col-sm-6">
+          <label for="workDesc"> Type in exactly &amp; be sure to proof:</label>
+          <p>Do not include " ", or any other characters that you do not wish to be on sign</p>
+          <input type="text" class="form-control" rows="5" id="workDesc" name="workDesc" placeholder='Jane Smith, PhD'>
+        </div>
+      </div>  <!-- /Sign Text -->
+
+      <hr class="hr-hidden">
+
+      <div class="form-group row">
+        <!-- Estimate -->
+        <div class="col-sm-6">
+          <legend>
+            <span class="number">5</span> Estimate:
+          </legend>
+          <div class="col-sm-12">
+            <h4>Do you want an estimate before facilities places the order?</h4>
+            <p>If you select "
+              <strong>YES</strong>", your order will not be placed until an estimate is created, and approval is received.</p>
+            <div class="radial">
+              <label class="radio-inline">
+                <input type="radio" name="estimate-yes-no" id="estimate-no" value="estimate-no" checked>
+                <p>No</p>
+              </label>
+            </div>
+            <div class="radial">
+              <label class="radio-inline">
+                <input type="radio" name="estimate-yes-no" id="estimate-yes" value="estimate-yes">
+                <p>Yes</p>
+              </label>
+            </div>
+          </div>
+        </div> <!-- /Estimate -->
+        <!-- Installation -->
+        <div class="col-sm-6">
+          <legend>
+            <span class="number">6</span> Installation Required:
+          </legend>
+          <div class="col-sm-12">
+            <p>Although most signs are easily installed, some require a lot of customization, such as wall patching, painting, drilling,
+              etc...
+              <br>Depending on the scope of the installation, additional charges may apply.</p>
+            <div class="radial">
+              <label class="radio-inline">
+                <input type="radio" name="installation-yes-no" id="installtion-no" value="installtion-no" checked>
+                <p>No, Do not install, just deliver</p>
+              </label>
+            </div>
+            <div class="radial">
+              <label class="radio-inline">
+                <input type="radio" name="nstallation-yes-no" id="installation-yes" value="installation-yes">
+                <p>Yes, I understand that installation fees may apply</p>
+              </label>
+            </div>
+          </div>
+        </div>
+      </div> <!-- /Installation --> 
+
+      <hr class="hr-hidden">
+
+      <!-- Metal Sign -->
+      <div class="form-group row">
+        <div class="col-sm-6">
+          <legend>
+            <span class="number">7</span> Metal Sign Bracket:
+            <span style="color:#afafaf"> (chrome)</span>
+          </legend>
+          <div class="col-sm-12">
+            <p>To ensure correct installation, Facilities will include and charge you for 1 adhesive-backed chrome metal bracket for each
+              sign ordered, unless you request to not include. Bracket will be sized appropriately to fit size of your signs (12x1,
+              12x2, 12x4, etc...)</p>
+            <div class="radial">
+              <label class="radio-inline">
+                <input type="radio" name="bracket-yes-no" id="bracket-no" value="bracket-no" checked>
+                <p>No, bracket already exist at location</p>
+              </label>
+            </div>
+            <div class="radial">
+              <label class="radio-inline">
+                <input type="radio" name="bracket-yes-no" id="bracket-yes" value="bracket-yes">
+                <p>Yes, include one bracket for each sign</p>
+              </label>
+            </div>
+          </div>
+        </div>
+        <!-- Additional Notes -->
+        <div class="col-sm-6">
+          <legend>
+            <span class="number">8</span> Additional Notes:
+          </legend>
+          <div class="col-sm-12">
+            <p>Be sure to list any specific information not already captured by this form. For example, you may want one sign horizonally
+              and vertically center justified.
+              <br>Signs are by default "
+              <strong>
+                <span style="color: red;">horizontal left</span>
+              </strong>" &amp; "
+              <strong>
+                <span style="color: red;">vertical center</span>
+              </strong>"</p>
+            <div class="form-group row">
+              <div class="col-sm-12">
+                <textarea class="form-control" rows="5" id="workDesc" name="workDesc"></textarea>
+              </div>
+            </div>
+          </div>
+        </div> <!-- /Additional Notes -->
+      </div>
+
+      <!-- /Metal Sign -->
 
       <hr class="hr-hidden">
 
       <!-- Attachments -->
       <legend>
-        <span class="number">5</span> Attachments:
+        <span class="number">9</span> Attachments:
       </legend>
       <div class="form-group row">
         <div class="col-sm-12">
-          <p>Please attach any supporting documents, pictures, or web pages that will support Facilities Management with your request.</p>
+          <p>Save setup time, and attach a photo of the sign installation location or similar sign type.</p>
         </div>
       </div>
       <div class="form-group row">
         <div class="col-sm-3">
           <button class="btn btn-default">Select File</button>
         </div>
-      </div>
-      <!-- /Attachments -->
+      </div> <!-- /Attachments -->
+
+      <hr class="hr-hidden">
+
+      
+      
+         
 
       <hr class="hr-hidden">
 
       <!-- Funding -->
       <legend>
-        <span class="number">6</span> Funding:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <span class="number">10</span> Funding:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         <a href="#" data-toggle="modal" data-target="#key-funding-Modal">
           <i class="fa fa-info-circle" aria-hidden="true"></i> Info</a>
       </legend>
@@ -436,7 +497,7 @@
       <hr class="hr-hidden">
 
 
-      <legend><span class="number">7</span> Contact Information  <a href="https://directory.ucsf.edu/" target="_blank"><i class="fa fa-search" aria-hidden="true"></i></a><span style="color:#afafaf"> (Look Up)</span></legend>
+      <legend><span class="number">11</span> Contact Information  <a href="https://directory.ucsf.edu/" target="_blank"><i class="fa fa-search" aria-hidden="true"></i></a><span style="color:#afafaf"> (Look Up)</span></legend>
       <div class="checkbox">
         <label>
           <input type="checkbox" value=""> Check here if same as Primary Contact, or fill out fields below.
@@ -444,70 +505,29 @@
       </div>
       <!-- Contact Info-->
       <div class="form-group row">
-        <div class="col-sm-4">
-          <label for="ContactName"><span class="glyphicon glyphicon-asterisk requiredField" aria-hidden="true"></span> Name:</label>
+        <div class="col-sm-3">
+          <label for="ContactName">Name:</label>
           <input type="text" class="form-control" id="ContactName" maxlength="40" required="required">
         </div>
-        <div class="col-sm-4">
-          <label for="ContactEmail"><span class="glyphicon glyphicon-asterisk requiredField" aria-hidden="true"></span> Email:</label>
+        <div class="col-sm-3">
+          <label for="ContactEmail">Email:</label>
           <input type="email" class="form-control" id="ContactEmail" maxlength="64" required="required">
         </div>
-        <div class="col-sm-4">
+        <div class="col-sm-2">
           <label for="ContactTitle">Title</label>
           <input type="email" class="form-control" id="ContactTitle" maxlength="80" required="required">
         </div>
-      </div>
-      <div class="form-group row">
-        <div class="col-sm-4">
-          <label for="ContactPhone"><span class="glyphicon glyphicon-asterisk requiredField" aria-hidden="true"></span> Phone:</label>
+        <div class="col-sm-2">
+          <label for="ContactPhone">Phone:</label>
           <input type="text" class="form-control" id="ontactPhone" maxlength="40" required="required">
         </div>
-        <div class="col-sm-1">
-          <label for="ContactBox">Box:</label>
-          <input type="text" class="form-control" id="ContactBox" maxlength="4" required="required">
-        </div>
-        <div class="col-sm-3">
-          <label for="ContactFax">Fax:</label>
-          <input type="text" class="form-control" id="ContactFax" maxlength="14" required="required">
-        </div>
-        
-        <div class="col-sm-4">
-          <label for="DeptName"></span> Department Name:</label>
+        <div class="col-sm-2">
+          <label for="DeptName">
+            </span> Department Name:</label>
           <input type="text" class="form-control" id="DeptName" maxlength="40" required="required">
         </div>
-      </div><!-- /Contact Info-->
-
-      <hr class="hr-hidden">
-
-      <legend><span class="number">8</span> Site Contact</legend>
-      <!-- Site Contact Info-->
-      <div class="form-group row">
-        <div class="col-sm-12">
-          <div class="checkbox">
-            <label>
-              <input type="checkbox" value="">
-              Check here if Site Contact is the same as above requestor, or fill out fields below.
-            </label>
-          </div>
-        </div>
-
-      </div>
-      <div class="form-group row">
-        <div class="col-sm-4">
-          <label for="ContactName">Name:</label>
-          <input type="text" class="form-control" id="ContactName" maxlength="30" required="true">
-        </div>
-        <div class="col-sm-4">
-          <label for="exampleInputEmail1">Email:</label>
-          <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Email">
-        </div>
-        <div class="col-sm-4">
-          <label for="ContactPhone">Phone:</label>
-          <input type="text" class="form-control" id="ContactPhone" maxlength="14">
-        </div>
-        
       </div> <!-- /Contact Info-->
-      
+
       <hr class="hr-hidden">
 
       <div class="form-group row">
@@ -528,32 +548,81 @@
         MODAL
   ======================================= -->
 
-    <!-- Funding Info -->
-    <div class="modal fade" id="key-funding-Modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <!-- nameplate-standard -->
+    <div class="modal fade" id="nameplate-standard-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            <h4 class="modal-title" id="key-funding-Label">Key Request Funding</h4>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+            <h4 class="modal-title" id="signs-order-Modal">Sample</h4>
           </div>
           <div class="modal-body">
-            <p>New Keys or Event Setups, please enter your GL COA(s) or select a Speed Type(s). If more than one GL/COA is used, the allocated
-            percentage splits must add to 100%</p>
-            <br>
-            <h4>Questions?</h4>
-            <p>Regarding billable vs. non-billable? 
-            <br>Please see pages <strong>29-36</strong> of our
-            <a href="http://campuslifeservices.ucsf.edu/upload/facilities/files/Guide_to_Services_2017-2018.pdf"
-              target="_blank"><strong>Guide To Services</strong></a></p>
-            <p>Or contact the <strong>Customer Service Center</strong> at , or email us at <a href="mailto:fmcustservice@fm.ucsf.edu">fmcustservice@fm.ucsf.edu</a>.</p>
+            <img src="img/nameplate-standard.png" alt="">
           </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
           </div>
         </div>
       </div>
     </div>
-    <!-- /Housing Info -->
+    <!-- /nameplate-standard-->
+
+    <!-- nameplate-standard -->
+    <div class="modal fade" id="nameplate-larger-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+            <h4 class="modal-title" id="signs-order-Modal">Sample</h4>
+          </div>
+          <div class="modal-body">
+            <img src="img/nameplate-larger.png" alt="">
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+    <!-- /nameplate-standard-->
+
+    <!-- sign-dept-12-2 -->
+    <div class="modal fade" id="sign-dept-12-2-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+            <h4 class="modal-title" id="signs-order-Modal">Sample</h4>
+          </div>
+          <div class="modal-body">
+            <img src="img/sign-dept-12-2.png" alt="">
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+    <!-- /sign-dept-12-2 -->
+
+    <!-- sign-dept-12-4 -->
+    <div class="modal fade" id="sign-dept-12-4-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+            <h4 class="modal-title" id="signs-order-Modal">Sample</h4>
+          </div>
+          <div class="modal-body">
+            <img src="img/sign-dept-12-4.png" alt="">
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+    <!-- /sign-dept-12-4 -->
 
     
 
@@ -564,6 +633,11 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
   <!-- Bootsrap 3.3.7 -->
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+    crossorigin="anonymous"></script>
+  <!-- Font Awesome CDN -->
+  <script defer src="https://use.fontawesome.com/releases/v5.0.8/js/solid.js" integrity="sha384-+Ga2s7YBbhOD6nie0DzrZpJes+b2K1xkpKxTFFcx59QmVPaSA8c7pycsNaFwUK6l"
+    crossorigin="anonymous"></script>
+  <script defer src="https://use.fontawesome.com/releases/v5.0.8/js/fontawesome.js" integrity="sha384-7ox8Q2yzO/uWircfojVuCQOZl+ZZBg2D2J5nkpLqzH1HY0C1dHlTKIbpRz/LG23c"
     crossorigin="anonymous"></script>
   <!-- Form Scripting -->
   <script src="script/form-all-bldg.js"></script>
